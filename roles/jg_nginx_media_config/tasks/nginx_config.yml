@@ -1,0 +1,102 @@
+---
+
+- name: Replace old hostname with new hostname local nginx
+  ansible.builtin.replace:
+    path: /home/mediauser/docker/nginx/config/nginx/site-confs/{{item}}
+    regexp: '{{nginx_media_oldip}}'
+    replace: '{{nginx_media_newip}}'
+  loop:
+    - autobrr.conf
+    - radarr.conf
+    - audiobookshelf.conf
+    - sonarr.conf
+    - iris.conf
+    - jellyfin.conf
+    - jellyseerr.conf
+    - lidatube.conf
+    - navidrome.conf
+    - prowlarr.conf
+    - readarr.conf
+    - lidarr.conf
+    - thelounge.conf
+
+- name: Replace old hostname with new hostname ext nginx jg-media
+  ansible.builtin.replace:
+    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
+    regexp: '{{nginx_media_oldip}}'
+    replace: '{{nginx_media_newip}}'
+  loop:
+    - audiobookshelf.conf
+    - jellyfin.conf
+    - navidrome.conf
+    - jellyseerr.conf
+
+- name: Replace old hostname with new hostname external nginx jg-app
+  ansible.builtin.replace:
+    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
+    regexp: '{{nginx_app_oldip}}'
+    replace: '{{nginx_app_newip}}'
+  loop:
+    - wikijs.conf
+    - nextcloud.conf
+    - navidrome.conf
+    - homeassistant.conf
+
+- name: Replace old certs with new certs media ext
+  ansible.builtin.replace:
+    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
+    regexp: "*.jaspergreenhill.com.key"
+    replace: jaspergreenhill.com.key
+  loop:
+    - wikijs.conf
+    - nextcloud.conf
+    - navidrome.conf
+    - homeassistant.conf
+    - audiobookshelf.conf
+    - jellyfin.conf
+    - jellyseerr.conf
+    - navidrome.conf
+
+- name: Replace old hostname with new hostname media local
+  ansible.builtin.replace:
+    path: /home/mediauser/docker/nginx/config/nginx/site-confs/{{item}}
+    regexp: "{{nginx_app_oldip}}"
+    replace: "{{nginx_app_newip}}"
+  loop:
+    - wikijs.conf
+    - nextcloud.conf
+
+- name: Replace old certs with new certs media
+  ansible.builtin.replace:
+    path: /home/mediauser/docker/nginx/config/nginx/site-confs/{{item}}
+    regexp: certs2//jasper
+    replace: certs2/jasper
+  loop:
+    - autobrr.conf
+    - radarr.conf
+    - sabnzbd.conf
+    - audiobookshelf.conf
+    - sonarr.conf
+    - iris.conf
+    - jellyfin.conf
+    - jellyseerr.conf
+    - lidatube.conf
+    - navidrome.conf
+    - prowlarr.conf
+    - readarr.conf
+    - lidarr.conf
+    - thelounge.conf
+    - wikijs.conf
+    - nextcloud.conf
+
+- name: Restart Nginx External
+  community.docker.docker_container:
+    name: nginx2
+    state: started
+    restart: true
+
+- name: Restart Nginx Internal
+  community.docker.docker_container:
+    name: nginx 
+    state: started
+    restart: true

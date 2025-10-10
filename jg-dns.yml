@@ -1,0 +1,11 @@
+---
+- hosts: dns
+  become: yes
+  collections:
+  - effectivelywild.technitium_dns.technitium_dns_add_record
+  roles:
+    - roles/jg_add_dns_record
+  vars:
+    technitium_api_url_2: "http://jg-dns.jaspergreenhill.com"
+    technitium_api_token_2: "cc645618a19a8ed7ca4d22bcd85289bd35af8e8bccf59e79f2e5a693b3f567fe"
+    technitium_api_port_1: 5380

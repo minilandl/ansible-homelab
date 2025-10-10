@@ -1,0 +1,52 @@
+---
+- name: Install Packages 
+  apt:
+    pkg:
+      - stress
+      - linux-firmware
+      - neovim
+      - fastfetch
+- name: Install file archive and compression tools
+  apt:
+    pkg:
+      - unzip
+      - zip
+      - xz-utils
+      - tar
+      - pristine-tar
+      - gzip
+      - bzip2
+      - p7zip-full
+      - p7zip
+      - lzop
+      - cpio
+      - cvs
+      - rcs
+      - unrar
+
+- name: Install file transfer tools
+  apt:
+    pkg:
+      - rsync
+      - curl
+      - lrzsz
+      - wget
+
+- name: Install network tools
+  apt:
+    pkg:
+      - traceroute
+      - mosh
+      - telnet
+      - finger
+      - dnsutils
+      - tshark
+      - tcpdump
+      - whois
+      - ethtool
+      - mtr
+      - iputils-tracepath
+      - iperf
+      - host
+      - ladvd
+

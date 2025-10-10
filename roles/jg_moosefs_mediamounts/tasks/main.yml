@@ -1,0 +1,5 @@
+---
+# tasks file for ucc_ad_client
+
+- include_tasks: removeoldmounts.yml 
+- include_tasks: moosefs_mounts.yml

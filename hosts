@@ -1,0 +1,14 @@
+
+media:
+ hosts: 
+  jg-media.jaspergreenhill.com
+servers:
+  hosts:
+    jg-media.jaspergreenhill.com
+pve:
+ hosts:
+   jgpve6.jaspergreenhill.com
+dns:
+ hosts:
+   jg-dns.jaspergreenhill.com
+

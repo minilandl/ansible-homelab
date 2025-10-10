@@ -1,0 +1,5 @@
+---
+- name: Install Moosefs Client
+  apt:
+    name: moosefs-client
+    update_cache: yes

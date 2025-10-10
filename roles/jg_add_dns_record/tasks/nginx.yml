@@ -1,0 +1,30 @@
+- name: Add record for NGINX Sites
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "{{item}}.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.40.6"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+  loop:
+    - sonarr
+    - radarr
+    - lidarr
+    - autobrr
+    - prowlarr
+    - iris
+    - jellyfin
+    - jellyseerr
+    - lidatube
+    - navidrome
+    - readarr
+    - sabnzbd
+    - thelounge
+    - audiobookshelf
+    - wiki
+    - homeassistant
+    - nextcloud

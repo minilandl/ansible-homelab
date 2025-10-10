@@ -1,0 +1,64 @@
+---
+- name: Create Anime directory
+  ansible.builtin.file:
+      path: "{{moosefs_mount_anime}}"
+      state: directory
+      mode: '0755'
+
+- name: Create Music directory
+  ansible.builtin.file:
+      path: "{{moosefs_mount_music}}"
+      state: directory
+      mode: '0755'
+
+- name: Create TV Shows directory
+  ansible.builtin.file:
+      path: "{{moosefs_mount_tv}}"
+      state: directory
+      mode: '0755'
+
+- name: Create Movies directory
+  ansible.builtin.file:
+      path: "{{moosefs_mount_movies}}"
+      state: directory
+      mode: '0755'
+
+- name: Mount TV Shows
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_tv}}"
+    opts: mfssubfolder={{moosefs_mount_tv_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs
+
+- name: Mount Movies Shows
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_movies}}"
+    opts: mfssubfolder={{moosefs_mount_movies_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs
+
+- name: Mount Anime 
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_anime}}"
+    opts: mfssubfolder={{moosefs_mount_anime_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs
+
+- name: Mount Music
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_music}}"
+    opts: mfssubfolder={{moosefs_mount_music_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs
+
+- name: Mount Audiobooks
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_audiobooks}}"
+    opts: mfssubfolder={{moosefs_mount_audiobooks_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs

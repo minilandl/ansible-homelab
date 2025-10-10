@@ -1,0 +1,47 @@
+  - name: Check if Enterprise Proxmox Sources exists
+    stat:
+     path: /etc/apt/sources.list.d/pve-enterprise.sources
+    register: file_check_result
+
+  - name: Check if Ceph Proxmox Sources exists
+    stat:
+     path: /etc/apt/sources.list.d/ceph.sources
+    register: file_check_result1
+
+  - name: Remove Enterprise sources
+    ansible.builtin.file:
+      path:  /etc/apt/sources.list.d/pve-enterprise.sources
+      state: absent
+    when: file_check_result.stat.exists !=0
+
+  - name: Remove Ceph  sources we dont need it 
+    ansible.builtin.file:
+      path:  /etc/apt/sources.list.d/ceph.sources
+      state: absent
+    when: file_check_result1.stat.exists !=0
+
+#  - name: Manage apt repositories
+#    block:
+#    - name: Add Proxmox repository
+#      ansible.builtin.apt_repository:
+#        repo: "{{ pve_repository_line }}"
+#        filename: proxmox
+ #       state: present
+ #     register: _pve_repo
+
+  - name: Manage deb822 repositories
+    block:
+     - name: Add Proxmox repository
+       ansible.builtin.deb822_repository:
+         name: proxmox
+         types: deb
+         uris: "{{ pve_repository.uris }}"
+         suites: "{{ pve_repository.suites }}"
+         components: "{{ pve_repository.components }}"
+         signed_by: /etc/apt/trusted.gpg.d/proxmox-release-{{ ansible_distribution_release }}.gpg
+         state: present
+       register: _pve_repo
+ 
+  - name: Update Apt Cache
+    apt:
+     update_cache: yes

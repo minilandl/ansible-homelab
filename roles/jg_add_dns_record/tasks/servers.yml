@@ -1,0 +1,80 @@
+- name: Add DNS Record Dracarys PC 
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "dracarys.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.20.61"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+
+- name: Add DNS Record JG AP1 Wifi
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "jg-ap1.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.70.2"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+
+- name: Add DNS Record Chunkserver1 
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "jg-chunkserver1.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.50.3"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+
+
+- name: Add DNS Record mfsmaster 
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "mfsmaster.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.50.2"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+
+
+- name: Add DNS Record jgpve5 
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "jgpve5.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.10.5"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+
+- name: Add DNS Record jgpve6 
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "jgpve6.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.10.6"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+

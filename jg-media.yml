@@ -1,0 +1,24 @@
+---
+- hosts: media
+  become: yes
+  roles:
+    - roles/jg_moosefs_mediamounts
+    - roles/jg_nginx_media_config
+  vars:
+     moosefs_mount_tv: /mnt/Tvshows
+     moosefs_mount_audiobooks: /mnt/Audiobooks
+     moosefs_mount_movies: /mnt/Movies
+     moosefs_mount_anime: /mnt/Anime
+     moosefs_mount_music: /mnt/Music
+     moosefs_mount_music_subfolder: Music 
+     moosefs_mount_anime_subfolder: anime 
+     moosefs_mount_audiobooks_subfolder: Audiobooks
+     moosefs_mount_movies_subfolder: Movies
+     moosefs_mount_tv_subfolder: tvshows 
+     moosefs_mfsmaster: "mfsmaster.jaspergreenhill.com:"
+     nginx_app_oldip: "192.168.1.43"
+     nginx_media_oldip: "192.168.1.28"
+     nginx_app_newip: "10.0.40.8"
+     nginx_media_newip: "10.0.40.6"
+     nginx_media_newcerts: "jaspergreenhill.com"
+     nginx_media_oldcerts: "*.jaspergreenhill.com"

@@ -1,0 +1,68 @@
+- name: JG-Media 
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "jg-media.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.40.6"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+
+- name: Add DNS Record JG-App
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "jg-app.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.40.8"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+
+- name: Add DNS Record JG DNS
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "jg-dns.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.40.3"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+
+- name: Add DNS Record JG FelixMinecraft
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "{{item}}.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.40.4"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+  loop:
+       - minecraft
+       - jg-felixminecraft
+
+
+- name: Add DNS Record pfsense
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "pfsense.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "192.168.26.2"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'

@@ -1,0 +1,6 @@
+---
+#- include_tasks: apt_remove_ent_pve.yml
+- include_tasks: ipmi.yml
+- include_tasks: nginx.yml 
+- include_tasks: servers.yml 
+- include_tasks: vm.yml 
