@@ -1,0 +1,30 @@
+- name: Remove existing Network interfaces File
+  file:
+    path: /etc/network/interfaces
+    state: absent
+
+- name: Create an empty file
+  ansible.builtin.file:
+    path: /etc/network/interfaces
+    state: touch
+    mode: '0644'
+
+- name: Recreate File
+  ansible.builtin.file:
+    path: /etc/network/interfaces
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: network interfaces file
+  copy:
+    src: interfaces.cfg
+    dest: /etc/network/interfaces
+
+- name: Replace old hostname with new hostname media local
+  ansible.builtin.replace:
+    path: /etc/network/interfaces
+    regexp: "10.0.10.5"
+    replace: "{{ansible_default_ipv4.address}}"
+
+

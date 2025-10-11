@@ -2,7 +2,7 @@
 - hosts: servers
   become: yes
   roles:
-    - roles/jg_moosefs_repo
-    - roles/jg_ntp
-    - roles/jg_moosefs_client
+    #- roles/jg_moosefs_repo broken need to fix later
+    #- roles/jg_ntp
+    - roles/jg_network
   vars:
