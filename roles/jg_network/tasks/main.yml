@@ -1,0 +1,4 @@
+---
+# tasks file for ucc_ad_client
+
+- include_tasks: ipv6_static.yml
