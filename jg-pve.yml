@@ -4,6 +4,7 @@
   roles:
     - roles/jg_pve_apt_repo
     - roles/jg_pve_network
+    - roles/jg_pve_moosefs_storage
     - roles/jg_pve_remove_nag
     - roles/jg_pve_pcipassthrough
   vars:

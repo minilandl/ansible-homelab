@@ -1,0 +1,23 @@
+---
+- name: Download MooseFS Proxmox from Github
+  ansible.builtin.get_url:
+    url: 'https://github.com/moosefs/pve-moosefs/releases/download/v0.1.10/libpve-storage-custom-moosefs-perl_0.1.10-1_all.deb'
+    dest: /root/pvemoosefs.deb
+    mode: '0440'
+
+- name: "Check if listed package is installed or not on Debian Linux family"
+  command: dpkg-query -l "{{ item }}"
+  register: debian_package_check
+  when: ansible_facts['os_family'] == "Debian"
+  loop:
+    - libpve-storage-custom-moosefs-perl    
+  
+- name: Install MooseFS Proxmox .deb package
+  ansible.builtin.apt:
+    deb: /root/pvemoosefs.deb
+
+- name: Restart pvemanager after installing moosefs
+  ansible.builtin.systemd_service:
+    name: pve-manager.service
+    state: started
+    enabled: true
