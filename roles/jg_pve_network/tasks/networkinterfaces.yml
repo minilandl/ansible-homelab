@@ -21,7 +21,7 @@
     src: interfaces.cfg
     dest: /etc/network/interfaces
 
-- name: Replace old hostname with new hostname media local
+- name: Update Current IP Address
   ansible.builtin.replace:
     path: /etc/network/interfaces
     regexp: "10.0.10.5"

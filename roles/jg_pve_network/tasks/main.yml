@@ -2,3 +2,4 @@
 # tasks file for ucc_ad_client
 
 - include_tasks: networkinterfaces.yml
+- include_tasks: resolv.yml
