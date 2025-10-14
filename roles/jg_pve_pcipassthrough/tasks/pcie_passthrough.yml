@@ -29,6 +29,7 @@
           vfio
           vfio_iommu_type1
           vfio_pci
+          relax_rmrr
           vfio_virqfd
         owner: root
         group: root
