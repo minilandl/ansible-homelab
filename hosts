@@ -7,7 +7,8 @@ servers:
     jg-felixminecraft.jaspergreenhill.com
 pve:
  hosts:
-   jgpve6.jaspergreenhill.com
+   jgpve6.jaspergreenhill.com:
+   jgpve5.jaspergreenhill.com:
 dns:
  hosts:
    jg-dns.jaspergreenhill.com

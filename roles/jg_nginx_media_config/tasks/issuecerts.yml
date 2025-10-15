@@ -1,0 +1,16 @@
+---
+
+
+
+
+- name: Restart Nginx External
+  community.docker.docker_container:
+    name: nginx2
+    state: started
+    restart: true
+
+- name: Restart Nginx Internal
+  community.docker.docker_container:
+    name: nginx 
+    state: started
+    restart: true

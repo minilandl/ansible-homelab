@@ -18,7 +18,7 @@
         path: /etc/default/grub
         regexp: >-
           ^GRUB_CMDLINE_LINUX_DEFAULT="quiet.*$
-        line: GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on"
+        line: GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on,relax_rmrr iommu=pt intremap=no_x2apic_optout "
       notify: Update GRUB
       when: "'intel' == cpu_type"
 

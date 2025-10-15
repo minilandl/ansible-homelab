@@ -42,20 +42,20 @@
     - navidrome.conf
     - homeassistant.conf
 
-- name: Replace old certs with new certs media ext
-  ansible.builtin.replace:
-    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
-    regexp: "*.jaspergreenhill.com.key"
-    replace: jaspergreenhill.com.key
-  loop:
-    - wikijs.conf
-    - nextcloud.conf
-    - navidrome.conf
-    - homeassistant.conf
-    - audiobookshelf.conf
-    - jellyfin.conf
-    - jellyseerr.conf
-    - navidrome.conf
+#- name: Replace old certs with new certs media ext
+#  ansible.builtin.replace:
+#    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
+#    regexp: "*.jaspergreenhill.com.key"
+#    replace: jaspergreenhill.com.key
+#  loop:
+#    - wikijs.conf
+#    - nextcloud.conf
+#    - navidrome.conf
+#    - homeassistant.conf
+#    - audiobookshelf.conf
+#    - jellyfin.conf
+#    - jellyseerr.conf
+#    - navidrome.conf
 
 - name: Replace old hostname with new hostname media local
   ansible.builtin.replace:
@@ -88,6 +88,66 @@
     - thelounge.conf
     - wikijs.conf
     - nextcloud.conf
+
+- name: Update SSL Certificate Nginx External fullchain.cer 
+  ansible.builtin.replace:
+    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
+    regexp: "#ssl_certificate"
+    replace: "ssl_certificate /data/certs2/jaspergreenhill.com_ecc/fullchain.cer;"
+  loop:
+    - audiobookshelf.conf
+    - jellyfin.conf
+    - jellyseerr.conf
+    - wikijs.conf
+    - nextcloud.conf
+
+- name: Update SSL Certificate Nginx External .key 
+  ansible.builtin.replace:
+    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
+    regexp: "#ssl_certificate_key"
+    replace: "ssl_certificate_key /data/certs2/jaspergreenhill.com_ecc/jaspergreenhill.com.key;"
+  loop:
+    - audiobookshelf.conf
+    - jellyfin.conf
+    - jellyseerr.conf
+    - navidrome.conf
+    - wikijs.conf
+    - nextcloud.conf
+
+
+
+
+- name: Remove Privkey.pem from files
+  ansible.builtin.replace:
+    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
+    regexp: 'ssl_certificate /data/certs2/jaspergreenhill.com_ecc/fullchain.cer; /data/certs2/jaspergreenhill.com_ecc/fullchain.cer;_key /data/certs/privkey.pem;'
+    replace: '#ssl_certificate /data/certs2/jaspergreenhill.com_ecc/fullchain.cer; /data/certs2/jaspergreenhill.com_ecc/fullchain.cer;_key /data/certs/privkey.pem;' 
+  loop:
+    - audiobookshelf.conf
+    - jellyfin.conf
+    - jellyseerr.conf
+    - navidrome.conf
+    - wikijs.conf
+    - nextcloud.conf
+
+- name: Remove Fullchain.pem from files
+  ansible.builtin.replace:
+    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
+    regexp: 'ssl_certificate /data/certs2/jaspergreenhill.com_ecc/fullchain.cer; /data/certs2/jaspergreenhill.com_ecc/fullchain.cer; /data/certs/#fullchain.pem;'
+    replace: '#ssl_certificate /data/certs2/jaspergreenhill.com_ecc/fullchain.cer; /data/certs2/jaspergreenhill.com_ecc/fullchain.cer; /data/certs/#fullchain.pem;' 
+  loop:
+    - audiobookshelf.conf
+    - jellyfin.conf
+    - jellyseerr.conf
+    - navidrome.conf
+    - wikijs.conf
+    - nextcloud.conf
+
+
+
+
+
+
 
 - name: Restart Nginx External
   community.docker.docker_container:
