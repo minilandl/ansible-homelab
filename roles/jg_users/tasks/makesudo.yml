@@ -1,0 +1,9 @@
+---
+- name: Add user to sudo group
+  ansible.builtin.user:
+    name: "{{item}}" 
+    groups: sudo # or wheel, depending on your system's sudo configuration
+    append: yes
+    state: present
+  loop:
+    - "{{user_jasper}}"

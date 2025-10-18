@@ -1,16 +1,2 @@
 ---
-# tasks file for ucc_desktop_packages
-
-- name: Switch to a local mirror
-  ansible.builtin.shell: 
-     cmd: mint-switch-to-local-mirror
-  when: ansible_facts['distribution'] == "Linux Mint"
-
-- name: Run the equivalent of "apt-get update"
-  apt:
-    update_cache: yes
-
-- name: "Install software for a clubroom desktop"
-  include_tasks: software.yml
-
-
+ - include_tasks: software.yml
