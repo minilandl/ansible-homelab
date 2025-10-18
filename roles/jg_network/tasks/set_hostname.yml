@@ -1,0 +1,8 @@
+---
+- name: set FQDN to match inventory
+  ansible.builtin.command: "/usr/bin/hostnamectl --static set-hostname {{ OVERRIDE_FQDN | default(ansible_hostname) | lower }}"
+  changed_when: false
+
+- name: set pretty hostname
+  ansible.builtin.command: "/usr/bin/hostnamectl --pretty set-hostname {{ OVERRIDE_HOSTNAME | default(ansible_hostname.split('.')[0]) | lower }}"
+  changed_when: false

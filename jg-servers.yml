@@ -3,6 +3,13 @@
   become: yes
   roles:
     #- roles/jg_moosefs_repo broken need to fix later
-    #- roles/jg_ntp
+    - roles/jg_ntp
     - roles/jg_network
   vars:
+    dnsserver: 10.0.40.3
+    domainname: jg-dns.jaspergreenhill.com
+  tasks:
+  - name: System details
+    ansible.builtin.debug: msg="{{ item }}"
+    with_items:
+    - "{{ ansible_hostname }}"

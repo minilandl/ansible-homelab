@@ -1,0 +1,21 @@
+---
+
+- name: Clear Lines in File domain name
+  lineinfile: 
+    dest: /etc/resolv.conf 
+    state: absent 
+    regexp: "search"
+
+- name: Clear Lines in File nameserver
+  lineinfile: 
+    dest: /etc/resolv.conf 
+    state: absent 
+    regexp: "nameserver"
+
+- name: Edit Resolv.conf
+  ansible.builtin.blockinfile:
+    path: /etc/resolv.conf
+    block: |
+      search {{domainname}}
+      nameserver {{dnsserver}}
+    marker: "# {mark} ANSIBLE MANAGED BLOCK nameserver"

@@ -2,3 +2,5 @@
 # tasks file for ucc_ad_client
 
 - include_tasks: ipv6_static.yml
+- include_tasks: set_hostname.yml
+- include_tasks: resolv.yml
