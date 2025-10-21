@@ -1,0 +1,6 @@
+---
+
+- include_tasks: packages.yml
+- include_tasks: config.yml
+- include_tasks: setup-bricks.yml
+- include_tasks: services.yml

@@ -1,0 +1,42 @@
+---
+# tasks file for ansible-role-moosefs
+# Configure your MooseFS cluster.
+
+- name: Configure the main metalogger configuration
+  template:
+    src: mfsmetalogger.cfg.j2
+    dest: /etc/mfs/mfsmetalogger.cfg
+    owner: root
+    group: root
+    mode: '0644'
+  when: "'chunkservers' in group_names"
+
+- name: Configure the main chunkserver configuration
+  template:
+    src: mfschunkserver.cfg.j2
+    dest: /etc/mfs/mfschunkserver.cfg
+    owner: root
+    group: root
+    mode: '0644'
+  when: "'chunkservers' in group_names"
+
+- name: Build a list of bricks
+  find:
+    paths: /mnt/
+    patterns: "mfsbrick.*,mfsbrickpro.*"
+    file_type: directory
+  register: brick_list
+
+- name: Configure the chunkserver brick list
+  template:
+    src: mfshdd.cfg.j2
+    dest: /etc/mfs/mfshdd.cfg
+    owner: root
+    group: root
+    mode: '0644'
+  when: "'chunkservers' in group_names"
+
+- name: Mark MooseFS as configured
+  set_fact:
+    moosefs_configured: true
+

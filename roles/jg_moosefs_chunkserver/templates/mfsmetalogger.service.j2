@@ -1,0 +1,13 @@
+[Unit]
+Description=MooseFS metalogger
+After=syslog.target network.target ypbind.service
+
+[Service]
+Type=forking
+TimeoutSec=600
+ExecStart=/usr/sbin/mfsmetalogger start
+ExecStop=/usr/sbin/mfsmetalogger stop
+
+[Install]
+WantedBy=multi-user.target
+

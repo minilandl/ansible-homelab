@@ -1,0 +1,11 @@
+---
+- name: Remove old mounts from 192.168.1.29
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    regexp: '//192.168.1.29'
+    state: absent
+- name: Remove old mounts ftp
+  ansible.builtin.lineinfile:
+    path: /etc/fstab
+    regexp: 'curlftpfs'
+    state: absent

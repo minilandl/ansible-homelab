@@ -1,17 +1,10 @@
 ---
-- hosts: servers
+- hosts: chunkservers
   become: yes
   roles:
-    - roles/jg_moosefs_repo 
-    - roles/jg_ntp
-    - roles/jg_server_packages
-    - roles/jg_network
-    - roles/jg_users
+    - roles/jg_moosefs_chunkserver 
   vars:
-    fqdn: jaspergreenhill.com
-    user_jasper: jasper
-    dnsserver: 10.0.40.3
-    domainname: jg-dns.jaspergreenhill.com
+    moosefs_master_host: mfsmaster.jaspergreenhill.com 
   tasks:
   - name: System details
     ansible.builtin.debug: msg="{{ item }}"

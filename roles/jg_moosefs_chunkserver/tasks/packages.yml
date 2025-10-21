@@ -1,0 +1,8 @@
+---
+- name: Install Moosefs Chunkserver Packages
+  apt:
+    name: 
+     - moosefs-chunkserver
+     - moosefs-metalogger
+     - moosefs-common
+    update_cache: yes

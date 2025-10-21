@@ -1,0 +1,43 @@
+---
+- name: Create Instructions directory
+  ansible.builtin.file:
+      path: "{{moosefs_mount_instructions}}"
+      state: directory
+      mode: '0755'
+
+- name: Create TV Shows directory
+  ansible.builtin.file:
+      path: "{{moosefs_mount_tv}}"
+      state: directory
+      mode: '0755'
+
+- name: Create Movies directory
+  ansible.builtin.file:
+      path: "{{moosefs_mount_movies}}"
+      state: directory
+      mode: '0755'
+
+- name: Mount TV Shows
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_tv}}"
+    opts: mfssubfolder={{moosefs_mount_tv_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs
+
+- name: Mount Movies Shows
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_movies}}"
+    opts: mfssubfolder={{moosefs_mount_movies_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs
+
+
+- name: Mount Movies Shows
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_instructions}}"
+    opts: mfssubfolder={{moosefs_mount_instructions_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs

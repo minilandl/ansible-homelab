@@ -1,0 +1,17 @@
+---
+
+# Start and enable MooseFS chunkserver
+- name: Start and enable MooseFS chunkserver
+  service:
+    name: moosefs-chunkserver
+    state: started
+    enabled: true
+  when: "'chunkservers' in group_names"
+
+# Start and enable MooseFS metalogger
+- name: Start and enable MooseFS metalogger
+  service:
+    name: moosefs-metalogger
+    state: started
+    enabled: true
+  when: "'chunkservers' in group_names"

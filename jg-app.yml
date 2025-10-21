@@ -1,0 +1,11 @@
+---
+- hosts: media
+  become: yes
+  roles:
+    - roles/jg_moosefs_appmounts
+  vars:
+     moosefs_mount_tv: /mnt/Tvshows
+     moosefs_mount_movies: /mnt/Movies
+     moosefs_mount_movies_subfolder: Movies
+     moosefs_mount_tv_subfolder: tvshows 
+     moosefs_mfsmaster: "mfsmaster.jaspergreenhill.com:"

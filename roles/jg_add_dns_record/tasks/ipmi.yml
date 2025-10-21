@@ -1,3 +1,16 @@
+- name: Add record for jgpve4-ipmi
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "jgpve4-ipmi.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.30.6"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+
 - name: Add record for jgpve5-ipmi
   effectivelywild.technitium_dns.technitium_dns_add_record:
         api_url: "{{ technitium_api_url_2 }}"

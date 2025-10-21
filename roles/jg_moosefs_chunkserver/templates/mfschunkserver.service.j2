@@ -1,0 +1,12 @@
+[Unit]
+Description=MooseFS chunkserver
+After=syslog.target network.target ypbind.service
+
+[Service]
+Type=forking
+TimeoutSec=600
+ExecStart=/usr/sbin/mfschunkserver start
+ExecStop=/usr/sbin/mfschunkserver stop
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,20 @@
+---
+# Settings for MooseFS.
+
+# Filesystem format to use for chunkserver bricks (xfs or ext4)
+moosefs_brick_fstype: xfs
+
+# Only defaults (from zorlin.moosefs) that are not appropriate for your particular needs are overridden here.
+# You can adjust any of this to suit your own installations.
+
+# MooseFS master host
+moosefs_master_host: mfsmaster.jaspergreenhill.com
+
+# The version of MooseFS to install and upgrade to. Only used for machines that need to build from source.
+moosefs_version: '3.0.116'
+
+# Enable MooseFS Pro
+moosefs_pro: false
+
+# MooseFS install method.
+moosefs_install_method: official
