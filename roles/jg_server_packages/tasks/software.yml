@@ -4,7 +4,6 @@
     pkg:
       - stress
       - neovim
-      - fastfetch
       - vim
       - htop
       - freeipmi

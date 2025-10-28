@@ -34,7 +34,7 @@
     fstype: moosefs
 
 
-- name: Mount Movies Shows
+- name: Mount Instructions
   ansible.posix.mount:
     src: "{{moosefs_mfsmaster}}" 
     path: "{{moosefs_mount_instructions}}"

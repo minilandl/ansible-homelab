@@ -1,16 +1,22 @@
 chunkservers:
  hosts: 
-   jg-chunkserver2.jaspergreenhill.com 
+   jg-chunkserver3.jaspergreenhill.com: 
+   jg-chunkserver2.jaspergreenhill.com:
 media:
  hosts: 
-  jg-media.jaspergreenhill.com
+  jg-media.jaspergreenhill.com:
+app:
+ hosts: 
+  jg-app.jaspergreenhill.com:
 servers:
   hosts:
     jg-chunkserver2.jaspergreenhill.com:
-    mfsmaster.jaspergreenhill.com:
+    jg-chunkserver3.jaspergreenhill.com:
+    jg-app.jaspergreenhill.com:
 pve:
  hosts:
    jgpve6.jaspergreenhill.com:
+   jgpve4.jaspergreenhill.com:
    jgpve5.jaspergreenhill.com:
 jgpve6:
  hosts:
