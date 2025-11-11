@@ -2,6 +2,7 @@ chunkservers:
  hosts: 
    jg-chunkserver3.jaspergreenhill.com: 
    jg-chunkserver2.jaspergreenhill.com:
+   jg-chunkserver1.jaspergreenhill.com:
 media:
  hosts: 
   jg-media.jaspergreenhill.com:

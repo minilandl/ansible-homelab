@@ -19,7 +19,7 @@
 
     # - name: Check if user is ready
     #   pause:
-    #     prompt: "Are you sure you wish to continue? Press [ENTER] to continue or press [CTRL-C] to cancel."
+   #     prompt: "Are you sure you wish to continue? Press [ENTER] to continue or press [CTRL-C] to cancel."
 
     - name: Ensure dependencies are installed
       package:

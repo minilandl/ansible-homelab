@@ -3,4 +3,5 @@
 - include_tasks: ipmi.yml
 - include_tasks: nginx.yml 
 - include_tasks: servers.yml 
+- include_tasks: windows.yml 
 - include_tasks: vm.yml 

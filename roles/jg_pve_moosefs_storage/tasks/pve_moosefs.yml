@@ -1,7 +1,7 @@
 ---
 - name: Download MooseFS Proxmox from Github
   ansible.builtin.get_url:
-    url: 'https://github.com/moosefs/pve-moosefs/releases/download/v0.1.10/libpve-storage-custom-moosefs-perl_0.1.10-1_all.deb'
+    url: 'https://github.com/moosefs/pve-moosefs/releases/download/v0.1.11/libpve-storage-custom-moosefs-perl_0.1.11-1_all.deb'
     dest: /root/pvemoosefs.deb
     mode: '0440'
 
