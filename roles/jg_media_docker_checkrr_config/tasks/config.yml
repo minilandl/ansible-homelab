@@ -1,0 +1,25 @@
+---
+
+- name: Create the ansible directory
+  ansible.builtin.file:
+   path: /home/mediauser/docker/checkrr/config
+   state: directory
+   mode: '0755'
+
+- name: Configure checkrr config file
+  template:
+    src: checkrr.j2
+    dest: /home/mediauser/docker/checkrr/config/checkrr.yaml
+    owner: mediauser
+    group: mediauser
+    mode: '0644'
+    
+- name: create checkrr database
+  ansible.builtin.shell:
+    cmd: touch checkrr.db
+    chdir: /home/mediauser/docker/checkrr/config/
+
+- name: Restart a checkrr
+  community.docker.docker_container:
+    name: checkrr
+    state: started

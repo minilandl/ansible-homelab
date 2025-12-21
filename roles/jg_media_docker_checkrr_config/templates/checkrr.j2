@@ -1,0 +1,66 @@
+# {{ ansible_managed }}
+lang: "en-us"
+checkrr:
+  checkpath:
+    - data/movies/
+    - data/tvshows/
+    - data/anime/
+  database: ./checkrr.db
+  removeunknownfiles: false
+  config: ./checkrr.yaml
+  debug: true
+  csvfile: "./badfiles.csv"
+  cron: "@daily"
+  ignorehidden: true
+  requireaudio: true
+  removevideo:
+  removelang:
+  removeaudio:
+  ignoreexts:
+    - .txt
+    - .nfo
+    - .nzb
+    - .url
+    - .jpg
+    - .srt
+    - .pdf
+    - .nfo-orig
+logs:
+  stdout:
+    out: stdout
+    formatter: default
+  file:
+    out: file
+    path: /var/log/checkrr.log
+    formatter: default
+arr:
+  radarr:
+    process: true
+    service: radarr # should be one of: sonarr radarr lidarr
+    address: "radarr.jaspergreenhill.com"
+    apikey: "478f0bae5cec4704850bff43b310e220"
+    baseurl: /
+    port: 443
+    ssl: true
+    mappings: # maps directories between docker and arr services
+      "/data/movies/": "/data/movies/" # what radarr sees: what checkrr sees
+  sonarr:
+    process: true
+    service: sonarr
+    address: "sonarr.jaspergreenhill.com"
+    apikey: "e784307994374a06bfa2077f39c1cd9a"
+    baseurl: /sonarr
+    port: 443
+    ssl: false
+    mappings:
+      "/data/movies": "/data/tvshows"
+      "/data/anime": "/data/anime"
+webserver:
+  port: 8585
+  tls: false
+  #certs:
+  #  cert: "/path/to/cert.pem"
+  #  key: "/path/to/privkey.pem"
+  baseurl: "/"
+  trustedproxies:
+    - 127.0.0.1
