@@ -1,0 +1,8 @@
+
+- name: Copy nginx checkrr config file 
+  template:
+    src: checkrr.conf
+    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/checkrr.conf 
+    owner: mediauser
+    group: mediauser
+    mode: '0644'

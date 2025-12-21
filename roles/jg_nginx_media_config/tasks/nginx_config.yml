@@ -101,32 +101,32 @@
     - wikijs.conf
     - nextcloud.conf
 
-- name: Remove Fullchain.pem from files
-  ansible.builtin.replace:
-    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
-    line: 'ssl_certificate /data/certs2/jaspergreenhill.com_ecc/fullchain.cer;'
-    replace: 'ssl_certificate'
-  loop:
-    - audiobookshelf.conf
-    - jellyfin.conf
-    - jellyseerr.conf
-    - navidrome.conf
-    - wikijs.conf
-    - nextcloud.conf
+#- name: update ssl certificate
+#  ansible.builtin.replace:
+#    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
+#    line: 'ssl_certificate /data/certs2/jaspergreenhill.com_ecc/fullchain.cer;'
+#    replace: 'ssl_certificate'
+#  loop:
+#    - audiobookshelf.conf
+#    - jellyfin.conf
+#    - jellyseerr.conf
+#    - navidrome.conf
+#    - wikijs.conf
+#    - nextcloud.conf
 
 
-- name: Remove Fullchain.pem from files
-  ansible.builtin.replace:
-    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
-    line: 'ssl_certificate_key /data/certs2/jaspergreenhill.com_ecc/jaspergreenhill.com.key;'
-    replace: 'ssl_certificate_key'
-  loop:
-    - audiobookshelf.conf
-    - jellyfin.conf
-    - jellyseerr.conf
-    - navidrome.conf
-    - wikijs.conf
-    - nextcloud.conf
+#- name: update ssl_certificate_key
+#  ansible.builtin.replace:
+#    path: /home/mediauser/docker/nginx2/config/nginx/site-confs/{{item}}
+#    line: 'ssl_certificate_key /data/certs2/jaspergreenhill.com_ecc/jaspergreenhill.com.key;'
+#    replace: 'ssl_certificate_key'
+#  loop:
+#    - audiobookshelf.conf
+#    - jellyfin.conf
+#    - jellyseerr.conf
+#    - navidrome.conf
+#    - wikijs.conf
+#    - nextcloud.conf
 
 - name: Restart Nginx External
   community.docker.docker_container:
