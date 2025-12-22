@@ -1,0 +1,13 @@
+---
+- hosts: chunkservers
+  become: yes
+  roles:
+    - roles/jg_moosefs_chunkserver 
+  vars:
+    moosefs_master_host: mfsmaster.jaspergreenhill.com 
+  tasks:
+  - name: System details
+    ansible.builtin.debug: msg="{{ item }}"
+    with_items:
+    - "{{ ansible_hostname }}"
+    - "{{ ansible_distribution_release }}"

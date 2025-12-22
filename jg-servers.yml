@@ -6,8 +6,8 @@
     - roles/jg_moosefs_client 
     - roles/jg_ntp
     - roles/jg_server_packages
-    - roles/jg_network
     - roles/jg_users
+    - roles/jg_sshkey
   vars:
     fqdn: jaspergreenhill.com
     user_jasper: jasper
