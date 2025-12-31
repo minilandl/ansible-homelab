@@ -5,6 +5,7 @@
     - roles/jg_moosefs_mediamounts
     - roles/jg_nginx_media_config
     - roles/jg_media_docker_checkrr_config
+    - roels/jg_media_userwatch_config
   vars:
      moosefs_mount_tv: /mnt/Tvshows
      moosefs_mount_audiobooks: /mnt/Audiobooks

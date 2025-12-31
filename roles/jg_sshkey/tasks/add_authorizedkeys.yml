@@ -1,7 +1,30 @@
 ---
-- name: Set authorized key taken from file
+- name: Set authorized key taken from file jasper
   ansible.posix.authorized_key:
     user: jasper
     state: present
-    key: "{{ lookup('file', '/home/jasper/.ssh/id_rsa.pub') }}"
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    path: /home/jasper/.ssh/authorized_keys
+
+
+- name: Set authorized key taken from file appuser
+  ansible.posix.authorized_key:
+    user: appuser
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    path: /home/appuser/.ssh/authorized_keys
+
+- name: Set authorized key taken from file mediauser
+  ansible.posix.authorized_key:
+    user: mediauser
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    path: /home/appuser/.ssh/authorized_keys
+
+- name: Set authorized key taken from file root
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    key: "{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+    path: /root/.ssh/authorized_keys
 
