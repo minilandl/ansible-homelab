@@ -6,3 +6,11 @@
     owner: mediauser
     group: mediauser
     mode: '0644'
+
+- name: Copy nginx joplin config file 
+  template:
+    src: joplin.conf
+    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/joplin.conf 
+    owner: mediauser
+    group: mediauser
+    mode: '0644'
