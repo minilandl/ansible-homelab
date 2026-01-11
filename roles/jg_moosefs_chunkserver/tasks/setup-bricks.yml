@@ -2,6 +2,13 @@
 # tasks file for ansible-role-moosefs
 # Make sure the brick directory is healthy and correctly configured
 
+
+- name: Cleanup Empty mountpoints 
+  find:
+    paths: /mnt/
+    patterns: -empty -type -delete 
+    file_type: directory
+
 - name: Build a list of bricks
   find:
     paths: /mnt/
@@ -20,3 +27,7 @@
   when: "'moosefs_chunkserver' in group_names"
   loop: "{{ brick_list.files }}"
   no_log: true
+
+
+
+
