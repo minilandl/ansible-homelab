@@ -1,5 +1,6 @@
 chunkservers:
  hosts: 
+   mfsmaster.jaspergreenhill.com:
    jg-chunkserver3.jaspergreenhill.com: 
    jg-chunkserver2.jaspergreenhill.com:
    jg-chunkserver1.jaspergreenhill.com:
@@ -11,10 +12,12 @@ app:
   jg-app.jaspergreenhill.com:
 servers:
   hosts:
-    jg-ansible.jaspergreenhill.com:
     jg-app.jaspergreenhill.com:
     jg-ansible.jaspergreenhill.com:
     jg-media.jaspergreenhill.com:
+    jg-chunkserver3.jaspergreenhill.com: 
+    jg-chunkserver2.jaspergreenhill.com:
+    jg-chunkserver1.jaspergreenhill.com:
     mfsmaster.jaspergreenhill.com:
 pve:
  hosts:
