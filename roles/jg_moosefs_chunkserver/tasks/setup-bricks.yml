@@ -1,34 +1,6 @@
----
 # tasks file for ansible-role-moosefs
 # Make sure the brick directory is healthy and correctly configured
-
-
 ---
-- name: Remove empty and unused mount points in /mnt
-  hosts: all
-  become: yes
-  tasks:
-    - name: Identify all directories in /mnt
-      ansible.builtin.find:
-        paths: /mnt
-        file_type: directory
-        recurse: no  # Usually, mount points are top-level in /mnt
-      register: discovered_dirs
-
-    - name: Remove directories if empty and NOT active mount points
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        state: absent
-      loop: "{{ discovered_dirs.files }}"
-      vars:
-        # Create a list of all currently active mount points
-        active_mounts: "{{ ansible_facts.mounts | map(attribute='mount') | list }}"
-      when: 
-        # 1. Ensure it's not currently mounted
-        - item.path not in active_mounts
-        # 2. Double check it's empty (ls -A returns nothing)
-        - lookup('pipe', 'ls -A ' + item.path | quote) == ""
-
 - name: Build a list of bricks
   find:
     paths: /mnt/
@@ -38,16 +10,13 @@
 
 - name: Ensure each brick folder exists and is owned correctly
   file:
-    name: "{{ item.path }}"
+    name: "{{ item.path }}/brick"
     state: directory
     owner: mfs
     group: mfs
-    mode: '0777'
+    mode: '0755'
     recurse: yes
   when: "'moosefs_chunkserver' in group_names"
   loop: "{{ brick_list.files }}"
   no_log: true
-
-
-
 
