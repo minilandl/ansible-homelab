@@ -24,6 +24,20 @@
         ttl: 3600
         validate_certs: 'false'
 
+- name: Add DNS Record JG SW1 Switch
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "jg-sw2.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "192.168.27.2"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+
+
 - name: Add DNS Record Chunkserver1 
   effectivelywild.technitium_dns.technitium_dns_add_record:
         api_url: "{{ technitium_api_url_2 }}"
