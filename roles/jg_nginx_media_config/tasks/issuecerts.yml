@@ -1,8 +1,5 @@
 ---
 
-
-
-
 - name: Restart Nginx External
   community.docker.docker_container:
     name: nginx2

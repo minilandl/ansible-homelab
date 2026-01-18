@@ -3,7 +3,9 @@
   apt:
     pkg:
       - stress
+      - rsync
       - neovim
+      - smartmontools
       - vim
       - htop
       - freeipmi

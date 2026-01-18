@@ -80,8 +80,8 @@
       file:
         path: "/mnt/mfsbrick.{{ item.uuid[0] }}"
         state: directory
-        owner: root
-        group: root
+        owner: mfs
+        group: mfs
         mode: 0755
       loop: "{{ uuids }}"
 
