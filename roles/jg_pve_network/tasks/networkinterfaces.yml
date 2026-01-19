@@ -20,11 +20,18 @@
   copy:
     src: interfaces.cfg
     dest: /etc/network/interfaces
-
+    
 - name: Update Current IP Address
   ansible.builtin.replace:
     path: /etc/network/interfaces
     regexp: "10.0.10.5"
     replace: "{{ansible_default_ipv4.address}}"
 
-
+- name: Identify all 10G interfaces
+  debug:
+    msg: "Found a 10G interface: {{ item }}"
+  loop: "{{ ansible_interfaces }}"
+  when: 
+    - ansible_facts[item]['speed'] is defined
+    - ansible_facts[item]['speed'] == 10000
+  register: 10Ginterface
