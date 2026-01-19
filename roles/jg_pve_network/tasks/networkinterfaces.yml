@@ -27,11 +27,16 @@
     regexp: "10.0.10.5"
     replace: "{{ansible_default_ipv4.address}}"
 
-- name: Identify all 10G interfaces
-  debug:
-    msg: "Found a 10G interface: {{ item }}"
-  loop: "{{ ansible_interfaces }}"
-  when: 
-    - ansible_facts[item]['speed'] is defined
-    - ansible_facts[item]['speed'] == 10000
-  register: 10Ginterface
+- name: Find the 10G interface name
+      set_fact:
+        is10g: "{{ item }}"
+      loop: "{{ ansible_interfaces }}"
+      when: 
+        - ansible_facts[item]['speed'] is defined
+        - ansible_facts[item]['speed'] == target_speed
+      # This ensures we pick the first matching 10G card found
+      
+    - name: Fail if no 10G interface is found
+      fail:
+        msg: "No 10G interface detected on this host."
+      when: is10g is not defined

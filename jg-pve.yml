@@ -25,6 +25,7 @@
         - i915
     pve_group: "PVEJG"
     pve_cluster_clustername: "{{ pve_group }}" 
+    target_speed: 10000 
     pve_cluster_enabled: yes
     pve_ssh_port: 22
     pve_manage_ssh: true
@@ -41,6 +42,7 @@
     debug: msg="{{ item }}"
     with_items:
     - "{{ ansible_distribution }}"
+    - "{{ ansible_interfaces }}"
     - "{{ ansible_distribution_version }}"
     - "{{ ansible_distribution_major_version }}"
     - "{{ ansible_distribution_release }}"
