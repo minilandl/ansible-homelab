@@ -4,7 +4,8 @@
   roles:
     #- roles/jg_moosefs_repo 
     #- roles/jg_moosefs_client 
-    #- roles/jg_ntp
+    - roles/jg_ntp
+    - roles/jg_network
     - roles/jg_server_packages
     - roles/jg_users
     - roles/jg_sshkey

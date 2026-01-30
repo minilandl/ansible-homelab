@@ -1,0 +1,106 @@
+---
+- name: 10G Enable memory auto tuning  
+  ansible.posix.sysctl: 
+    name: net.ipv4.tcp_moderate_rcvbuf
+    value: '1'
+    state: present
+    reload: true  # Immediately applies the change via `sysctl -p`
+    sysctl_set: true 
+
+- name: 10G allow testing with buffers up to 64MB 
+  ansible.posix.sysctl:
+    name: "{{ item }}"
+    value: "67108864"
+    reload: false
+  loop:
+    - net.core.wmem_max
+    - net.core.rmem_max
+
+- name: min, default, max number of bytes allocated for the socket's receive/send buffer  
+  ansible.posix.sysctl:
+    name: "{{ item }}"
+    value: "4096 87380 33554432"
+    reload: true
+  loop:
+    - net.ipv4.tcp_rmem
+    - net.ipv4.tcp_wmem
+
+- name: 10G recommended default congestion control is htcp 
+  ansible.posix.sysctl: 
+    name: net.ipv4.tcp_congestion_control 
+    value: 'htcp'
+    state: present
+    reload: true  # Immediately applies the change via `sysctl -p`
+    sysctl_set: true 
+
+- name: 10G The maximum number of packets queued in received state 
+  ansible.posix.sysctl: 
+    name: net.core.netdev_max_backlog 
+    value: '30000'
+    state: present
+    reload: true  # Immediately applies the change via `sysctl -p`
+    sysctl_set: true 
+
+- name: 10G Timeout closing of TCP connections after 7seconds.  
+  ansible.posix.sysctl: 
+    name: net.ipv4.tcp_fin_timeout
+    value: '7'
+    state: present
+    reload: true  # Immediately applies the change via `sysctl -p`
+    sysctl_set: true
+
+- name: Avoid falling back to slow start after a connection goes idle.  
+  ansible.posix.sysctl: 
+    name: net.ipv4.tcp_slow_start_after_idle 
+    value: '0'
+    state: present
+    reload: true  # Immediately applies the change via `sysctl -p`
+    sysctl_set: true
+
+- name: Enable Forward Acknowledgment, which operates with Selective Acknowledgment (SACK) to reduce congestion. 
+  ansible.posix.sysctl: 
+    name: net.ipv4.tcp_fack 
+    value: '1'
+    state: present
+    reload: true  # Immediately applies the change via `sysctl -p`
+    sysctl_set: true
+
+- name: Support windows larger than 64KB.  
+  ansible.posix.sysctl: 
+    name: net.ipv4.tcp_window_scaling  
+    value: '1'
+    state: present
+    reload: true  # Immediately applies the change via `sysctl -p`
+    sysctl_set: true
+
+- name: Enable selective acknowledgment, which improves performance by selectively acknowledging packets received out of order.   
+  ansible.posix.sysctl: 
+    name: net.ipv4.tcp_sack 
+    value: '0'
+    state: present
+    reload: true  # Immediately applies the change via `sysctl -p`
+    sysctl_set: true
+
+- name: Enable calculation of RTT in a more accurate way (see RFC 1323) than the retransmission timeout.  
+  ansible.posix.sysctl: 
+    name: net.ipv4.tcp_timestamps 
+    value: '0'
+    state: present
+    reload: true  # Immediately applies the change via `sysctl -p`
+    sysctl_set: true
+
+- name: netdevbudgetusecs  
+  ansible.posix.sysctl: 
+    name: net.core.netdev_budget_usecs  
+    value: '4000'
+    state: present
+    reload: true  # Immediately applies the change via `sysctl -p`
+    sysctl_set: true
+
+- name: netdevbudget
+  ansible.posix.sysctl: 
+    name: net.core.netdev_budget
+    value: '600'
+    state: present
+    reload: true  # Immediately applies the change via `sysctl -p`
+    sysctl_set: true
