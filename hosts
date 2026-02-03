@@ -19,6 +19,9 @@ servers:
     jg-chunkserver2.jaspergreenhill.com:
     jg-chunkserver1.jaspergreenhill.com:
     mfsmaster.jaspergreenhill.com:
+    jgpve4.jaspergreenhill.com:
+    jgpve5.jaspergreenhill.com:
+    jgpve6.jaspergreenhill.com:
 pve:
  hosts:
    jgpve6.jaspergreenhill.com:

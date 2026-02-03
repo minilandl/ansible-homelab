@@ -1,0 +1,21 @@
+---
+- name: Check for Mellanox ConnectX-3 Cards
+  shell: lspci -d ::0200 | grep Mellanox
+  register: mellanox_cards
+  changed_when: false
+
+
+- name: "Update apt cache (Debian Family)"
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_os_family == "Debian"
+
+
+- name: Install Mellanox DKMS Drivers
+  apt:
+    pkg:
+      - mstflint-dkms
+      - pve-headers    
+  when: ansible_vendor_name= "Mellanox"
