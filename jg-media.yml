@@ -10,9 +10,11 @@
      moosefs_mount_tv: /mnt/Tvshows
      moosefs_mount_audiobooks: /mnt/Audiobooks
      moosefs_mount_movies: /mnt/Movies
+     moosefs_mount_roms: /mnt/roms
      moosefs_mount_anime: /mnt/Anime
      moosefs_mount_music: /mnt/Music
      moosefs_mount_music_subfolder: Music 
+     moosefs_mount_roms_subfolder: roms 
      moosefs_mount_anime_subfolder: anime 
      moosefs_mount_audiobooks_subfolder: Audiobooks
      moosefs_mount_movies_subfolder: Movies

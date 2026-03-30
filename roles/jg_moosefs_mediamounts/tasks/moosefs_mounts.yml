@@ -23,6 +23,12 @@
       state: directory
       mode: '0755'
 
+- name: Create Roms directory
+  ansible.builtin.file:
+      path: "{{moosefs_mount_roms}}"
+      state: directory
+      mode: '0755'
+
 - name: Mount TV Shows
   ansible.posix.mount:
     src: "{{moosefs_mfsmaster}}" 
@@ -60,5 +66,13 @@
     src: "{{moosefs_mfsmaster}}" 
     path: "{{moosefs_mount_audiobooks}}"
     opts: mfssubfolder={{moosefs_mount_audiobooks_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs
+
+- name: Mount Roms
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_roms}}"
+    opts: mfssubfolder={{moosefs_mount_roms_subfolder}},defaults,mfsdelayedinit,allow_other
     state: mounted
     fstype: moosefs
