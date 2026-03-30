@@ -12,6 +12,7 @@
         validate_certs: 'false'
   loop:
     - sonarr
+    - jdownloader
     - radarr
     - lidarr
     - autobrr
