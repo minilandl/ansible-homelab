@@ -14,3 +14,11 @@
     owner: mediauser
     group: mediauser
     mode: '0644'
+
+- name: Copy nginx jdownloader config file 
+  template:
+    src: jdownloader.conf
+    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/jdownloader.conf 
+    owner: mediauser
+    group: mediauser
+    mode: '0644'
