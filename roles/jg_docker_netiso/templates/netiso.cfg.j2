@@ -1,0 +1,8 @@
+services:
+ netiso_xbox360_tuxuser:
+   container_name: NetISO-XBOX360
+   image: ghcr.io/tuxuser/netiso-srv-rs:latest
+   ports:
+     - 4323:4323
+   volumes:
+     - /mnt/mfs/roms/ROMs/xbox360:/mnt:rw
