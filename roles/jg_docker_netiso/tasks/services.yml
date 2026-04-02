@@ -1,0 +1,12 @@
+---
+- name: Ensure Docker service is started and enabled
+  service:
+   name: docker
+   state: started
+   enabled: yes
+
+- name: Ensure containerd service is started and enabled
+  service:
+   name: containerd
+   state: started
+   enabled: yes
