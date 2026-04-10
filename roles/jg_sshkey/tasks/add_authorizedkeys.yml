@@ -1,4 +1,10 @@
 ---
+ - name: Create directory for daily logs
+   ansible.builtin.file:
+     path: ~/.ssh
+     state: directory
+     mode: '0644'
+
 - name: Set authorized key taken from file jasper
   ansible.posix.authorized_key:
     user: jasper
