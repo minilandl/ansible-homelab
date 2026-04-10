@@ -18,21 +18,19 @@ servers:
     jg-app.jaspergreenhill.com:
     jg-ansible.jaspergreenhill.com:
     jg-media.jaspergreenhill.com:
-    jg-chunkserver3.jaspergreenhill.com: 
-    jg-chunkserver2.jaspergreenhill.com:
-    jg-chunkserver1.jaspergreenhill.com:
-    mfsmaster.jaspergreenhill.com:
-    jgpve4.jaspergreenhill.com:
-    jgpve5.jaspergreenhill.com:
-    jgpve6.jaspergreenhill.com:
+    chunkservers:
+    pve:
 pve:
  hosts:
    jgpve6.jaspergreenhill.com:
    jgpve4.jaspergreenhill.com:
    jgpve5.jaspergreenhill.com:
-jgpve6:
+k8s:
  hosts:
-   jgpve6.jaspergreenhill.com:
+   jg-k8sworker1.jaspergreenhill.com:
+   jg-k8sworker2.jaspergreenhill.com:
+   jg-k8sworker3.jaspergreenhill.com:
+   jg-k8smaster1.jaspergreenhill.com:
 dns:
  hosts:
    jg-dns.jaspergreenhill.com
