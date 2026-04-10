@@ -1,8 +1,15 @@
 ---
-- name: set FQDN to match inventory
-  ansible.builtin.command: "/usr/bin/hostnamectl --static set-hostname {{ OVERRIDE_FQDN | default(ansible_hostname) | lower }}"
+- name: Configure hostname template 
+  template:
+    src: hostname.j2
+    dest: /etc/hostname
+    owner: root
+    group: root
+    mode: '0644'
+
+
+- name: Ensure the hostname is applied to the current session
+  ansible.builtin.hostname:
+    name: "{{ ansible_hostname }}"
   changed_when: false
 
-- name: set pretty hostname
-  ansible.builtin.command: "/usr/bin/hostnamectl --pretty set-hostname {{ OVERRIDE_HOSTNAME | default(ansible_hostname.split('.')[0]) | lower }}"
-  changed_when: false
