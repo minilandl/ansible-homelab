@@ -89,13 +89,13 @@
     reload: true  # Immediately applies the change via `sysctl -p`
     sysctl_set: true
 
-- name: netdevbudgetusecs  
-  ansible.posix.sysctl: 
-    name: net.core.netdev_budget_usecs  
-    value: '4000'
-    state: present
-    reload: true  # Immediately applies the change via `sysctl -p`
-    sysctl_set: true
+#- name: netdevbudgetusecs  
+#  ansible.posix.sysctl: 
+#    name: net.core.netdev_budget_usecs  
+#    value: '4000'
+#    state: present
+#    reload: true  # Immediately applies the change via `sysctl -p`
+#    sysctl_set: true
 
 - name: netdevbudget
   ansible.posix.sysctl: 
