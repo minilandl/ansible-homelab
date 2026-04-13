@@ -1,3 +1,4 @@
+---
 - name: Ensure /opt/containerd directory exists
   file:
     path: /opt/containerd
