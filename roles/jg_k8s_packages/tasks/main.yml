@@ -1,4 +1,5 @@
 ---
  - include_tasks: software.yml
  - include_tasks: software_kube.yml
+ - include_tasks: software_docker.yml
  - include_tasks: repo.yml
