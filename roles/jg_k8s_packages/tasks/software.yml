@@ -4,7 +4,6 @@
    name:
     - curl
     - gnupg2
-    - software-properties-common
     - apt-transport-https
     - ca-certificates
     - docker.io
