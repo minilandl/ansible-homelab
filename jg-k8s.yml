@@ -1,0 +1,16 @@
+---
+- hosts: k8s
+  become: yes
+  roles:
+    - roles/jg_k8s_packages
+  vars:
+    fqdn: jaspergreenhill.com
+    user_jasper: jasper
+    dnsserver: 10.0.40.3
+    domainname: jg-dns.jaspergreenhill.com
+  tasks:
+  - name: System details
+    ansible.builtin.debug: msg="{{ item }}"
+    with_items:
+    - "{{ ansible_hostname }}"
+    - "{{ ansible_distribution_release }}"
