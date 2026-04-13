@@ -1,0 +1,8 @@
+---
+- name: Disable swap
+  ansible.builtin.command:
+    cmd: swapoff -a
+
+- name: Ensure swap is disabled on boot
+  ansible.builtin.command:
+    cmd: sudo sed -i -e '/\/swap.img\s\+none\s\+swap\s\+sw\s\+0\s\+0/s/^/#/' /etc/fstab
