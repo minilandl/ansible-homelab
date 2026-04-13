@@ -1,2 +1,2 @@
 ---
-include_tasks: disableswap.yml
+- include_tasks: disableswap.yml

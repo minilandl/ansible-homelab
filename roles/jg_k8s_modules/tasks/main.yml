@@ -1,2 +1,2 @@
 ---
-include-tasks: modules.yml
+- include-tasks: modules.yml
