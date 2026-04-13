@@ -1,0 +1,5 @@
+---
+- name: Replace /etc/default/kubelet contents
+  ansible.builtin.copy:
+    dest: /etc/default/kubelet
+    content: 'KUBELET_EXTRA_ARGS="--cgroup-driver=cgroupfs"'
