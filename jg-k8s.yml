@@ -3,6 +3,10 @@
   become: yes
   roles:
     - roles/jg_k8s_packages
+    - roles/jg_k8s_containerd
+    - roles/jg_k8s_disableswap
+    - roles/jg_k8s_kubecfg
+    - roles/jg_k8s_modules
   vars:
     fqdn: jaspergreenhill.com
     user_jasper: jasper
