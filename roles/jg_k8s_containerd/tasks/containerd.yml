@@ -1,0 +1,23 @@
+- name: Ensure /opt/containerd directory exists
+  file:
+    path: /opt/containerd
+    state: directory
+    mode: '0755'    
+
+- name: Configuring Containerd (building the configuration file)
+  ansible.builtin.command:
+    cmd: sudo sh -c "containerd config default > /opt/containerd/config.toml"
+
+- name: Configuring Containerd (Setting SystemdCgroup Variable to True)
+  ansible.builtin.command:
+    cmd: sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /opt/containerd/config.toml
+
+- name: Reload systemd configuration
+  ansible.builtin.command:
+    cmd: systemctl daemon-reload
+
+- name: Restart containerd service
+  ansible.builtin.service:
+    name: containerd
+    state: restarted
+
