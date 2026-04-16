@@ -1,9 +1,6 @@
 ---
 
 - name: Remove Existing Docker  Directory (if it exists)
-  ansible.builtin.shell: sudo rm -rf /etc/apt/keyrings
-
-- name: Remove Existing Docker  Directory (if it exists)
   ansible.builtin.shell: sudo rm -rf /etc/apt/sources.list.d/docker.list
 
 - name: Download Docker GPG key securely
