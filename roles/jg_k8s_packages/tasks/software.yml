@@ -37,7 +37,7 @@
 
 - name: Download Kubernetes GPG key securely
   ansible.builtin.shell: curl -fsSL https://pkgs.k8s.io/core:/stable:/{{k8s_version}}/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-  when: !k8sgpg_file
+  when: not k8sgpg_file.stat.exists
 
 - name: Add Kubernetes repository
   ansible.builtin.apt_repository:
