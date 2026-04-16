@@ -1,27 +1,15 @@
 ---
-- name: Install required packages
-  apt:
-   name:
-    - curl
-    - gnupg2
-    - apt-transport-https
-    - ca-certificates
-   state: present
-   update_cache: yes
 
-- name: Remove Existing Kubernetes Directory (if it exists)
-  ansible.builtin.shell: sudo rm -rf /etc/apt/sources.list.d/pkgs_k8s_io_core_stable_v1_30_deb.list
+- name: Remove Existing K8s List
+  ansible.builtin.shell: sudo rm -rf /etc/apt/sources.list.d/*k8s*.sources
 
-- name: "Gathering facts"
-  ansible.builtin.setup:
-  when: ansible_facts|default({}) == {}
+- name: Remove Existing Docker List
+  ansible.builtin.shell: sudo rm -rf /etc/apt/sources.list.d/*docker*.sources
 
-- name: "Update apt cache (Debian Family)"
-  become: true
-  ansible.builtin.apt:
-    update_cache: true
-    cache_valid_time: 3600
-  when: ansible_os_family == "Debian"
+
+- name: Remove Existing Docker  Directory (if it exists)
+  ansible.builtin.shell: sudo rm -rf /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+
 
 - name: Prepare keyrings directory and update permissions
   file:
@@ -43,6 +31,27 @@
   ansible.builtin.apt_repository:
     repo: "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/{{ k8s_version }}/deb/ /"
     state: present
+
+- name: Install required packages
+  apt:
+   name:
+    - curl
+    - gnupg2
+    - apt-transport-https
+    - ca-certificates
+   state: present
+   update_cache: yes
+
+- name: "Gathering facts"
+  ansible.builtin.setup:
+  when: ansible_facts|default({}) == {}
+
+- name: "Update apt cache (Debian Family)"
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  when: ansible_os_family == "Debian"
 
 - name: Hold kubelet, kubeadm, kubectl packages
   ansible.builtin.command:
