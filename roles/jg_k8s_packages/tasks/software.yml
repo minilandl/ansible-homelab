@@ -6,19 +6,11 @@
     - gnupg2
     - apt-transport-https
     - ca-certificates
-    - docker.io
    state: present
    update_cache: yes
 
-- name: Remove Keyrings Directory (if it exists)
-  ansible.builtin.shell: rm -rf /etc/apt/keyrings
-
 - name: Remove Existing Kubernetes Directory (if it exists)
   ansible.builtin.shell: sudo rm -rf /etc/apt/sources.list.d/pkgs_k8s_io_core_stable_v1_30_deb.list
-
-- name: Remove Existing Docker  Directory (if it exists)
-  ansible.builtin.shell: sudo rm -rf /etc/apt/sources.list.d/docker.list
-
 
 - name: "Gathering facts"
   ansible.builtin.setup:
@@ -37,11 +29,15 @@
     state: directory
     mode: '0755'
 
-- name: Download Kubernetes GPG key securely
-  ansible.builtin.shell: curl -fsSL https://pkgs.k8s.io/core:/stable:/{{ k8s_version }}/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+- name: Check if Kubernetes GPG key file exists
+  ansible.builtin.stat:
+    path: /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  register: k8sgpg_file
 
-- name: Download Docker GPG key securely
-  ansible.builtin.shell: curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+
+- name: Download Kubernetes GPG key securely
+  ansible.builtin.shell: curl -fsSL https://pkgs.k8s.io/core:/stable:/{{k8s_version}}/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+  when: !k8sgpg_file
 
 - name: Add Kubernetes repository
   ansible.builtin.apt_repository:
