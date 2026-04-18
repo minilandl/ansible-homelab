@@ -20,3 +20,15 @@
   loop: "{{ brick_list.files }}"
   no_log: true
 
+- name: Ensure each brick folder exists and is owned correctly
+  file:
+    name: "{{ item.path }}/brick/*"
+    state: directory
+    owner: mfs
+    group: mfs
+    mode: '0755'
+    recurse: yes
+  when: "'moosefs_chunkserver' in group_names"
+  loop: "{{ brick_list.files }}"
+  no_log: true
+
