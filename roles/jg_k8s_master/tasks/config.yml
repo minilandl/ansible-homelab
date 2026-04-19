@@ -1,0 +1,20 @@
+---
+- name: Update System-Wide Profile for Kubernetes
+  ansible.builtin.copy:
+    dest: /etc/profile.d/kubernetes.sh
+    content: |
+      export KUBECONFIG=/etc/kubernetes/admin.conf
+      export ANSIBLE_USER="jasper"
+
+- name: Replace Docker daemon.json configuration
+  ansible.builtin.copy:
+    dest: /etc/docker/daemon.json
+    content: |
+      {
+        "exec-opts": ["native.cgroupdriver=systemd"],
+        "log-driver": "json-file",
+        "log-opts": {
+          "max-size": "100m"
+        },
+        "storage-driver": "overlay2"
+      }
