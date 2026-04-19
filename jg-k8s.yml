@@ -1,4 +1,16 @@
 ---
+- name: Configure Master Nodes
+- hosts: k8s-master
+  become: yes
+  roles:
+    - roles/jg_k8s_packages
+    - roles/jg_k8s_containerd
+    - roles/jg_k8s_disableswap
+    - roles/jg_k8s_kubecfg
+    - roles/jg_k8s_modules
+    - roles/jg_k8s_master
+    - roles/jg_k8s_master_kubeadm
+- name: Configure all Nodes
 - hosts: k8s
   become: yes
   roles:
@@ -7,6 +19,7 @@
     - roles/jg_k8s_disableswap
     - roles/jg_k8s_kubecfg
     - roles/jg_k8s_modules
+
   vars:
     fqdn: jaspergreenhill.com
     user_jasper: jasper
