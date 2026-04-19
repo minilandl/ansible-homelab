@@ -35,7 +35,7 @@ k8s:
    jg-k8sworker1.jaspergreenhill.com:
    jg-k8sworker2.jaspergreenhill.com:
    jg-k8sworker3.jaspergreenhill.com:
-k8s-master:
+k8smaster:
  hosts:
    jg-k8smaster1.jaspergreenhill.com:
 dns:
