@@ -10,6 +10,7 @@
     - roles/jg_k8s_modules
     - roles/jg_k8s_master
     - roles/jg_k8s_master_kubeadm
+    - roles/jg_k8s_master_join
 - name: Configure all Nodes
 - hosts: k8s
   become: yes
