@@ -1,0 +1,9 @@
+---
+- name: Reload systemd configuration
+  ansible.builtin.command:
+    cmd: systemctl daemon-reload
+
+- name: Restart kubelet service
+  ansible.builtin.service:
+    name: kubelet
+    state: restarted
