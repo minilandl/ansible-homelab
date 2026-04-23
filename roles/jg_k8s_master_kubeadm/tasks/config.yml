@@ -9,7 +9,7 @@
 
 - name: Initialize Kubernetes control plane
   ansible.builtin.command:
-    cmd: kubeadm init --control-plane-endpoint=10.0.40.21 --pod-network-cidr={{ cni_network }} --upload-certs
+    cmd: kubeadm init --control-plane-endpoint=10.0.40.21 --node-name jg-k8smaster1 --pod-network-cidr={{ cni_network }} --upload-certs
     creates: /tmp/kubeadm_output
   register: kubeadm_init_output
   become: true
