@@ -3,6 +3,7 @@
   hosts: k8smaster
   become: yes
   roles:
+    - roles/jg_update_packages
     - roles/jg_k8s_packages
     - roles/jg_k8s_containerd
     - roles/jg_k8s_disableswap
@@ -16,6 +17,7 @@
   hosts: k8s
   become: yes
   roles:
+    - roles/jg_update_packages
     - roles/jg_k8s_packages
     - roles/jg_k8s_containerd
     - roles/jg_k8s_disableswap
