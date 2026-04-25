@@ -11,9 +11,13 @@
     - roles/jg_k8s_modules
     - roles/jg_k8s_master
     - roles/jg_k8s_master_kubeadm
-    - roles/jg_k8s_master_join
-    - roles/jg_k8s_joinmaster
 
+- name: Configure And Install Helm
+  hosts: k8smaster
+  become: yes
+  roles:
+    - roles/jg_k8s_master_helm
+ 
 - name: Configure Worker Nodes
   hosts: k8s
   become: yes
@@ -24,6 +28,17 @@
     - roles/jg_k8s_disableswap
     - roles/jg_k8s_kubecfg
     - roles/jg_k8s_modules
+
+- name: Join Master Nodes
+  hosts: k8smaster
+  become: yes
+  roles:
+    - roles/jg_k8s_joinmaster
+
+- name: Join Worker  Nodes
+  hosts: k8s
+  become: yes
+  roles:
     - roles/jg_k8s_joinworker
   vars:
     fqdn: jaspergreenhill.com
