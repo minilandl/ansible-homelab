@@ -13,6 +13,10 @@
   ansible.builtin.command:
     cmd: sudo sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /opt/containerd/config.toml
 
+- name: Configuring Containerd (Enable cri Container Runtime Plugin)
+  ansible.builtin.command:
+    cmd: sudo sed -i 's/disabled_/enabled_/g' /etc/containerd/config.toml
+
 - name: Reload systemd configuration
   ansible.builtin.command:
     cmd: systemctl daemon-reload
