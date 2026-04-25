@@ -1,0 +1,11 @@
+---
+---
+- name: Copy join-command file to master nodes
+  copy:
+    src: /tmp/worker-join-command
+    dest: /tmp/worker-join-command
+    mode: 0755
+
+- name: Join Master Nodes
+  ansible.builtin.shell: sh /tmp/worker-join-command
+  become: yes
