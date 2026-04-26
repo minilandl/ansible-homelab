@@ -17,7 +17,13 @@
   become: yes
   roles:
     - roles/jg_k8s_master_helm
- 
+
+- name: Configure Network
+  hosts: k8smaster
+  become: yes
+  roles:
+    - roles/jg_k8s_network_cillium
+
 - name: Configure Worker Nodes
   hosts: k8s
   become: yes
@@ -40,6 +46,7 @@
   become: yes
   roles:
     - roles/jg_k8s_joinworker
+
   vars:
     fqdn: jaspergreenhill.com
     user_jasper: jasper
