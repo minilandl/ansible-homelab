@@ -1,4 +1,14 @@
 ---
+
+
+
+
+
+
+
+
+
+
 - name: Install kubeadm, kubelet, kubectl
   ansible.builtin.apt:
     name:

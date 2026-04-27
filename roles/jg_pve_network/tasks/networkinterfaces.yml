@@ -44,5 +44,5 @@
 - name: Update 10G interface bridge /etc/network/interfaces
   ansible.builtin.replace:
     path: /etc/network/interfaces
-    regexp: "bridge-ports eno1"
+    regexp: "bridge-ports"
     replace: "bridge-ports {{is10g}}"

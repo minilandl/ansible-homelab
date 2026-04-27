@@ -14,6 +14,11 @@
 
 - name: Update apt and install docker-ce
   apt:
-     name: docker-ce
+     name: 
+        - docker-ce
+        - docker-ce-cli
+        - containerd.io
+        - docker-buildx-plugin
+        - docker-compose-plugin
      state: latest
      update_cache: true

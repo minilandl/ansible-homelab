@@ -131,11 +131,13 @@
 - name: Restart Nginx External
   community.docker.docker_container:
     name: nginx2
+    image: nginx:latest 
     state: started
     restart: true
 
 - name: Restart Nginx Internal
   community.docker.docker_container:
-    name: nginx 
+    name: nginx
+    image: nginx:latest 
     state: started
     restart: true
