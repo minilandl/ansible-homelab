@@ -1,0 +1,11 @@
+- name: Update argocd-svc file
+  replace:
+    path: /tmp/argocd-svc.yml
+    regexp: 'ClusterIP'
+    replace: 'NodePort'
+  ignore_errors: yes
+
+- name: Apply the modified argocd-svc service
+  shell: kubectl apply -f /tmp/argocd-svc.yml
+  ignore_errors: yes  
+
