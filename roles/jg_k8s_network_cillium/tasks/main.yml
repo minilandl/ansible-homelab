@@ -39,7 +39,14 @@
       with_items:
         - ""
         - ".sha256sum"
-    
+  
+    - name: Check if Cilium is installed
+      shell: kubectl get ds cilium -n kube-system
+      register: cilium_check
+      ignore_errors: true
+      changed_when: false
+
     - name: Install Cilium
       ansible.builtin.command:
         cmd: "cilium install --version {{ cilium_version }}"
+      when: cilium_check.rc != 0
