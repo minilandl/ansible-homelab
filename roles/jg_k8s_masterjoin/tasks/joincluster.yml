@@ -1,5 +1,4 @@
 ---
----
 - name: Copy join-command file to master nodes
   copy:
     src: /tmp/master-join-command
