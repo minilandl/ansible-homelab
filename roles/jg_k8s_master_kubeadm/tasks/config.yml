@@ -34,15 +34,16 @@
 
 - name: create .kube directoryi and copy kube config file
   shell: "{{ item }}"
+  when: not kube_config_manifest.stat.exists
   loop:
     - mkdir -p $HOME/.kube
     - cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
     - chown $(id -u):$(id -g) $HOME/.kube/config
-  when: not kube_config_manifest.stat.exists
 
 - name: Store Kubernetes initialization output to file
   copy:
     content: "{{ kubeadm_init_output.stdout }}"
     dest: /tmp/kubeadm_output
   become: true
+  when: not control_plane_manifest.stat.exists
   delegate_to: localhost
