@@ -39,14 +39,18 @@
   hosts: k8smaster
   become: yes
   roles:
-    - roles/jg_k8s_joinmaster
+    - roles/jg_k8s_masterjoin
 
 - name: Join Worker  Nodes
   hosts: k8s
   become: yes
   roles:
-    - roles/jg_k8s_joinworker
-
+    - roles/jg_k8s_workerjoin
+- name: install argocd
+  hosts: k8smaster
+  become: yes
+  roles:
+    - roles/jg_k8s_argocd
   vars:
     fqdn: jaspergreenhill.com
     user_jasper: jasper
