@@ -7,6 +7,11 @@
   ansible.builtin.command:
     cmd: sudo kubeadm config images pull
 
+- name: Check if control plane is initialized
+  stat:
+    path: /etc/kubernetes/manifests/kube-apiserver.yaml
+  register: control_plane_manifest
+
 - name: Initialize Kubernetes control plane
   ansible.builtin.command:
     cmd: kubeadm init --control-plane-endpoint=10.0.40.21 --node-name jg-k8smaster1 --pod-network-cidr={{ cni_network }} --upload-certs
@@ -14,6 +19,9 @@
   register: kubeadm_init_output
   become: true
   changed_when: false
+  when: not control_plane_manifest.stat.exists
+
+
 
 #- name: Set permissions for Kubernetes Admin
 #  file:
