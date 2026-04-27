@@ -5,6 +5,12 @@
     dest: /tmp/master-join-command
     mode: 0755
 
+- name: Check if node is already joined
+  stat:
+    path: /etc/kubernetes/kubelet.conf
+  register: kubeconfig_file
+
 - name: Join Master Nodes
   ansible.builtin.shell: sh /tmp/master-join-command
   become: yes
+  when: not kubeconfig_file.stat.exists
