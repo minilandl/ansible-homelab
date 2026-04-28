@@ -1,0 +1,23 @@
+---
+- name: Generate the Join Command
+  ansible.builtin.shell: cat /tmp/kubeadm_output | tail -n 2 | sed ':a;N;$!ba;s/\\\n\s*/ /g' > /tmp/worker-join-command
+  delegate_to: localhost
+
+- name: Set permissions for the Join Executable
+  file:
+    path: /tmp/worker-join-command
+    state: file
+    mode: '0755'
+  delegate_to: localhost
+
+
+- name: Generate the Join Command
+  ansible.builtin.shell: cat /tmp/kubeadm_output | sed ':a;N;$!ba;s/\\\n\s*/ /g' | grep "kubeadm join" | sed -n '/kubeadm join.*--control-plane/p' > /tmp/master-join-command
+  delegate_to: localhost
+
+- name: Set permissions for the Join Executable
+  file:
+    path: /tmp/master-join-command
+    state: file
+    mode: '0755'
+  delegate_to: localhost
