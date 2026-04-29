@@ -5,13 +5,13 @@
   ansible.builtin.command:
     cmd: kubeadm token create --print-join-command 
     creates: /tmp/kubeadm_output_join
-  register: kubeadm_output_join
+  register: kubeadm_token_output
   become: true
   changed_when: false
 
 
 - name: Generate the Join Command for Worker Nodes
-  ansible.builtin.shell: cat /tmp/kubeadm_output_join | tail -n 2 | sed ':a;N;$!ba;s/\\\n\s*/ /g' > /tmp/worker-join-command
+  ansible.builtin.shell: cat /tmp/kubeadm_output_join  > /tmp/worker-join-command
   delegate_to: localhost
 
 - name: Set permissions for the Join Executable
