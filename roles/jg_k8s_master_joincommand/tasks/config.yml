@@ -1,6 +1,17 @@
 ---
-- name: Generate the Join Command
-  ansible.builtin.shell: cat /tmp/kubeadm_output | tail -n 2 | sed ':a;N;$!ba;s/\\\n\s*/ /g' > /tmp/worker-join-command
+
+
+- name: Create Join Command and Token to Join Nodes
+  ansible.builtin.command:
+    cmd: kubeadm token create --print-join-command 
+    creates: /tmp/kubeadm_output_join
+  register: kubeadm_output_join
+  become: true
+  changed_when: false
+
+
+- name: Generate the Join Command for Worker Nodes
+  ansible.builtin.shell: cat /tmp/kubeadm_output_join | tail -n 2 | sed ':a;N;$!ba;s/\\\n\s*/ /g' > /tmp/worker-join-command
   delegate_to: localhost
 
 - name: Set permissions for the Join Executable
@@ -11,8 +22,8 @@
   delegate_to: localhost
 
 
-- name: Generate the Join Command
-  ansible.builtin.shell: cat /tmp/kubeadm_output | sed ':a;N;$!ba;s/\\\n\s*/ /g' | grep "kubeadm join" | sed -n '/kubeadm join.*--control-plane/p' > /tmp/master-join-command
+- name: Generate the Join Command for Master Nodes
+  ansible.builtin.shell: cat /tmp/kubeadm_output_join | sed ':a;N;$!ba;s/\\\n\s*/ /g' | grep "kubeadm join" | sed -n '/kubeadm join.*--control-plane/p' > /tmp/master-join-command
   delegate_to: localhost
 
 - name: Set permissions for the Join Executable
