@@ -8,6 +8,7 @@
     - roles/jg_k8s_containerd
     - roles/jg_k8s_disableswap
     - roles/jg_k8s_kubecfg
+    - roles/jg_k8s_master_joincommand
     - roles/jg_k8s_modules
     - roles/jg_k8s_master
     - roles/jg_k8s_master_kubeadm
@@ -35,17 +36,39 @@
     - roles/jg_k8s_kubecfg
     - roles/jg_k8s_modules
 
-- name: Join Master Nodes
-  hosts: k8smaster
-  become: yes
-  roles:
-    - roles/jg_k8s_masterjoin
+- hosts: k8sall
+  tasks:
+    - name: save join command for other hosts to access them
+      ansible.builtin.set_fact:
+        join_command: "{{ hostvars['jg-k8smaster1.jaspergreenhill.com']['join_command_output'].stdout }}"
+        certificate_key: "{{ hostvars['jg-k8smaster1.jaspergreenhill.com']['certificate_key_output'].stdout_lines[-1] }}"
 
-- name: Join Worker  Nodes
-  hosts: k8s
-  become: yes
-  roles:
-    - roles/jg_k8s_workerjoin
+- hosts: k8smaster
+  serial: 1
+  tasks:
+    - name: Check if node is already joined
+      stat:
+       path: /etc/kubernetes/kubelet.conf
+      register: kubeconfig_file
+
+    - name: setup other control plane nodes 
+      ansible.builtin.shell: "{{ join_command }} --control-plane --certificate-key {{ certificate_key }}"
+      become: true
+      when: not kubeconfig_file.stat.exists
+
+- hosts: k8s
+  serial: 1
+  tasks:
+    - name: Check if node is already joined
+      stat:
+       path: /etc/kubernetes/kubelet.conf
+      register: kubeconfig_file
+
+    - name: setup worker nodes
+      ansible.builtin.shell: "{{ join_command }}"
+       when: not kubeconfig_file.stat.exists
+       become: true
+
 - name: install argocd
   hosts: k8smaster
   become: yes
@@ -61,4 +84,5 @@
     ansible.builtin.debug: msg="{{ item }}"
     with_items:
     - "{{ ansible_hostname }}"
-    - "{{ ansible_distribution_release }}"
+    - "{{ ansible_distribution_release }}
+      
