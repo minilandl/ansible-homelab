@@ -44,32 +44,16 @@
         certificate_key: "{{ hostvars['jg-k8smaster1.jaspergreenhill.com']['certificate_key_output'].stdout_lines[-1] }}"
 
 - hosts: k8smaster
-  serial: 1
   tasks:
-    - name: Check if node is already joined
-      stat:
-       path: /etc/kubernetes/kubelet.conf
-      register: kubeconfig_file
-
     - name: setup other control plane nodes 
       ansible.builtin.shell: "{{ join_command }} --control-plane --certificate-key {{ certificate_key }}"
       become: true
-      when: not kubeconfig_file.stat.exists
 
 - hosts: k8s
-  serial: 1
   tasks:
-    - name: Check if node is already joined
-      stat:
-       path: /etc/kubernetes/kubelet.conf
-      register: kubeconfig_file
-
     - name: setup worker nodes
       ansible.builtin.shell: "{{ join_command }}"
-       when: not kubeconfig_file.stat.exists
-       become: true
-
-- name: install argocd
+      become: true
   hosts: k8smaster
   become: yes
   roles:
@@ -79,10 +63,9 @@
     user_jasper: jasper
     dnsserver: 10.0.40.3
     domainname: jg-dns.jaspergreenhill.com
-  tasks:
-  - name: System details
-    ansible.builtin.debug: msg="{{ item }}"
-    with_items:
-    - "{{ ansible_hostname }}"
-    - "{{ ansible_distribution_release }}
-      
+  #tasks:
+  #- name: System details
+  #  ansible.builtin.debug: msg="{{ item }}"
+  #  with_items:
+  #  - "{{ ansible_hostname }}"
+  #  - "{{ ansible_distribution_release }}
