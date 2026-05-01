@@ -45,15 +45,28 @@
 
 - hosts: k8smaster
   tasks:
+    - name: Check if node is already joined
+      stat:
+        path: /etc/kubernetes/kubelet.conf
+      register: kubeconfig_file
+
     - name: setup other control plane nodes 
       ansible.builtin.shell: "{{ join_command }} --control-plane --certificate-key {{ certificate_key }}"
+      when: not kubeconfig_file.stat.exists
       become: true
 
 - hosts: k8s
   tasks:
+    - name: Check if node is already joined
+      stat:
+        path: /etc/kubernetes/kubelet.conf
+      register: kubeconfig_file
+
     - name: setup worker nodes
       ansible.builtin.shell: "{{ join_command }}"
+      when: not kubeconfig_file.stat.exists
       become: true
+- name: Install Argo
   hosts: k8smaster
   become: yes
   roles:
