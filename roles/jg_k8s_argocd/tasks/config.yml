@@ -1,7 +1,17 @@
 ---
+
+- name: Check if the 'argocd' namespace exists
+  kubernetes.core.k8s_info:
+    api_version: v1
+    kind: Namespace
+    name: argocd
+  register: argocd_ns
+
+
 - name: Create ArgoCD Namespace
   shell: kubectl create namespace argocd  
   ignore_errors: yes  
+  when: argocd_ns.rc != 0
 
 - name:  set Config Namespace to Argocd
   shell: kubectl config set-context --current --namespace=argocd
