@@ -11,7 +11,8 @@
   pip:
     name:
       - pyyaml
-      - kubernetes 
+      - kubernetes
+    break_system_packages: true 
 
 - name: Check if the 'argocd' namespace exists
   kubernetes.core.k8s_info:
@@ -37,9 +38,16 @@
   shell: helm repo update
   ignore_errors: yes
 
+- name: check if argocd is present
+  shell: helm status argocd -n argocd
+  register: argocd_check
+  ignore_errors: true
+
+
 - name: Install Argo CD using Helm
   shell: helm install -n argocd argocd argo/argo-cd
   ignore_errors: yes
+  when: helm_check.rc != 0 
 
 - name: Pause for 1 minute to allow Argo CD to initialize
   pause:
