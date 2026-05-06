@@ -1,5 +1,18 @@
 ---
 
+- name: Install required packages
+  apt:
+   name:
+    - python3-pip
+   state: present
+   update_cache: yes
+
+- name: install pre-requisites python libraries 
+  pip:
+    name:
+      - pyyaml
+      - kubernetes 
+
 - name: Check if the 'argocd' namespace exists
   kubernetes.core.k8s_info:
     api_version: v1
