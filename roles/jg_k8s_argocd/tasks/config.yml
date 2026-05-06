@@ -7,18 +7,33 @@
     name: argocd
   register: argocd_ns
 
-
 - name: Create ArgoCD Namespace
   shell: kubectl create namespace argocd  
   ignore_errors: yes  
-  when: argocd_ns.rc != 0
+  when: not argocd_ns
 
 - name:  set Config Namespace to Argocd
   shell: kubectl config set-context --current --namespace=argocd
   ignore_errors: yes  
 
+- name: Add Argo CD repository
+  shell: helm repo add argo https://argoproj.github.io/argo-helm
+  ignore_errors: yes
+
+- name: Update repository using Helm
+  shell: helm repo update
+  ignore_errors: yes
+
+- name: Install Argo CD using Helm
+  shell: helm install -n argocd argocd argo/argo-cd
+  ignore_errors: yes
+
+- name: Pause for 1 minute to allow Argo CD to initialize
+  pause:
+    minutes: 2
+
+
 - name: Apply ArgoCD
   shell: kubectl apply -n argocd --server-side --force-conflicts -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-  ignore_errors: yes  
-
+  ignore_errors: yes
 
