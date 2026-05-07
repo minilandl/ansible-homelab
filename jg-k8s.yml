@@ -24,6 +24,7 @@
   become: yes
   roles:
     - roles/jg_k8s_network_cillium
+    - roles/jg_k8s_network_gatewayapi
 
 - name: Configure Worker Nodes
   hosts: k8s
