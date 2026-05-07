@@ -47,7 +47,7 @@
 - name: Install Argo CD using Helm
   shell: helm install -n argocd argocd argo/argo-cd
   ignore_errors: yes
-  when: helm_check.rc != 0 
+  when: argocd_check.rc != 0 
 
 - name: Pause for 1 minute to allow Argo CD to initialize
   pause:
