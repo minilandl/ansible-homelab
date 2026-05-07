@@ -1,0 +1,20 @@
+---
+- name: Install Gateway API 1/6
+  shell: kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/experimental/gateway.networking.k8s.io_gatewayclasses.yaml
+
+- name: Install Gateway API 2/6
+  shell: kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/experimental/gateway.networking.k8s.io_gateways.yaml 
+
+- name: Install Gateway API 3/6
+  shell: kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/experimental/gateway.networking.k8s.io_httproutes.yaml 
+
+
+- name: Install Gateway API 4/6
+  shell: kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/experimental/gateway.networking.k8s.io_referencegrants.yaml  
+
+- name: Install Gateway API 5/6
+  shell: kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/experimental/gateway.networking.k8s.io_grpcroutes.yaml 
+
+- name: Install Gateway API 6/6
+  shell: kubectl apply -f kubectl apply -f https://raw.githubusercontent.com/kubernetes-sigs/gateway-api/v1.1.0/config/crd/experimental/gateway.networking.k8s.io_tlsroutes.yaml  
+
