@@ -22,3 +22,11 @@
     owner: mediauser
     group: mediauser
     mode: '0644'
+
+ - name: Copy nginx jdownloader config file 
+  template:
+    src: tvheadend.conf
+    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/tvheadend.conf 
+    owner: mediauser
+    group: mediauser
+    mode: '0644'   
