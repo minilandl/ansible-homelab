@@ -12,6 +12,7 @@
         validate_certs: 'false'
   loop:
     - sonarr
+    - tvheadend
     - jdownloader
     - radarr
     - lidarr
