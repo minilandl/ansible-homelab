@@ -31,10 +31,10 @@
     group: mediauser
     mode: '0644'  
 
-- name: Copy nginx dispatcharr config file 
+- name: Copy nginx dispatcharr-us config file 
   template:
-    src: dispatcharr.conf
-    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/dispatcharr.conf 
+    src: dispatcharr-us.conf
+    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/dispatcharr-us.conf 
     owner: mediauser
     group: mediauser
     mode: '0644'
