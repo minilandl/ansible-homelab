@@ -23,10 +23,18 @@
     group: mediauser
     mode: '0644'
 
- - name: Copy nginx jdownloader config file 
+- name: Copy nginx tvheadend config file 
   template:
     src: tvheadend.conf
     dest: /home/mediauser/docker/nginx/config/nginx/site-confs/tvheadend.conf 
     owner: mediauser
     group: mediauser
-    mode: '0644'   
+    mode: '0644'  
+
+- name: Copy nginx dispatcharr config file 
+  template:
+    src: dispatcharr.conf
+    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/dispatcharr.conf 
+    owner: mediauser
+    group: mediauser
+    mode: '0644'
