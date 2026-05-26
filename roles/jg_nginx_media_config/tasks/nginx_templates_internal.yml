@@ -38,3 +38,19 @@
     owner: mediauser
     group: mediauser
     mode: '0644'
+
+- name: Copy nginx dispatcharr-uk config file 
+  template:
+    src: dispatcharr-uk.conf
+    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/dispatcharr-uk.conf 
+    owner: mediauser
+    group: mediauser
+    mode: '0644'
+
+- name: Copy nginx dispatcharr config file 
+  template:
+    src: dispatcharr.conf
+    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/dispatcharr.conf 
+    owner: mediauser
+    group: mediauser
+    mode: '0644'
