@@ -50,3 +50,15 @@
       ansible.builtin.command:
         cmd: "cilium install --version {{ cilium_version }}"
       when: cilium_check.rc != 0
+
+    - name: Copy Cillium BGP peer policy
+      template:
+        src: bgp_peer.j2
+        dest: /tmp/bgp-peer.yaml
+        owner: root
+        group: root
+        mode: '0644'   
+      
+    - name: Apply BGP Peer Policy
+      shell: kubectl apply -f /tmp/bgp-peer.yaml
+
