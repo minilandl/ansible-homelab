@@ -51,6 +51,18 @@
         cmd: "cilium install --version {{ cilium_version }}"
       when: cilium_check.rc != 0
 
+    - name: Configure Cilium using helm
+      template:
+        src: cilium_helm.j2
+        dest: /tmp/cilium-helm.yaml
+        owner: root
+        group: root
+        mode: '0644'   
+
+    - name: Apply /Install Cilium 
+      shell: kubectl apply -f /tmp/cilium-helm.yaml
+
+
     - name: Copy Cillium BGP peer policy
       template:
         src: bgp_peer.j2
