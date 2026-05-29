@@ -1,11 +1,11 @@
-apiVersion: v1
+apiVersion: cilium.io/v2
 kind: CiliumBGPPeeringPolicy
 metadata:
   name: 00-bgp-peering-policy
 spec: # CiliumBGPPeeringPolicySpec
   nodeSelector:
     matchLabels:
-      kubernetes.io/hostname: {{ k8smaster }} 
+      kubernetes.io/hostname: jg-k8smaster1.jaspergreenhill.com 
   virtualRouters: # []CiliumBGPVirtualRouter
     - localASN: 65090
       exportPodCIDR: false
