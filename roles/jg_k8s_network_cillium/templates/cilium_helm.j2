@@ -4,7 +4,7 @@ helm install cilium cilium/cilium --version 1.19.4 \
 --set tunnel=disabled \
 --set ipam.operator.clusterPoolIPv4PodCIDRList=10.42.0.0/16 \
 --set kubeProxyReplacement=true \
---set k8sServiceHost={{ _k8sServiceHost }} \
+--set k8sServiceHost= jg-k8smaster1.jaspergreenhill.com \
 --set k8sServicePort=6443 \
 --set routingMode=native \
 --set autoDirectNodeRoutes=true \
