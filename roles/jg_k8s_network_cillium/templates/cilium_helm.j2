@@ -1,17 +1,44 @@
-helm install cilium cilium/cilium --version 1.19.4 \
---namespace kube-system \
---set bgpControlPlane.enabled=true \
---set tunnel=disabled \
---set ipam.operator.clusterPoolIPv4PodCIDRList=10.42.0.0/16 \
---set kubeProxyReplacement=true \
---set k8sServiceHost= jg-k8smaster1.jaspergreenhill.com \
---set k8sServicePort=6443 \
---set routingMode=native \
---set autoDirectNodeRoutes=true \
---set ipv4NativeRoutingCIDR=10.42.0.0/16 \
---set loadBalancer.mode=dsr \
---set ipv4.enabled=true \
---set prometheus.enabled=true \
---set operator.prometheus.enabled=true \
---set hubble.enabled=true \
---set hubble.metrics.enabled="{dns,drop,tcp,flow,port-distribution,icmp,http}"
+# values.yaml
+namespace: kube-system
+
+# Connectivity & Routing
+tunnel: disabled
+routingMode: native
+autoDirectNodeRoutes: true
+ipv4NativeRoutingCIDR: "10.42.0.0/16"
+ipv4:
+  enabled: true
+
+# IPAM (IP Address Management)
+ipam:
+  operator:
+    clusterPoolIPv4PodCIDRList: ["10.42.0.0/16"]
+
+# BGP & Load Balancing
+bgpControlPlane:
+  enabled: true
+loadBalancer:
+  mode: dsr
+
+# Kube-Proxy Replacement
+kubeProxyReplacement: true
+k8sServiceHost: "jg-k8smaster1.jaspergreenhill.com"
+k8sServicePort: 6443
+
+# Monitoring & Hubble
+prometheus:
+  enabled: true
+operator:
+  prometheus:
+    enabled: true
+hubble:
+  enabled: true
+  metrics:
+    enabled:
+      - dns
+      - drop
+      - tcp
+      - flow
+      - port-distribution
+      - icmp
+      - http
