@@ -19,13 +19,6 @@
   roles:
     - roles/jg_k8s_master_helm
 
-- name: Configure Network
-  hosts: k8smaster
-  become: yes
-  roles:
-    - roles/jg_k8s_network_cillium
-    - roles/jg_k8s_network_gatewayapi
-
 - name: Configure Worker Nodes
   hosts: k8s
   become: yes
@@ -67,6 +60,14 @@
       ansible.builtin.shell: "{{ join_command }}"
       when: not kubeconfig_file.stat.exists
       become: true
+
+- name: Configure Network
+  hosts: k8smaster
+  become: yes
+  roles:
+    - roles/jg_k8s_network_cillium
+    - roles/jg_k8s_network_gatewayapi
+
 - name: Install Argo
   hosts: k8smaster
   become: yes
