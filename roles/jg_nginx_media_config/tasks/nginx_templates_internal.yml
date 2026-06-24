@@ -54,3 +54,11 @@
     owner: mediauser
     group: mediauser
     mode: '0644'
+
+- name: Copy nginx keycloak config file 
+  template:
+    src: keycloak.conf
+    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/keycloak.conf 
+    owner: mediauser
+    group: mediauser
+    mode: '0644'
