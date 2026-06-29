@@ -9,10 +9,10 @@ MASTER_HOST = {{ moosefs_master_host }}
 ######################################################################
 
 # user to run daemon as (default is mfs)
-# WORKING_USER = mfs
+ WORKING_USER = mfs
 
 # group to run daemon as (optional - if empty then default user group will be used)
-# WORKING_GROUP = mfs
+ WORKING_GROUP = mfs
 
 # name of process to place in syslog messages (default is mfschunkserver)
 # SYSLOG_IDENT = mfschunkserver
@@ -33,7 +33,7 @@ MASTER_HOST = {{ moosefs_master_host }}
 # FILE_UMASK = 027
 
 # where to store daemon lock file (default is /var/lib/mfs)
-# DATA_PATH = /var/lib/mfs
+ DATA_PATH = /var/lib/mfs
 
 # when set to one chunkserver will not abort start even when incorrect entries are found in 'mfshdd.cfg' file
 # ALLOW_STARTING_WITH_INVALID_DISKS = 0
@@ -72,8 +72,8 @@ MASTER_HOST = {{ moosefs_master_host }}
 # percent of total work time the chunkserver is allowed to spend on hdd space rebalancing
  HDD_REBALANCE_UTILIZATION = 25
 
-#CHUNKS_WRITE_REP_LIMIT = 16,8,8,32,32
-#CHUNKS_READ_REP_LIMIT = 80,40,16,40,80
+CHUNKS_WRITE_REP_LIMIT = 16,8,8,32,32
+CHUNKS_READ_REP_LIMIT = 80,40,16,40,80
 
 
 # maximum simultaneous writes per disk in high speed disk rebalance (0 means use standard rebalance)
@@ -119,7 +119,7 @@ MASTER_HOST = {{ moosefs_master_host }}
 # BIND_HOST = *
 
 # MooseFS master host, IP is allowed only in single-master installations (default is mfsmaster)
-
+#
 # MooseFS master command port (default is 9420)
  MASTER_PORT = 9420
 
@@ -144,4 +144,4 @@ MASTER_HOST = {{ moosefs_master_host }}
 
 # port to listen for client (mount) connections (default is 9422)
 # CSSERV_LISTEN_PORT = 9422
-
+#

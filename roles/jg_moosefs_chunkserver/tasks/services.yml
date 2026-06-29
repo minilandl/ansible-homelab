@@ -4,7 +4,7 @@
 - name: Copy Moosefs Chunkserver service template
   template:
     src: moosefs-chunkserver.service.j2
-    dest: /usr/lib/systemd/system/
+    dest: /usr/lib/systemd/system/moosefs-chunkserver.service
     owner: root
     group: root
     mode: '0644'
@@ -14,7 +14,7 @@
 - name: Copy Moosefs Metalogger service template
   template:
     src: moosefs-metalogger.service.j2
-    dest: /usr/lib/systemd/system/
+    dest: /usr/lib/systemd/system/moosefs-metalogger.service
     owner: root
     group: root
     mode: '0644'
@@ -35,3 +35,9 @@
     state: started
     enabled: true
   when: "'chunkservers' in group_names"
+
+- name: Reload Moosefs Chunkserver
+  ansible.builtin.systemd:
+    name: moosefs-chunkserver
+    state: restarted
+    daemon_reload: yes
