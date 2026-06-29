@@ -1,12 +1,10 @@
 [Unit]
 Description=MooseFS Chunkserver
-Wants=network-online.target
-After=network.target network-online.target
+Wants=multi-user.target
+After=multi-user.target
 
 [Service]
-Type=simple
-User=mfs
-Group=mfs
+Type=forking
 ExecStart=/usr/sbin/mfschunkserver start
 ExecStop=/usr/sbin/mfschunkserver stop
 ExecReload=/usr/sbin/mfschunkserver reload
