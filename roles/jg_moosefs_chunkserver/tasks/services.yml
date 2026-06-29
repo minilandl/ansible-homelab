@@ -1,5 +1,25 @@
 ---
 
+
+- name: Copy Moosefs Chunkserver service template
+  template:
+    src: moosefs-chunkserver.service
+    dest: /usr/lib/systemd/system/
+    owner: root
+    group: root
+    mode: '0644'
+  when: "'chunkservers' in group_names"
+
+
+- name: Copy Moosefs Metalogger service template
+  template:
+    src: moosefs-metalogger.service
+    dest: /usr/lib/systemd/system/
+    owner: root
+    group: root
+    mode: '0644'
+  when: "'chunkservers' in group_names"
+
 # Start and enable MooseFS chunkserver
 - name: Start and enable MooseFS chunkserver
   service:
