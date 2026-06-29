@@ -3,7 +3,7 @@
 
 - name: Copy Moosefs Chunkserver service template
   template:
-    src: moosefs-chunkserver.service
+    src: moosefs-chunkserver.service.j2
     dest: /usr/lib/systemd/system/
     owner: root
     group: root
@@ -13,7 +13,7 @@
 
 - name: Copy Moosefs Metalogger service template
   template:
-    src: moosefs-metalogger.service
+    src: moosefs-metalogger.service.j2
     dest: /usr/lib/systemd/system/
     owner: root
     group: root
