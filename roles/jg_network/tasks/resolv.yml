@@ -1,5 +1,11 @@
 ---
 
+- name: Remove symbolic link to resolv.conf
+  ansible.builtin.file:
+    path: /etc/resolv.conf
+    state: absent
+  become: true  
+
 - name: Create resolv.conf
   ansible.builtin.file:
     path: /etc/resolv.conf
