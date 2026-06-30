@@ -17,10 +17,12 @@ servers:
   hosts:
     jg-app.jaspergreenhill.com:
     jg-ansible.jaspergreenhill.com:
+    jg-felixminecraft.jaspergreenhill.com:
     jg-media.jaspergreenhill.com:
     jgpve6.jaspergreenhill.com:
     jgpve4.jaspergreenhill.com:
     jgpve5.jaspergreenhill.com:
+    jg-chunkserver1.jaspergreenhill.com:
     jg-k8sworker1.jaspergreenhill.com:
     jg-k8sworker2.jaspergreenhill.com:
     jg-k8sworker3.jaspergreenhill.com:
