@@ -1,5 +1,11 @@
 ---
 
+- name: Create resolv.conf
+  ansible.builtin.file:
+    path: /etc/resolv.conf
+    state: touch
+    mode: '0644'
+
 - name: Clear Lines in File domain name
   lineinfile: 
     dest: /etc/resolv.conf 
