@@ -1,0 +1,25 @@
+- name: Check if iptables is installed
+  ansible.builtin.package:
+    name: iptables
+    state: present
+  check_mode: yes
+  register: package_check
+
+- name: Install IPtables Packages
+  apt:
+    name: 
+     - iptables
+  update_cache: yes
+  when: not package_check.stat.exists
+
+- name: Allow outgoing TCP traffic to mfsmaster on port 9420
+  ansible.builtin.iptables:
+    chain: OUTPUT
+    protocol: tcp
+    destination: "{{ moosefs_master_host }}"
+    destination_port: "9420"
+    jump: ACCEPT
+    action: append
+    comment: Allow outbound connection to MooseFS Master
+
+
