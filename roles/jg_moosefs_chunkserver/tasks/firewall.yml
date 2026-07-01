@@ -12,7 +12,7 @@
   update_cache: yes
   when: not package_check.stat.exists
 
-- name: Allow outgoing TCP traffic to mfsmaster on port 9420
+- name: Allow outgoing TCP traffic to mfsmaster for chunkservers
   ansible.builtin.iptables:
     chain: OUTPUT
     protocol: tcp
@@ -22,4 +22,12 @@
     action: append
     comment: Allow outbound connection to MooseFS Master
 
-
+- name: Allow outgoing TCP traffic to mfsmaster for metalogger
+  ansible.builtin.iptables:
+    chain: OUTPUT
+    protocol: tcp
+    destination: "{{ moosefs_master_host }}"
+    destination_port: "9419"
+    jump: ACCEPT
+    action: append
+    comment: Allow outbound connection to MooseFS Master
