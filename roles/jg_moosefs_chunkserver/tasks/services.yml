@@ -20,6 +20,14 @@
     mode: '0644'
   when: "'chunkservers' in group_names"
 
+# Reload MooseFS chunkserver
+- name: Start and enable MooseFS chunkserver
+  service:
+    name: moosefs-chunkserver
+    state: reloaded
+    enabled: true
+  when: "'chunkservers' in group_names"
+
 # Start and enable MooseFS chunkserver
 - name: Start and enable MooseFS chunkserver
   service:
