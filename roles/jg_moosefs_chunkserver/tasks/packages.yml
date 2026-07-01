@@ -5,4 +5,5 @@
      - moosefs-chunkserver
      - moosefs-metalogger
      - moosefs-common
+     - iptables
     update_cache: yes

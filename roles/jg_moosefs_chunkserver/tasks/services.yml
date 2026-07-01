@@ -1,6 +1,5 @@
 ---
 
-
 - name: Copy Moosefs Chunkserver service template
   template:
     src: moosefs-chunkserver.service.j2
@@ -20,15 +19,11 @@
     mode: '0644'
   when: "'chunkservers' in group_names"
 
-# Reload MooseFS chunkserver
-- name: Start and enable MooseFS chunkserver
-  service:
-    name: moosefs-chunkserver
-    state: reloaded
-    enabled: true
-  when: "'chunkservers' in group_names"
-
-# Start and enable MooseFS chunkserver
+- name: Reload systemd configuration
+  ansible.builtin.command:
+    cmd: systemctl daemon-reload  
+  
+  # Start and enable MooseFS chunkserver
 - name: Start and enable MooseFS chunkserver
   service:
     name: moosefs-chunkserver
@@ -44,8 +39,3 @@
     enabled: true
   when: "'chunkservers' in group_names"
 
-- name: Reload Moosefs Chunkserver
-  ansible.builtin.systemd:
-    name: moosefs-chunkserver
-    state: restarted
-    daemon_reload: yes
