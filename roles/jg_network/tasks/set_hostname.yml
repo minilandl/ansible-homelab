@@ -6,15 +6,18 @@
         ansible_fqdn != ansible_ssh_host
      
 
-    - name: Remove hosts file
-      ansible.builtin.file:
-      path: /etc/hosts
-      state: absent 
-      
-    - name: Touch a file
-      ansible.builtin.file:
-      path: /etc/hosts
-      state: touch
+
+- name: Remove symbolic link to resolv.conf
+  ansible.builtin.file:
+    path: /etc/hosts
+    state: absent
+  become: true
+
+- name: Create resolv.conf
+  ansible.builtin.file:
+    path: /etc/hosts
+    state: touch
+    mode: '0644'
 
 
     - name: Fix /etc/hosts removing the old hostname
