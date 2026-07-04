@@ -39,3 +39,14 @@
     enabled: true
   when: "'chunkservers' in group_names"
 
+- name: Restart systemd service
+  ansible.builtin.systemd_service:
+    name: moosefs-chunkserver
+    state: restarted
+  become: true
+
+- name: Restart systemd service
+  ansible.builtin.systemd_service:
+    name: moosefs-metalogger
+    state: restarted
+  become: true
