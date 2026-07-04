@@ -1,0 +1,8 @@
+---
+- name: Install Moosefs Chunkserver Packages
+  apt:
+    name: 
+     - moosefs-master
+     - moosefs-gui
+     - iptables
+    update_cache: yes
