@@ -1,17 +1,21 @@
 [Unit]
-Description=MooseFS Metalogger server
+Description=MooseFS Chunkserver
 Wants=network-online.target
 After=network.target network-online.target
 
+After=local-fs.target
+
 [Service]
-Type=simple
-User=mfs
-Group=mfs
+Type=forking
 ExecStart=/usr/sbin/mfsmetalogger start
 ExecStop=/usr/sbin/mfsmetalogger stop
 ExecReload=/usr/sbin/mfsmetalogger reload
-PIDFile=/var/lib/mfs/.mfsmetalogger.lock
+PIDFile=/var/lib/mfs/.mfschunkserver.lock
+TimeoutStopSec=600
+TimeoutStartSec=60
 Restart=on-failure
+RestartSec=10s
+
 
 [Install]
 WantedBy=multi-user.target
