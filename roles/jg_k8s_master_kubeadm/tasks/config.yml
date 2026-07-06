@@ -32,7 +32,7 @@
     path: /etc/kubernetes/manifests/kube-apiserver.yaml
   register: kube_config_manifest
 
-- name: create .kube directoryi and copy kube config file
+- name: create .kube directory and copy kube config file
   shell: "{{ item }}"
   when: not kube_config_manifest.stat.exists
   loop:

@@ -4,6 +4,9 @@ chunkservers:
    jg-chunkserver3.jaspergreenhill.com: 
    jg-chunkserver2.jaspergreenhill.com:
    jg-chunkserver1.jaspergreenhill.com:
+mfsmaster:
+ hosts:
+   mfsmaster.jaspergreenhill.com:
 docker:
  hosts:
    mfsmaster.jaspergreenhill.com:

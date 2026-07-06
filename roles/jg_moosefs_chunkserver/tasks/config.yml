@@ -20,37 +20,6 @@
     mode: '0644'
   when: "'chunkservers' in group_names"
 
-- name: Create a list of active mount paths
-  ansible.builtin.set_fact:
-    active_mounts: "{{ ansible_mounts | map(attribute='mount') | list }}"
-
-- name: Find all directories under /mnt
-  ansible.builtin.find:
-    paths: /mnt
-    file_type: directory
-    recurse: false  # Set to true if you want to check nested subdirectories
-  register: found_directories
-
-- name: Remove empty directories (excluding active mount points)
-  ansible.builtin.file:
-    path: "{{ item.path }}"
-    state: absent
-  loop: "{{ found_directories.files }}"
-  # Condition 1: Directory must be empty (matched_files == 0)
-  # Condition 2: Directory must NOT be in the active mount points list
-  when: 
-    - item.matched == 0
-    - item.path not in active_mounts
-  register: removal_result
-
-- name: Show which directories were removed
-  ansible.builtin.debug:
-    msg: "Removed empty unmounted directory: {{ item.item.path }}"
-  loop: "{{ removal_result.results }}"
-  when: item.changed
-  loop_control:
-    label: "{{ item.item.path }}"
-
 - name: Build a list of bricks
   find:
     paths: /mnt/

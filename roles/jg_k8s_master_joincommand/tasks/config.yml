@@ -13,3 +13,8 @@
   ansible.builtin.set_fact:
     join_command: "{{ hostvars['jg-k8smaster1.jaspergreenhill.com']['join_command_output'].stdout }}"
     certificate_key: "{{ hostvars['jg-k8smaster1.jaspergreenhill.com']['certificate_key_output'].stdout_lines[-1] }}"
+
+
+
+
+  
