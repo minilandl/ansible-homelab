@@ -22,7 +22,7 @@
       lineinfile:
         state=present
         dest=/etc/hosts
-        line="{{ ansible_default_ipv4.address }} {{ inventory_hostname }} {{ ansible_hostname }}"
+        line="{{ inventory_hostname }} {{ ansible_hostname }}"
         regexp="^{{ ansible_default_ipv4.address }}"
       when:
         ansible_fqdn != inventory_hostname
