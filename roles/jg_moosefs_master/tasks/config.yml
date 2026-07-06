@@ -1,0 +1,35 @@
+---
+# tasks file for ansible-role-moosefs
+# Configure your MooseFS cluster.
+
+- name: Configure moosefs master configuration
+  template:
+    src: mfsmaster.cfg.j2
+    dest: /etc/mfs/mfsmaster.cfg
+    owner: mfs
+    group: mfs
+    mode: '0644'
+  when: "'mfsmaster' in group_names"
+
+- name: Configure the exports configuration
+  template:
+    src: mfsexports.cfg.j2
+    dest: /etc/mfs/mfsexports.cfg
+    owner: mfs
+    group: mfs
+    mode: '0644'
+  when: "'mfsmaster' in group_names"
+
+ name: Configure the moosefs webui
+  template:
+    src: mfsgui.cfg.j2
+    dest: /etc/mfs/mfsgui.cfg
+    owner: mfs
+    group: mfs
+    mode: '0644'
+  when: "'mfsmaster' in group_names"
+
+- name: Mark MooseFS as configured
+  set_fact:
+    moosefs_configured: true
+
