@@ -18,6 +18,7 @@ app:
   jg-app.jaspergreenhill.com:
 servers:
   hosts:
+    mfsmaster.jaspergreenhill.com:
     jg-app.jaspergreenhill.com:
     jg-ansible.jaspergreenhill.com:
     jg-felixminecraft.jaspergreenhill.com:
