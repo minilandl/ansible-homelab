@@ -21,7 +21,7 @@
   when: "'mfsmaster' in group_names"
 
  name: Configure the moosefs webui
-  template:
+ template:
     src: mfsgui.cfg.j2
     dest: /etc/mfs/mfsgui.cfg
     owner: mfs
