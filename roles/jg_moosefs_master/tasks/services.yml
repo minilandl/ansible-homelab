@@ -1,0 +1,41 @@
+---
+
+- name: Copy Moosefs Chunkserver service template
+  template:
+    src: moosefs-master.service.j2
+    dest: /usr/lib/systemd/system/moosefs-master.service
+    owner: root
+    group: root
+    mode: '0644'
+  when: "'mfsmaster' in group_names"
+
+
+- name: Copy Moosefs gui service template
+  template:
+    src: moosefs-gui.service.j2
+    dest: /usr/lib/systemd/system/moosefs-gui.service
+    owner: root
+    group: root
+    mode: '0644'
+  when: "'mfsmaster' in group_names"
+
+- name: Reload systemd configuration
+  ansible.builtin.command:
+    cmd: systemctl daemon-reload  
+  
+  # Start and enable MooseFS chunkserver
+- name: Start and enable MooseFS master
+  service:
+    name: moosefs-master
+    state: started
+    enabled: true
+  when: "'mfsmaster' in group_names"
+
+# Start and enable MooseFS metalogger
+- name: Start and enable MooseFS gui
+  service:
+    name: moosefs-gui
+    state: started
+    enabled: true
+  when: "'mfsmaster' in group_names"
+

@@ -1,0 +1,21 @@
+[Unit]
+Description=MooseFS GUI Server
+Wants=network-online.target
+After=network.target network-online.target
+
+After=local-fs.target
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/mfsgui start
+ExecStop=/usr/sbin/mfsgui
+ExecReload=/usr/sbin/mfsgui reload
+PIDFile=/var/lib/mfs/.mfsgui.lock
+TimeoutStopSec=1800
+TimeoutStartSec=1800
+Restart=on-failure
+RestartSec=10s
+
+
+[Install]
+WantedBy=multi-user.target
