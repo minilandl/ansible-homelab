@@ -1,6 +1,6 @@
 ---
 
-- name: Copy Moosefs Chunkserver service template
+- name: Copy Moosefs Master service template
   template:
     src: moosefs-master.service.j2
     dest: /usr/lib/systemd/system/moosefs-master.service
@@ -38,4 +38,3 @@
     state: started
     enabled: true
   when: "'mfsmaster' in group_names"
-

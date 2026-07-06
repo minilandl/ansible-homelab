@@ -4,5 +4,4 @@
     name: 
      - moosefs-master
      - moosefs-gui
-     - iptables
     update_cache: yes
