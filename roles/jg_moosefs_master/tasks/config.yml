@@ -20,8 +20,8 @@
     mode: '0644'
   when: "'mfsmaster' in group_names"
 
- name: Configure the moosefs webui
- template:
+- name: Configure the moosefs webui
+  template:
     src: mfsgui.cfg.j2
     dest: /etc/mfs/mfsgui.cfg
     owner: mfs
