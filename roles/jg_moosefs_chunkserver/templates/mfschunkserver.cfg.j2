@@ -72,9 +72,7 @@ MASTER_HOST = {{ moosefs_master_host }}
 # percent of total work time the chunkserver is allowed to spend on hdd space rebalancing
  HDD_REBALANCE_UTILIZATION = 25
 
-CHUNKS_WRITE_REP_LIMIT = 16,8,8,32,32
-CHUNKS_READ_REP_LIMIT = 80,40,16,40,80
-
+REPLICATIONS_DELAY_INIT = 1 
 
 # maximum simultaneous writes per disk in high speed disk rebalance (0 means use standard rebalance)
  HDD_HIGH_SPEED_REBALANCE_LIMIT = 0
