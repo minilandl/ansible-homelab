@@ -36,5 +36,6 @@
     - checkrr
     - joplin
     - keycloak
+    - keycloak-admin
     - seedsyncarr
     - dns

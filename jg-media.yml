@@ -18,6 +18,7 @@
      moosefs_mount_roms_subfolder: roms 
      moosefs_mount_anime_subfolder: anime 
      moosefs_mount_audiobooks_subfolder: Audiobooks
+     moosefs_mount_seedbox_subfolder: seedbox
      moosefs_mount_recordings_subfolder: recordings
      moosefs_mount_movies_subfolder: Movies
      moosefs_mount_tv_subfolder: tvshows 

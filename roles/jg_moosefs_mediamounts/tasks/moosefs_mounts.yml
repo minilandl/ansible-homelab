@@ -84,3 +84,11 @@
     opts: mfssubfolder={{moosefs_mount_recordings_subfolder}},defaults,mfsdelayedinit,allow_other
     state: mounted
     fstype: moosefs
+
+- name: Mount Seedbox
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_recordings}}"
+    opts: mfssubfolder={{moosefs_mount_recordings_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs
