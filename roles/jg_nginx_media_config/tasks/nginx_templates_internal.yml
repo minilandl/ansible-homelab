@@ -70,6 +70,13 @@
     owner: mediauser
     group: mediauser
     mode: '0644'
+- name: Copy nginx keycloak config file 
+  template:
+    src: keycloak-admin.conf
+    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/keycloak-admin.conf
+    owner: mediauser
+    group: mediauser
+    mode: '0644'
 
 - name: Copy nginx technitium config file 
   template:
