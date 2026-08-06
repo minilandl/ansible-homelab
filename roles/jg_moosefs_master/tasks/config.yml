@@ -38,8 +38,8 @@
   ansible.builtin.copy:
     dest: /etc/modules-load.d/nbd.conf
     content: |
-       # Managed by Ansible
-       nbd
+      # Managed by Ansible
+      nbd
      owner: root
      group: root
      mode: '0644'
