@@ -38,8 +38,3 @@
     state: started
     enabled: true
   when: "'chunkservers' in group_names"
-- name: Ensure mfsblockdev service is enabled and running
-  ansible.builtin.systemd:
-    name: mfsblockdev
-    state: started
-    enabled: true 
