@@ -36,6 +36,21 @@
     mode: '0644'
   when: "'chunkservers' in group_names"
 
+- name: Load nbd kernel module immediately
+  community.general.modprobe:
+    name: nbd
+    state: present
+
+- name: Ensure nbd module loads automatically on boot
+  ansible.builtin.copy:
+    dest: /etc/modules-load.d/nbd.conf
+    content: |
+       # Managed by Ansible
+       nbd
+     owner: root
+     group: root
+     mode: '0644'
+
 - name: Mark MooseFS as configured
   set_fact:
     moosefs_configured: true

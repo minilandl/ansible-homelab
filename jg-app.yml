@@ -2,13 +2,24 @@
 - hosts: app
   become: yes
   roles:
-    - roles/jg_moosefs_appmounts
+    - roles/jg_moosefs_mediamounts
   vars:
-     moosefs_mount_instructions: /mnt/instructions
      moosefs_mount_tv: /mnt/Tvshows
+     moosefs_mount_audiobooks: /mnt/Audiobooks
      moosefs_mount_movies: /mnt/Movies
+     moosefs_mount_roms: /mnt/roms
+     moosefs_mount_instructions: /mnt/instructions
+     moosefs_mount_anime: /mnt/Anime
+     moosefs_mount_music: /mnt/Music
+     moosefs_mount_recordings: /mnt/recordings
+     moosefs_mount_music_subfolder: Music 
+     moosefs_mount_roms_subfolder: roms 
+     moosefs_mount_anime_subfolder: anime 
+     moosefs_mount_instructions: instructions
+     moosefs_mount_audiobooks_subfolder: Audiobooks
+     moosefs_mount_seedbox_subfolder: seedbox
+     moosefs_mount_recordings_subfolder: recordings
      moosefs_mount_movies_subfolder: Movies
      moosefs_mount_tv_subfolder: tvshows 
-     moosefs_mount_data_subfolder: data 
-     moosefs_mount_instructions_subfolder: instructions 
      moosefs_mfsmaster: "mfsmaster.jaspergreenhill.com:"
+ 
