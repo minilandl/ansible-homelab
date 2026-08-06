@@ -19,6 +19,16 @@
     mode: '0644'
   when: "'mfsmaster' in group_names"
 
+- name: Copy Moosefs block device service template
+  template:
+    src: moosefs-mfsbdev.service.j2
+    dest: /usr/lib/systemd/system/moosefs-mfsbdev.service
+    owner: root
+    group: root
+    mode: '0644'
+  when: "'mfsmaster' in group_names"
+
+
 - name: Reload systemd configuration
   ansible.builtin.command:
     cmd: systemctl daemon-reload  
@@ -39,8 +49,11 @@
     enabled: true
   when: "'mfsmaster' in group_names"
 
-- name: Ensure mfsblockdev service is enabled and running
-  ansible.builtin.systemd:
-    name: mfsblockdev
+# Start and enable MooseFS Block Device Service
+- name: Start and enable MooseFS Block Device Service
+  service:
+    name: moosefs-mfsbdev
     state: started
-    enabled: true 
+    enabled: true
+  when: "'mfsmaster' in group_names"
+
