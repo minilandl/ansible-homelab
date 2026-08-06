@@ -3,9 +3,8 @@
 - hosts: mfsmaster
   become: yes
   roles:
-    - roles/jg_docker_netiso
-    - roles/jg_network
     - roles/jg_moosefs_master
+    - roles/jg_docker_netiso
   vars:
   tasks:
   - name: System details

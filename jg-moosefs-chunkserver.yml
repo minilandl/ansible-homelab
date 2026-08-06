@@ -10,4 +10,5 @@
     ansible.builtin.debug: msg="{{ item }}"
     with_items:
     - "{{ ansible_hostname }}"
+    - "{{ ansible_mounts }}"
     - "{{ ansible_distribution_release }}"
