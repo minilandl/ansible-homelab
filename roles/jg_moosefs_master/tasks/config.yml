@@ -40,11 +40,10 @@
     content: |
       # Managed by Ansible
       nbd
-     owner: root
-     group: root
-     mode: '0644'
+    owner: root
+    group: root
+    mode: '0644'
 
 - name: Mark MooseFS as configured
   set_fact:
     moosefs_configured: true
-

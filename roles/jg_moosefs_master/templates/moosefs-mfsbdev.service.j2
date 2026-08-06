@@ -1,0 +1,21 @@
+[Unit]
+Description=MooseFS Block Device Server
+Wants=network-online.target
+After=network.target network-online.target
+
+After=local-fs.target
+
+[Service]
+Type=forking
+ExecStart=/usr/sbin/mfsbdev start
+ExecStop=/usr/sbin/mfsbdev stop
+#ExecReload=/usr/sbin/mfsmaster reload
+PIDFile=/var/lib/mfs/.mfsbdev.lock
+TimeoutStopSec=1800
+TimeoutStartSec=1800
+Restart=on-failure
+RestartSec=10s
+
+
+[Install]
+WantedBy=multi-user.target
