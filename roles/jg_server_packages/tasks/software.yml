@@ -9,6 +9,8 @@
       - vim
       - htop
       - freeipmi
+      - screen
+    
 
 - name: "Gathering facts"
   ansible.builtin.setup:
