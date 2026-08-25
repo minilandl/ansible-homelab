@@ -1,0 +1,10 @@
+// {{ ansible_managed }}
+// Managed by the auto_patching Ansible role. Do not edit by hand.
+
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Download-Upgradeable-Packages "{{ patch_download_upgradeable_packages | bool | int }}";
+APT::Periodic::Unattended-Upgrade "1";
+APT::Periodic::AutocleanInterval "7";
+// Splay is handled by the systemd timer's RandomizedDelaySec — do not
+// stack with apt's in-script sleep.
+APT::Periodic::RandomSleep "0";
