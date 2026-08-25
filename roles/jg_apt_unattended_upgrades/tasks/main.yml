@@ -1,6 +1,4 @@
 ---
- - include_tasks: software.yml
-
 - name: Gather minimal facts needed for OS dispatch
   ansible.builtin.setup:
     gather_subset:
@@ -25,3 +23,5 @@
   when: ansible_facts['os_family'] == 'Debian'
   tags: [auto_patching]
 
+
+- include_tasks: software.yml
