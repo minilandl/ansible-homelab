@@ -10,7 +10,7 @@
     - roles/jg_server_packages
     - roles/jg_users
     - roles/jg_sshkey
-    - roles/jg_pki_cert
+    #- roles/jg_pki_cert
   vars:
     ad_username:
     ad_password:
