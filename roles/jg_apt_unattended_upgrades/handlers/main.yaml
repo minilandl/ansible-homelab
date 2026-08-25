@@ -1,0 +1,31 @@
+#SPDX-License-Identifier: MIT-0
+---
+# handlers file for auto_patching
+
+- name: Restart apt unattended-upgrade timers
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - apt-daily.timer
+    - apt-daily-upgrade.timer
+
+- name: Reload systemd and restart apt unattended-upgrade timers
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+    daemon_reload: true
+  loop:
+    - apt-daily.timer
+    - apt-daily-upgrade.timer
+
+- name: Restart dnf-automatic timer
+  ansible.builtin.systemd:
+    name: dnf-automatic.timer
+    state: restarted
+
+- name: Reload systemd and restart dnf-automatic timer
+  ansible.builtin.systemd:
+    name: dnf-automatic.timer
+    state: restarted
+    daemon_reload: true
