@@ -19,9 +19,6 @@
   tags: [auto_patching, always]
 
 - name: Configure auto-patching (Debian family)
-  ansible.builtin.include_tasks: software.yaml
+  include_tasks: software.yaml
   when: ansible_facts['os_family'] == 'Debian'
   tags: [auto_patching]
-
-
-- include_tasks: software.yml
