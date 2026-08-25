@@ -1,0 +1,77 @@
+---
+
+- name: Install unattended-upgrades and apt-listchanges
+  ansible.builtin.apt:
+    name:
+      - unattended-upgrades
+      - apt-listchanges
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+  tags: [auto_patching]
+
+- name: Set-up unattended-upgrades
+  ansible.builtin.template:
+    src: debian/50unattended-upgrades.j2
+    dest: /etc/apt/apt.conf.d/50unattended-upgrades
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart apt unattended-upgrade timers
+  tags: [auto_patching]
+
+- name: Set-up auto-upgrades
+  ansible.builtin.template:
+    src: debian/20auto-upgrades.j2
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart apt unattended-upgrade timers
+  tags: [auto_patching]
+
+- name: Ensure timer drop-in directories exist
+  ansible.builtin.file:
+    path: "/etc/systemd/system/{{ item }}.d"
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+  loop:
+    - apt-daily.timer
+    - apt-daily-upgrade.timer
+  tags: [auto_patching]
+
+- name: Set-up apt timer schedule override
+  ansible.builtin.template:
+    src: debian/timer-override.conf.j2
+    dest: "/etc/systemd/system/{{ item }}.d/auto-patching.conf"
+    owner: root
+    group: root
+    mode: "0644"
+  loop:
+    - apt-daily.timer
+    - apt-daily-upgrade.timer
+  notify: Reload systemd and restart apt unattended-upgrade timers
+  tags: [auto_patching]
+
+- name: Unmask apt-daily backing services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    masked: false
+  loop:
+    - apt-daily.service
+    - apt-daily-upgrade.service
+  tags: [auto_patching]
+
+- name: Ensure apt unattended-upgrade timers are unmasked, enabled, and started
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    masked: false
+    enabled: true
+    state: started
+    daemon_reload: true
+  loop:
+    - apt-daily.timer
+    - apt-daily-upgrade.timer
+  tags: [auto_patching]
