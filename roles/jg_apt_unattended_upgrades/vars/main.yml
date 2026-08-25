@@ -1,1 +1,38 @@
-k8s_version:  "v1.35"
+# SPDX-License-Identifier: MIT-0
+---
+# vars file for auto_patching
+
+# APT origin patterns selected by ansible_facts['distribution'].
+# The lists use the placeholder syntax that unattended-upgrades expands
+# at runtime: ${distro_id} and ${distro_codename}. Don't try to render
+# the codename in Jinja — let unattended-upgrades resolve it on the host.
+patch_security_origins:
+  Ubuntu:
+    - "origin=${distro_id},codename=${distro_codename}-security"
+    - "origin=${distro_id}ESMApps,codename=${distro_codename}-apps-security"
+    - "origin=${distro_id}ESM,codename=${distro_codename}-infra-security"
+  Debian:
+    - "origin=Debian,codename=${distro_codename},label=Debian-Security"
+    - "origin=Debian,codename=${distro_codename}-security,label=Debian-Security"
+  Raspbian:
+    - "origin=Raspbian,codename=${distro_codename},label=Raspbian"
+    - "origin=Raspberry Pi Foundation,codename=${distro_codename},label=Raspberry Pi Foundation"
+  # Armbian inherits Ubuntu apt sources, so reuse Ubuntu's pattern set.
+  Armbian:
+    - "origin=${distro_id},codename=${distro_codename}-security"
+    - "origin=Ubuntu,codename=${distro_codename}-security"
+    - "origin=UbuntuESMApps,codename=${distro_codename}-apps-security"
+    - "origin=UbuntuESM,codename=${distro_codename}-infra-security"
+
+# Extra (non-security) origins added when patch_update_scope == 'all'.
+patch_extra_origins:
+  Ubuntu:
+    - "origin=${distro_id},codename=${distro_codename}-updates"
+  Debian:
+    - "origin=Debian,codename=${distro_codename},label=Debian"
+    - "origin=Debian,codename=${distro_codename}-updates"
+  Raspbian:
+    - "origin=Raspbian,codename=${distro_codename}-updates,label=Raspbian"
+  Armbian:
+    - "origin=${distro_id},codename=${distro_codename}-updates"
+    - "origin=Ubuntu,codename=${distro_codename}-updates"
