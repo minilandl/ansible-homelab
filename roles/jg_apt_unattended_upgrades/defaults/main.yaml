@@ -1,0 +1,72 @@
+# SPDX-License-Identifier: MIT-0
+---
+# defaults file for auto_patching
+
+# Update scope: 'security' (default) or 'all'.
+# - Debian family: 'security' restricts unattended-upgrades to the security
+#   origin only; 'all' also allows updates and (where present) -backports.
+# - RHEL family: maps to dnf-automatic upgrade_type=security|default.
+patch_update_scope: security
+
+# Automatically reboot when an update requires it.
+patch_auto_reboot: false
+
+# Time of day (HH:MM, 24h, host-local) for the auto-reboot when enabled.
+patch_auto_reboot_time: "03:00"
+
+# Email address that should receive patching notifications.
+# Leave empty to disable email config entirely (no MTA required).
+patch_notify_email: ""
+
+# Only send email when something went wrong (error or unattended-upgrade
+# left the system in a state needing attention). Set to false to receive
+# a notification on every run.
+patch_email_only_on_error: true
+
+# Packages to never auto-upgrade. List of glob-style names — passed to
+# Unattended-Upgrade::Package-Blacklist on Debian and to 'exclude' in
+# /etc/dnf/automatic.conf on RHEL.
+patch_blacklist_packages: [kubeadm,kubelet,moosefs-chunkserver,moosefs-master,moosefs-common,moosefs-gui]
+
+# Remove unused dependencies after a successful upgrade.
+patch_remove_unused_dependencies: true
+
+# Pre-download upgradeable packages on the daily apt timer so the
+# unattended-upgrade run installs them without first hitting the
+# network. Maps to APT::Periodic::Download-Upgradeable-Packages.
+patch_download_upgradeable_packages: false
+
+# Debian family only. Remove old kernel packages once a newer one has
+# been installed and booted. Maps to
+# Unattended-Upgrade::Remove-Unused-Kernel-Packages.
+patch_remove_unused_kernels: true
+
+# Debian family only. Extra allowed origins appended to the per-distro
+# security (and optional 'all') origin list. Useful for third-party
+# repos you've vetted and want unattended-upgrades to pull from.
+# Must use key=value format (Origins-Pattern syntax), e.g.:
+#   "origin=Docker", "origin=Proxmox", "site=download.docker.com"
+patch_extra_allowed_origins: []
+
+# --- Scheduling --------------------------------------------------------
+# Time of day (HH:MM, 24h, host-local) when the patching run fires.
+# Builds OnCalendar="*-*-* HH:MM:00" and applies it to:
+#   Debian: apt-daily.timer and apt-daily-upgrade.timer
+#   RHEL:   dnf-automatic.timer
+patch_schedule_time: "03:00"
+
+# Optional systemd weekday filter. "" means every day. Examples:
+#   "Mon..Fri"  weekdays only
+#   "Sun"       Sundays only
+#   "Mon,Thu"   Mondays and Thursdays
+patch_schedule_weekdays: "Thu"
+
+# systemd timer RandomizedDelaySec — the ONLY splay knob the role
+# exposes. apt's APT::Periodic::RandomSleep and dnf-automatic's
+# random_sleep are forced to 0 so splay isn't double-applied.
+patch_schedule_randomized_delay_sec: 1800
+
+# Escape hatch. If non-empty, this value is used verbatim as the timer
+# OnCalendar= and the time/weekdays variables above are ignored.
+# Example: "Sun *-*-* 02:30:00"
+patch_schedule_oncalendar: "Sun *-*-* 02:30:00"
