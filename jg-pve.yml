@@ -9,6 +9,8 @@
     - roles/jg_pve_moosefs_storage
     - roles/jg_pve_packages_lldp
     - roles/jg_pve_remove_nag
+    - roles/jg_users
+    - roles/jg_sshkey
   vars:
     pcie_passthrough:
       enable: true
