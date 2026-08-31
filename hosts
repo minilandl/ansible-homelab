@@ -17,23 +17,31 @@ media:
 app:
  hosts: 
   jg-app.jaspergreenhill.com:
+   ansible_user: appuser
 servers:
   hosts:
     mfsmaster.jaspergreenhill.com:
+      ansible_user: jasper
     jg-dns.jaspergreenhill.com:
+      ansible_user: jasper
     jg-app.jaspergreenhill.com:
+      ansible_user: jasper
     jg-ansible.jaspergreenhill.com:
-    jg-felixminecraft.jaspergreenhill.com:
+      ansible_user: jasper
     jg-media.jaspergreenhill.com:
-    jgpve6.jaspergreenhill.com:
-    jgpve4.jaspergreenhill.com:
-    jgpve5.jaspergreenhill.com:
+      ansible_user: mediauser
     jg-chunkserver1.jaspergreenhill.com:
+      ansible_user: jasper
     jg-chunkserver2.jaspergreenhill.com:
+      ansible_user: jasper
     jg-chunkserver3.jaspergreenhill.com:
+      ansible_user: jasper
     jg-k8sworker1.jaspergreenhill.com:
+      ansible_user: jasper
     jg-k8sworker2.jaspergreenhill.com:
+      ansible_user: jasper
     jg-k8sworker3.jaspergreenhill.com:
+      ansible_user: jasper
     jg-k8smaster1.jaspergreenhill.com:
 pve:
  hosts:
