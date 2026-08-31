@@ -1,24 +1,3 @@
 ---
-- name: Gather minimal facts needed for OS dispatch
-  ansible.builtin.setup:
-    gather_subset:
-      - "!all"
-      - "!min"
-      - distribution
-      - os_family
-  when: ansible_facts['os_family'] is not defined
-  tags: [auto_patching, always]
 
-- name: Assert supported OS family
-  ansible.builtin.assert:
-    that:
-      - ansible_facts['os_family'] in ['Debian', 'RedHat']
-    fail_msg: >-
-      auto_patching does not support os_family={{ ansible_facts['os_family'] | default('unknown') }}.
-      Supported families: Debian, RedHat.
-  tags: [auto_patching, always]
-
-- name: Configure auto-patching (Debian family)
-  include_tasks: software.yaml
-  when: ansible_facts['os_family'] == 'Debian'
-  tags: [auto_patching]
+- include_tasks: software.yml
