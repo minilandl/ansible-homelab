@@ -6,7 +6,7 @@
 # - Debian family: 'security' restricts unattended-upgrades to the security
 #   origin only; 'all' also allows updates and (where present) -backports.
 # - RHEL family: maps to dnf-automatic upgrade_type=security|default.
-patch_update_scope: security
+patch_update_scope: all
 
 # Automatically reboot when an update requires it.
 patch_auto_reboot: false
