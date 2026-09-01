@@ -9,7 +9,7 @@
 patch_update_scope: all
 
 # Automatically reboot when an update requires it.
-patch_auto_reboot: false
+patch_auto_reboot: true
 
 # Time of day (HH:MM, 24h, host-local) for the auto-reboot when enabled.
 patch_auto_reboot_time: "03:00"
@@ -46,7 +46,7 @@ patch_remove_unused_kernels: true
 # repos you've vetted and want unattended-upgrades to pull from.
 # Must use key=value format (Origins-Pattern syntax), e.g.:
 #   "origin=Docker", "origin=Proxmox", "site=download.docker.com"
-patch_extra_allowed_origins: []
+patch_extra_allowed_origins: ["origin=*"]
 
 # --- Scheduling --------------------------------------------------------
 # Time of day (HH:MM, 24h, host-local) when the patching run fires.
