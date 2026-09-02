@@ -77,6 +77,22 @@
         ttl: 3600
         validate_certs: 'false'
 
+
+- name: Add DNS Record Chunkserver4 
+  effectivelywild.technitium_dns.technitium_dns_add_record:
+        api_url: "{{ technitium_api_url_2 }}"
+        api_token: "{{ technitium_api_token_2 }}"
+        api_port: "{{ technitium_api_port_1 }}"
+        name: "jg-chunkserver4.jaspergreenhill.com"
+        type: "A"
+        ipAddress: "10.0.50.54"
+        ptr: true
+        createPtrZone: true 
+        ttl: 3600
+        validate_certs: 'false'
+
+
+
 - name: Add DNS Record mfsmaster 
   effectivelywild.technitium_dns.technitium_dns_add_record:
         api_url: "{{ technitium_api_url_2 }}"
