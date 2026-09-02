@@ -1,24 +1,27 @@
 ---
 
-- name: "Install curl & gpg"
-  package:
-    name:
-      - curl
-      - gpg
+
+- name: Remove Existing Moosefs  List apt 
+  ansible.builtin.shell: sudo rm -rf /etc/apt/sources.list.d/moosefs.list
+
+
+- name: Remove Existing Moosefs gpg
+  ansible.builtin.shell: sudo rm -rf /etc/apt/keyrings/moosefs.gpg
+
+
+- name: Download Moosefs GPG key securely
+  ansible.builtin.shell: curl https://repository.moosefs.com/moosefs.key | gpg -o /etc/apt/keyrings/moosefs.gpg
+
+- name: "Add MooseFS 4 Community Repository"
+  ansible.builtin.deb822_repository:
+    name: moosefs
+    types: [deb]
+    uris: "https://repository.moosefs.com/moosefs-4/apt/{{ ansible_distribution | lower }}"
+    signed_by: "https://repository.moosefs.com/moosefs.key"
+    suites: ["{{ ansible_distribution_release | lower }}"]
+    components: [main]
     state: present
-
-#- name: Check if Moosefs Key Already Exists
-#  stat:
-#   path: /etc/apt/keyrings/moosefs.gpg
-
-#- name: "Get public key for MooseFS repository"
-#  shell: "curl https://repository.moosefs.com/moosefs.key | gpg -o /etc/apt/keyrings/moosefs.gpg --dearmor" 
-
-- name: Add MooseFS repo to sources list
-  apt_repository:
-    repo: "deb [signed-by=/etc/apt/keyrings/moosefs.gpg] http://repository.moosefs.com/moosefs-4/apt/debian/{{ansible_distribution_release}}  {{ansible_distribution_release}} main" 
-    state: present
-    filename: "/etc/apt/sources.list.d/moosefs"
+    enabled: yes
 
 - name: Update apt cache
   apt:
