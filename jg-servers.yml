@@ -9,7 +9,7 @@
     #- roles/jg_update_packages
     - roles/jg_server_packages
     - roles/jg_users
-    - roles/jg_sshkey
+    #- roles/jg_sshkey
     - roles/jg_apt_unattended_upgrades
     #- roles/jg_pki_cert
   vars:
@@ -27,8 +27,6 @@
     patch_notify_email: jasper.greenhill@gmail.com
     patch_email_only_on_error: true
     patch_remove_unused_dependencies: true
-    patch_blacklist_packages:
-      - docker-ce
   tasks:
   - name: System details
     ansible.builtin.debug: msg="{{ item }}"
