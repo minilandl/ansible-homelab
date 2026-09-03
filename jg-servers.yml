@@ -5,6 +5,7 @@
     #- roles/jg_moosefs_repo 
     #- roles/jg_moosefs_client 
     - roles/jg_network
+    - roles/jg_apt_unattended_upgrades
    # - roles/jg_moosefs_repo 
     - roles/jg_ntp
     #- roles/jg_moosefs_repo 
@@ -12,7 +13,6 @@
     - roles/jg_server_packages
     - roles/jg_users
     #- roles/jg_sshkey
-    - roles/jg_apt_unattended_upgrades
     #- roles/jg_pki_cert
   vars:
    # ad_username:
