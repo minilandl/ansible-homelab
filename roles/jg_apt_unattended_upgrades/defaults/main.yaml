@@ -26,7 +26,7 @@ patch_email_only_on_error: true
 # Packages to never auto-upgrade. List of glob-style names — passed to
 # Unattended-Upgrade::Package-Blacklist on Debian and to 'exclude' in
 # /etc/dnf/automatic.conf on RHEL.
-patch_blacklist_packages: [libnvidia-,nvidia-,kubeadm,kubelet,moosefs-chunkserver,moosefs-master,moosefs-common,moosefs-gui]
+patch_blacklist_packages: [cuda-,libnvidia-,nvidia-,kubeadm,kubelet,moosefs-chunkserver,moosefs-master,moosefs-common,moosefs-gui]
 
 # Remove unused dependencies after a successful upgrade.
 patch_remove_unused_dependencies: true
