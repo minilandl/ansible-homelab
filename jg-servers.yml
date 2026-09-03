@@ -5,7 +5,9 @@
     #- roles/jg_moosefs_repo 
     #- roles/jg_moosefs_client 
     - roles/jg_network
+    - roles/jg_moosefs_repo 
     - roles/jg_ntp
+    #- roles/jg_moosefs_repo 
     #- roles/jg_update_packages
     - roles/jg_server_packages
     - roles/jg_users
