@@ -10,6 +10,23 @@
     validate_certs: 'false'
     state: absent
 
+- name: remove dns record jg-chunkserver4 
+  effectivelywild.technitium_dns.technitium_dns_record:
+    api_url: "{{ technitium_api_url_2 }}"
+    api_token: "{{ technitium_api_token_2 }}"
+    api_port: "{{ technitium_api_port_1 }}"
+    name: "jg-chunkserver4.jaspergreenhill.com"
+    type: "A"
+    ipAddress: "10.0.50.54"
+    ttl: 3600
+    validate_certs: 'false'
+    state: absent
+
+
+
+
+
+
 - name: remove dns record jg-chunkserver11-ipmi 
   effectivelywild.technitium_dns.technitium_dns_record:
     api_url: "{{ technitium_api_url_2 }}"
