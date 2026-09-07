@@ -20,6 +20,7 @@ app:
    ansible_user: appuser
 servers:
  hosts:
+   jg-felixminecraft.jaspergreenhill.com:
    mfsmaster.jaspergreenhill.com:
    jg-dns.jaspergreenhill.com:
    jg-app.jaspergreenhill.com:
