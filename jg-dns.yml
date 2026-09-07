@@ -3,6 +3,7 @@
   become: yes
   collections:
   - effectivelywild.technitium_dns.technitium_dns_add_record
+  - effectivelywild.technitium_dns.technitium_dns_remove_record
   roles:
     - roles/jg_remove_dns_record
     - roles/jg_add_dns_record

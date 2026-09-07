@@ -1,0 +1,11 @@
+---
+- name: Push SSH Public Key to All Hosts
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Deploy local public key to authorized_keys
+      ansible.posix.authorized_key:
+        user: "{{ ansible_user | default('root') }}"
+        state: present
+        key: "{{ lookup('ansible.builtin.file', '~/.ssh/id_rsa.pub') }}"
+

@@ -16,9 +16,9 @@
   ansible.builtin.deb822_repository:
     name: moosefs
     types: [deb]
-    uris: "https://repository.moosefs.com/moosefs-4/apt/{{ ansible_distribution | lower }}"
+    uris: "https://repository.moosefs.com/moosefs-4/apt/debian{{ ansible_distribution}}"
     signed_by: "https://repository.moosefs.com/moosefs.key"
-    suites: ["{{ ansible_distribution_release | lower }}"]
+    suites: ["{{ ansible_distribution_release}}"]
     components: [main]
     state: present
     enabled: yes

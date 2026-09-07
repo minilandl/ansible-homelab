@@ -1,0 +1,14 @@
+# {{ ansible_managed }}
+# Managed by the auto_patching Ansible role. Do not edit by hand.
+{% if patch_schedule_oncalendar | length > 0 %}
+{%   set oncalendar = patch_schedule_oncalendar %}
+{% else %}
+{%   set day = patch_schedule_weekdays | trim %}
+{%   set oncalendar = (day ~ ' ' if day else '') ~ '*-*-* ' ~ patch_schedule_time ~ ':00' %}
+{% endif %}
+
+[Timer]
+OnCalendar=
+OnCalendar={{ oncalendar }}
+RandomizedDelaySec={{ patch_schedule_randomized_delay_sec | int }}
+Persistent=true
