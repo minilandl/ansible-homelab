@@ -4,6 +4,7 @@
   collections:
   - effectivelywild.technitium_dns.technitium_dns_add_record
   roles:
+    - roles/jg_remove_dns_record
     - roles/jg_add_dns_record
   vars:
     technitium_api_url_2: "http://jg-dns.jaspergreenhill.com"
