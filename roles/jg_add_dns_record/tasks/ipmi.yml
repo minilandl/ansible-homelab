@@ -40,7 +40,7 @@
         api_url: "{{ technitium_api_url_2 }}"
         api_token: "{{ technitium_api_token_2 }}"
         api_port: "{{ technitium_api_port_1 }}"
-        name: "jg-mfschunkserver11-ipmi.jaspergreenhill.com"
+        name: "jg-mfschunkserver1-ipmi.jaspergreenhill.com"
         type: "A"
         ipAddress: "10.0.30.54"
         ttl: 3600
