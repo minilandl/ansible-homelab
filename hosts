@@ -4,6 +4,7 @@ chunkservers:
    jg-chunkserver3.jaspergreenhill.com: 
    jg-chunkserver2.jaspergreenhill.com:
    jg-chunkserver1.jaspergreenhill.com:
+   jg-mfschunkserver1.jaspergreenhill.com:
 mfsmaster:
  hosts:
    mfsmaster.jaspergreenhill.com:
@@ -21,12 +22,14 @@ app:
 servers:
  hosts:
    jg-felixminecraft.jaspergreenhill.com:
+    ansible_user: minecraftuser
    mfsmaster.jaspergreenhill.com:
    jg-dns.jaspergreenhill.com:
    jg-app.jaspergreenhill.com:
    jg-ansible.jaspergreenhill.com:
    jg-media.jaspergreenhill.com:
    jg-chunkserver1.jaspergreenhill.com:
+   jg-mfschunkserver1.jaspergreenhill.com:
    jg-chunkserver2.jaspergreenhill.com:
    jg-chunkserver3.jaspergreenhill.com:
    jg-k8sworker1.jaspergreenhill.com:
