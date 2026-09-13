@@ -1,0 +1,19 @@
+---
+# handlers file for auto_patching
+
+- name: Restart Moosefs Chunkerver and Metalogger
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - moosefs-chunkserver.service
+    - moosefs-metalogger.service
+
+- name: Reload systemd and restart Chunkserver and Metalogger
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    state: restarted
+    daemon_reload: true
+  loop:
+    - moosefs-chunkserver.service
+    - moosefs-metalogger.service
