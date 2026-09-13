@@ -2,7 +2,7 @@
 - hosts: servers
   become: yes
   roles:
-    #- roles/jg_moosefs_repo 
+    - roles/jg_moosefs_repo 
     #- roles/jg_moosefs_client 
     - roles/jg_network
     - roles/jg_apt_unattended_upgrades
