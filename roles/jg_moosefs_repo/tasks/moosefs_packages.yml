@@ -1,0 +1,10 @@
+- name: Remove moosefs at sources.list
+  ansible.builtin.file:
+    path: /etc/apt/sources.list.d/moosefs.*
+    state: absent
+
+ - name: Install a gpg if not installed
+  ansible.builtin.apt:
+    name: gpg       
+    state: present     # Ensures the package is installed
+    update_cache: yes  

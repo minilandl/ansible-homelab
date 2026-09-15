@@ -1,20 +1,6 @@
 ---
 
 
-- name: Remove Existing Moosefs  List apt 
-  ansible.builtin.shell: sudo rm -rf /etc/apt/sources.list.d/moosefs.list
-
-- name: Remove Existing Moosefs  List apt 
-  ansible.builtin.shell: sudo rm -rf /etc/apt/sources.list.d/moosefs.sources
-
-
-- name: Remove Existing Moosefs gpg
-  ansible.builtin.shell: sudo rm -rf /etc/apt/keyrings/moosefs.gpg
-
-
-- name: Download Moosefs GPG key securely
-  ansible.builtin.shell: curl https://repository.moosefs.com/moosefs.key | gpg -o /etc/apt/keyrings/moosefs.gpg --dearmour
-
 - name: "Add MooseFS 4 Community Repository"
   ansible.builtin.deb822_repository:
     name: moosefs
