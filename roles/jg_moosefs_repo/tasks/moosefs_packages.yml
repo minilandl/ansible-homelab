@@ -1,11 +1,9 @@
 - name: Remove moosefs at sources.list
   ansible.builtin.file:
-    path: /etc/apt/sources.list.d/moosefs.*
+    path: /etc/apt/sources.list.d/moosefs.list
     state: absent
 
-
-
-- name: Install Moosefs Chunkserver Packages
+- name: Install gpg package
   apt:
     name: 
      - gpg
