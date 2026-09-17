@@ -3,6 +3,11 @@
     path: /etc/apt/sources.list.d/moosefs.list
     state: absent
 
+- name: Remove moosefs at sources.sources
+  ansible.builtin.file:
+    path: /etc/apt/sources.list.d/moosefs.sources
+    state: absent
+
 - name: Install gpg package
   apt:
     name: 
