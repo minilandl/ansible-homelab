@@ -3,6 +3,7 @@
   ansible.builtin.apt:
     name:
       - unattended-upgrades
+      - needrestart
       - apt-listchanges
     state: present
     update_cache: true
@@ -28,6 +29,14 @@
     mode: "0644"
   notify: Restart apt unattended-upgrade timers
   tags: [auto_patching]
+
+- name: Configure needrestart for automatic service restarts
+   ansible.builtin.lineinfile:
+     path: /etc/needrestart/needrestart.conf
+     regexp: '^#?\$nrconf\{restart\}'
+     line: '$nrconf{restart} = "a";'
+     create: yes
+     mode: '0644'
 
 - name: Ensure timer drop-in directories exist
   ansible.builtin.file:
