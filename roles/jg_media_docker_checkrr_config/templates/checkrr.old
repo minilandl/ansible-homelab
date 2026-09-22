@@ -1,21 +1,24 @@
+# {{ ansible_managed }}
 lang: "en-us"
 checkrr:
-  checkpath: 
-    - "data/movies/"
-    - "data/tvshows/"
-    - "data/anime/"
+  checkpath:
+    - data/movies/
+    - data/tvshows/
+    - data/anime/
   database: ./checkrr.db
+  removeunknownfiles: false
+  config: ./checkrr.yaml
   debug: true
   csvfile: "./badfiles.csv"
   cron: "@daily"
   ignorehidden: true
   requireaudio: true
   ffmpeg-full: false
-  ffmpeg-quick: false
-  ffmpeg-quick-seconds: 120
+  ffmpeg-quick: true
   ffprobe: true
-  ignorepaths:
-    - '/tv/ignored'
+  removevideo:
+  removelang:
+  removeaudio:
   ignoreexts:
     - .(null)
     - .txt
@@ -27,15 +30,13 @@ checkrr:
     - .srt
     - .pdf
     - .nfo-orig
-    - .url
-    - .svg
 logs:
   stdout:
     out: stdout
     formatter: default
   file:
     out: file
-    path: "/var/log/checkrr.log"
+    path: /var/log/checkrr.log
     formatter: default
 arr:
   radarr:
@@ -59,17 +60,20 @@ arr:
     mappings:
       "/data/movies": "/data/tvshows"
       "/data/anime": "/data/anime"
-notifications:
+ notifications:
   discord:
     url: "https://discordapp.com/api/webhooks/1551927682340618322/MlKIRKZQ99utwCAKoap2Ml2eo73KMIPFNiZWwsPZud_dXcEbWotyQyh8vbFXqJFp4HHH"
     notificationtypes: 
       - reacquire
       - unknowndetected
       - startrun
-      - endrun
+      - endrun 
 webserver:
   port: 8585
   tls: false
+  #certs:
+  #  cert: "/path/to/cert.pem"
+  #  key: "/path/to/privkey.pem"
   baseurl: "/"
   trustedproxies:
     - 127.0.0.1
