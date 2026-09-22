@@ -31,11 +31,10 @@
   tags: [auto_patching]
 
 - name: Configure needrestart for automatic service restarts
-   ansible.builtin.lineinfile:
+  ansible.builtin.lineinfile:
      path: /etc/needrestart/needrestart.conf
      regexp: '^#?\$nrconf\{restart\}'
      line: '$nrconf{restart} = "a";'
-     create: yes
      mode: '0644'
 
 - name: Ensure timer drop-in directories exist
