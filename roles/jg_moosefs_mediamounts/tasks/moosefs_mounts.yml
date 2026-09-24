@@ -29,6 +29,13 @@
       state: directory
       mode: '0755'
 
+- name: Create TranscodeCache directory
+  ansible.builtin.file:
+      path: "{{moosefs_mount_transcodecache}}"
+      state: directory
+      mode: '0755'
+
+
 - name: Mount TV Shows
   ansible.posix.mount:
     src: "{{moosefs_mfsmaster}}" 
@@ -82,6 +89,13 @@
     src: "{{moosefs_mfsmaster}}" 
     path: "{{moosefs_mount_recordings}}"
     opts: mfssubfolder={{moosefs_mount_recordings_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefo
+- name: Mount Transcodecache
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_transcodecache}}"
+    opts: mfssubfolder={{moosefs_mount_transcodecache_subfolder}},defaults,mfsdelayedinit,allow_other
     state: mounted
     fstype: moosefs
 
