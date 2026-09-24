@@ -13,8 +13,10 @@
      moosefs_mount_roms: /mnt/roms
      moosefs_mount_anime: /mnt/Anime
      moosefs_mount_music: /mnt/Music
+     moosefs_mount_transcodecache: /mnt/transcodecache
      moosefs_mount_recordings: /mnt/recordings
      moosefs_mount_music_subfolder: Music 
+     moosefs_mount_transcodecache_subfolder: transcodecache 
      moosefs_mount_roms_subfolder: roms 
      moosefs_mount_anime_subfolder: anime 
      moosefs_mount_audiobooks_subfolder: Audiobooks
