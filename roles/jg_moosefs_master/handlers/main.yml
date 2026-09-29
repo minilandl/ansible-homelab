@@ -1,0 +1,5 @@
+- name: moosefsmaster
+  ansible.builtin.systemd_service:
+    name: moosefs-master
+    state: restarted
+  become: true
