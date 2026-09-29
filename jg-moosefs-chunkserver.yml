@@ -4,6 +4,8 @@
   roles:
     - roles/jg_moosefs_chunkserver 
   vars:
+    target_directory: "/mnt/"
+    dry_run: false
     moosefs_master_host: mfsmaster.jaspergreenhill.com 
   tasks:
   - name: System details

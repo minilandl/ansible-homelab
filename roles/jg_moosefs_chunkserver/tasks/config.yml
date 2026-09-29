@@ -22,36 +22,45 @@
 
 
 - name: Get list of active mount points
+  ansible.builtin.assert:
+    that:
+      - target_directory | length > 0
+      - (target_directory | regex_replace('/+$', '')) not in
+        ['', '/', '/boot', '/etc', '/home', '/usr', '/var']
+    fail_msg: "Refusing to run against '{{ target_directory }}'"
+
+- name: Gather mount facts only
   ansible.builtin.setup:
-   filter: "ansible_mounts"
+    gather_subset:
+      - '!all'
+      - '!min'
+      - mounts
 
-- name: Create a list of mount point paths
-  ansible.builtin.set_fact:
-    mount_points: "{{ ansible_facts.ansible_mounts | map(attribute='mount') | list }}"
+- name: Confirm target exists
+  ansible.builtin.stat:
+    path: "{{ target_directory }}"
+  register: target_stat
+  failed_when: not target_stat.stat.exists or not target_stat.stat.isdir
 
-- name: Find all empty directories
-  ansible.builtin.find:
-    paths: "{{ target_directory }}"
-    file_type: directory
-    hidden: true
-    recurse: true
-  register: found_dirs
+- name: Find (and optionally delete) empty, non-mount-point directories
+  ansible.builtin.command:
+    argv: >-
+      {{
+        ['find', target_directory, '-xdev', '-mindepth', '1', '-depth',
+         '-type', 'd', '-empty']
+        + (ansible_facts.mounts | map(attribute='mount') | map('regex_replace', '^(.*)$', '-not -path \1') | map('split', ' ', 2) | flatten | list)
+        + ['-print']
+        + ([] if dry_run else ['-delete'])
+      }}
+  register: result
+  changed_when: (not dry_run) and result.stdout_lines | length > 0
+  check_mode: false   # command must run so the dry-run listing works
 
-- name: Filter out non-empty directories and mount points
-  ansible.builtin.set_fact:
-    empty_unmounted_dirs: >-
-        {{
-            found_dirs.files
-            | selectattr('size', 'equalto', 0)
-            | map(attribute='path')
-            | difference(mount_points)
-          }}
+- name: Report directories
+  ansible.builtin.debug:
+    msg: "{{ 'Would remove' if dry_run else 'Removed' }}: {{ result.stdout_lines }}"
 
-- name: Remove empty and non-mounted directories
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: absent
-  loop: "{{ empty_unmounted_dirs | sort(reverse=True) }}"  
+  
 
 - name: Build a list of bricks
   find:
