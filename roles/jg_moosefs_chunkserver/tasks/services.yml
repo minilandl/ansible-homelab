@@ -38,3 +38,16 @@
     state: started
     enabled: true
   when: "'chunkservers' in group_names"
+
+
+- name: Restart Moosefs Chunkserver
+  ansible.builtin.systemd_service:
+    name: moosefs-chunkserver
+    state: restarted
+  become: true  
+
+- name: Restart Moosefs Metalogger
+  ansible.builtin.systemd_service:
+    name: moosefs-metalogger
+    state: restarted
+  become: true  
