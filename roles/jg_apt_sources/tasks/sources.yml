@@ -1,0 +1,25 @@
+---
+
+- name: Add APT repositories Trixie
+  when: ansible_distribution_release == "trixie" 
+  become: true
+  template:
+    src: sources.j2
+    dest: /etc/apt/sources.list 
+    owner: mediauser
+    group: mediauser
+    mode: '0644'
+
+- name: Add APT repositories Bookworm
+  when: ansible_distribution_release == "bookworm" 
+  become: true
+  template:
+    src: sourcesbookworm.j2
+    dest: /etc/apt/sources.list 
+    owner: mediauser
+    group: mediauser
+    mode: '0644'
+
+- name: Update apt cache
+  apt:
+    update_cache: yes

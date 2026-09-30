@@ -10,12 +10,16 @@
       - htop
       - freeipmi
       - ipmitool
-      - vim
       - curl
       - git
       - screen
       - fastfetch
-    
+
+- name: Install Packages Bookworm
+  apt:
+    pkg:
+      - neofetch
+  when: ansible_distribution_release == "bookworm" 
 
 - name: "Gathering facts"
   ansible.builtin.setup:
