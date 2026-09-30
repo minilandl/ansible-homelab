@@ -17,5 +17,13 @@
   check_mode: false
 
 - name: Install Spotify Gstreamer plugin 
-  
-  when: mopidy_spotify_check.rc == 0 
+  ansible.builtin.get_url:
+    url: 'https://github.com/mopidy/gst-plugins-rs-build/releases/download/gst-plugin-spotify_{{spotify_version}}-alpha%2Bspotify-logging.b9abdbc/gst-plugin-spotify_{{spotify_version}}-alpha+spotify-logging.b9abdbc-0mopidy1_amd64.deb'
+    dest: /tmp/gst-plugin-spotify_{{spotify_version}}-alpha+spotify-logging.b9abdbc-0mopidy1_amd64.deb
+    mode: '0440'  
+  when: mopidy_spotify_check.rc == 0
+
+ - name: Install MooseFS Proxmox .deb package
+   ansible.builtin.apt:
+     deb: /tmp/gst-plugin-spotify_{{spotify_version}}-alpha+spotify-logging.b9abdbc-0mopidy1_amd64.deb
+   when: mopidy_spotify_check.rc == 0
