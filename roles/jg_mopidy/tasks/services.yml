@@ -1,0 +1,12 @@
+# Start and enable Mopidy
+- name: Start and enable MooseFS mopidy
+  service:
+    name: mopidy
+    state: started
+    enabled: true
+
+- name: Restart Mopidy
+  ansible.builtin.systemd_service:
+    name: mopidy
+    state: restarted
+  become: true  
