@@ -1,5 +1,12 @@
 ---
 
+
+- name: Remove apt sources.list
+  ansible.builtin.file:
+    path: /etc/apt/sources.list
+    state: absent
+
+
 - name: Add APT repositories Trixie
   when: ansible_distribution_release == "trixie" 
   become: true
