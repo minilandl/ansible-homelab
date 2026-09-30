@@ -1,0 +1,6 @@
+- name: Install Mopidy Packages
+  apt:
+    name: 
+     - mopidy
+     - mopidy-alsamixer
+    update_cache: yes
