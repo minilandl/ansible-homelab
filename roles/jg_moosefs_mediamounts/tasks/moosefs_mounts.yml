@@ -90,7 +90,7 @@
     path: "{{moosefs_mount_recordings}}"
     opts: mfssubfolder={{moosefs_mount_recordings_subfolder}},defaults,mfsdelayedinit,allow_other
     state: mounted
-    fstype: moosefo
+    fstype: moosefs
 - name: Mount Transcodecache
   ansible.posix.mount:
     src: "{{moosefs_mfsmaster}}" 
