@@ -1,0 +1,21 @@
+- name: Install multiple Python packages
+  ansible.builtin.pip:
+    name:
+      - mopidy-spotify
+      - mopidy-mpd
+      - mopidy-mpris
+      - mopidy-tunein
+      - mopidy-iris
+      - mopidy-jellyfin
+    state: present
+
+- name: Check if Mopidy-Spotify extension is installed
+  ansible.builtin.shell: mopidyctl deps | grep -i spotify
+  register: mopidy_spotify_check
+  failed_when: false
+  changed_when: false
+  check_mode: false
+
+- name: Install Spotify Gstreamer plugin 
+  
+  when: mopidy_spotify_check.rc == 0 
