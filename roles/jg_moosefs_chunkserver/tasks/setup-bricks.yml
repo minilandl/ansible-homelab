@@ -19,3 +19,16 @@
   when: "'moosefs_chunkserver' in group_names"
   loop: "{{ brick_list.files }}"
   no_log: true
+
+- name: Set Permissions on brick directory
+  file:
+    path: "{{ item.path }}/brick*/*"
+    state: directory
+    owner: mfs
+    group: mfs
+    mode: '0755'
+    recurse: true
+  no_log: true
+
+
+- 
