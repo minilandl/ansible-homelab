@@ -14,21 +14,16 @@
     state: directory
     owner: mfs
     group: mfs
-    mode: '0755'
+    mode: '0750'
     recurse: yes
   when: "'moosefs_chunkserver' in group_names"
   loop: "{{ brick_list.files }}"
   no_log: true
 
-- name: Set Permissions on brick directory
+- name: Ensure each brick folder exists and is owned correctly
   file:
-    path: "{{ item.path }}/brick*/*"
-    state: directory
+    path: /mnt/mfsbrick.*
     owner: mfs
     group: mfs
-    mode: '0755'
-    recurse: true
+    recurse: yes
   no_log: true
-
-
-- 
