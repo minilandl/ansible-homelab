@@ -1,0 +1,216 @@
+# For further information about options in this file see:
+#   https://docs.mopidy.com/
+#
+# The initial commented out values reflect the defaults as of:
+#   Mopidy 3.0.1
+#   Mopidy-File 3.0.1
+#   Mopidy-HTTP 3.0.1
+#   Mopidy-M3U 3.0.1
+#   Mopidy-SoftwareMixer 3.0.1
+#   Mopidy-Spotify 4.0.1
+#   Mopidy-Stream 3.0.1
+#
+# Available options and defaults might have changed since then,
+# run `mopidy config` to see the current effective config and
+# `mopidy --version` to check the current version.
+
+[core]
+cache_dir = var/lib/mopidy/cache
+config_dir = $XDG_CONFIG_DIR/mopidy
+data_dir = /var/lib/mopidy
+max_tracklist_length = 10000
+restore_state = true
+
+
+[logging]
+verbosity = 0
+format = %(levelname)-8s %(asctime)s [%(process)d:%(threadName)s] %(name)s\n  %(message)s
+#color = true
+#config_file =
+
+[audio]
+mixer = software
+output = audioresample ! audioconvert ! audio/x-raw,rate=48000,channels=2,format=S16LE ! filesink location=/tmp/snapfifo
+#buffer_time = 
+
+[proxy]
+#scheme = 
+#hostname = 
+#port = 
+#username = 
+#password = 
+
+[local]
+enabled = true
+library = json
+media_dir = /mnt/Music
+scan_timeout = 5000
+scan_flush_threshold = 100
+scan_follow_symlinks = false
+excluded_file_extensions =
+  .directory
+  .html
+  .jpeg
+  .jpg
+  .log
+  .nfo
+  .pdf
+  .png
+  .txt
+  .zip
+
+[http]
+enabled = true
+hostname = jg-media.jaspergreenhill.com
+port = 6700
+zeroconf = Mopidy HTTP server on $hostname
+csrf_protection = true
+default_app = mopidy
+
+[mpd]
+enabled = true
+hostname = 10.0.40.6
+port = 6600
+max_connections = 20
+
+[m3u]
+#enabled = true
+#base_dir = $XDG_MUSIC_DIR
+#default_encoding = latin-1
+#default_extension = .m3u8
+#playlists_dir =
+
+[softwaremixer]
+enabled = true
+
+[notify]
+enabled = true
+max_icon_size = 200
+fallback_icon = notification-audio-play
+track_summary = ${track}
+track_message = ${artists} - ${album}
+
+[stream]
+enabled = true
+protocols = 
+  http
+  https
+  mms
+  rtmp
+  rtmps
+  rtsp
+timeout = 5000
+
+
+[spotify]
+client_id = c1b53223-3b62-4b09-ad5c-204d056948ef
+client_secret = lxGA4XVcqsOlOFgsW54qTJCeCrM6ukroMeqGM1aBYvs=
+bitrate = 320
+enabled=true
+timeout = 10
+allow_cache=true
+allow_network = true
+allow_playlists = true
+search_artist_count = 10
+search_track_count = 50
+search_album_count = 50 
+
+
+[subidy]
+enabled = false
+url=http://10.0.40.6:4533
+username=jasper
+password=jabba123
+legacy_auth=true
+
+
+[jellyfin]
+enabled=false
+hostname=jellyfin.jaspergreenhill.com/jellyfin
+username=jasperg
+password=jabba123A@
+libraries=Music
+
+[iris]
+country=au
+locale=en_AU
+snapcast_enabled=true
+snapcast_host=10.0.40.6
+snapcast_port=1780
+
+
+[internetarchive]
+enabled = true
+
+# archive.org base URL
+base_url = http://archive.org
+
+# top-level collections for browsing
+collections =
+    audio
+    etree
+    librivoxaudio
+    audio_bookspoetry
+    audio_tech
+    audio_music
+    audio_news
+    audio_foreign
+    audio_podcast
+    audio_religion
+
+# audio file formats in order of preference
+audio_formats = FLAC,VBR MP3, 64Kbps MP3
+
+# image file formats in order of preference
+image_formats = JPEG, JPEG Thumb
+
+# maximum number of browse results
+browse_limit = 100
+
+# list of collection browse views: <fieldname> (asc|desc) | <name>
+browse_views =
+      downloads desc    | Views
+      titleSorter asc   | Title
+      publicdate desc   | Date Archived
+      date desc         | Date Published
+      creatorSorter asc | Creator
+
+# maximum number of search results
+search_limit = 20
+
+# sort order for searching: <fieldname> (asc|desc); default is score
+search_order =
+
+# number of items to cache
+cache_size = 128
+
+# cache time-to-live in seconds
+cache_ttl = 86400
+
+# maximm number of HTTP connection retries
+retries = 3
+
+# HTTP request timeout in seconds
+timeout = 10
+
+[tunein]
+enabled = true
+timeout = 5000
+
+[soundcloud]
+auth_token = 3-35204-91631918-RQCSVgP920lbnXum
+enabled = false
+
+[youtube]
+enabled = false
+threads_max = 16
+search_results = 500
+autoplay_enabled = false
+youtube_api_key =  AIzaSyD59TwVLJW6fk698yg5FOMHOj59eSPeeyc 
+api_enabled = true
+
+[somafm]
+enabled=true
+encoding = aac
+quality = fast
+dj_as_artist = true
