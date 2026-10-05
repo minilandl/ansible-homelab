@@ -21,16 +21,18 @@
   no_log: true
 
 - name: Find all items matched by /mnt/mfsbrick.*/*
-      ansible.builtin.find:
-        paths: /mnt
-        patterns: 'mfsbrick.*'
-        file_type: directory
-      register: matched_bricks
+  ansible.builtin.find:
+    paths: /mnt
+    patterns: 'mfsbrick.*'
+    file_type: directory
+  register: matched_bricks
+  no_log: true
 
 - name: Set ownership recursively to mfs:mfs on brick contents
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        owner: mfs
-        group: mfs
-        recurse: yes
-      loop: "{{ matched_bricks.files }}"
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    owner: mfs
+    group: mfs
+    recurse: yes
+  loop: "{{ matched_bricks.files }}"
+  no_log: true

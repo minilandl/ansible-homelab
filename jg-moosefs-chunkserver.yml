@@ -1,6 +1,7 @@
 ---
 - hosts: chunkservers
   become: yes
+  serial: 1 
   roles:
     - roles/jg_moosefs_chunkserver 
   vars:
