@@ -8,6 +8,7 @@
       - mopidy-iris
       - mopidy-jellyfin
     state: present
+    break_system_packages: true
 
 - name: Check if Mopidy-Spotify extension is installed
   ansible.builtin.shell: mopidyctl deps | grep -i spotify
@@ -23,7 +24,7 @@
     mode: '0440'  
   when: mopidy_spotify_check.rc == 0
 
- - name: Install MooseFS Proxmox .deb package
-   ansible.builtin.apt:
-     deb: /tmp/gst-plugin-spotify_{{spotify_version}}-alpha+spotify-logging.b9abdbc-0mopidy1_amd64.deb
-   when: mopidy_spotify_check.rc == 0
+- name: Install MooseFS Proxmox .deb package
+  ansible.builtin.apt:
+    deb: /tmp/gst-plugin-spotify_{{spotify_version}}-alpha+spotify-logging.b9abdbc-0mopidy1_amd64.deb
+  when: mopidy_spotify_check.rc == 0
