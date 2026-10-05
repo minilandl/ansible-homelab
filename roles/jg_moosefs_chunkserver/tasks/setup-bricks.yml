@@ -20,6 +20,11 @@
   loop: "{{ brick_list.files }}"
   no_log: true
 
+- name: Remove .chunkdb to force a rescan 
+  ansible.builtin.file:
+    path: /mnt/mfsbrick.*/.chunkdb
+    state: absent
+
 - name: Find brick directories
   ansible.builtin.find:
     paths: /mnt
