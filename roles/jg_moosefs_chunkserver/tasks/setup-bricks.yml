@@ -20,19 +20,28 @@
   loop: "{{ brick_list.files }}"
   no_log: true
 
-- name: Find all items matched by /mnt/mfsbrick.*/*
+- name: Find brick directories
   ansible.builtin.find:
     paths: /mnt
     patterns: 'mfsbrick.*'
     file_type: directory
-  register: matched_bricks
-  no_log: true
+  register: brick_dirs
 
-- name: Set ownership recursively to mfs:mfs on brick contents
+- name: Find items inside the bricks not owned by mfs:mfs
+  ansible.builtin.command:
+    argv: >-
+      {{
+        ['find'] + (brick_dirs.files | map(attribute='path') | list) +
+        ['-xdev', '(', '!', '-user', 'mfs', '-o', '!', '-group', 'mfs', ')']
+       }}
+  register: non_mfs_items
+  changed_when: false
+  check_mode: false
+
+- name: Set ownership to mfs:mfs on non-mfs items
   ansible.builtin.file:
-    path: "{{ item.path }}"
+    path: "{{ item }}"
     owner: mfs
     group: mfs
-    recurse: yes
-  loop: "{{ matched_bricks.files }}"
-  no_log: true
+    follow: false
+  loop: "{{ non_mfs_items.stdout_lines }}"
