@@ -10,7 +10,7 @@
 
 - name: Ensure each brick folder exists and is owned correctly
   file:
-    name: "{{ item.path }}/brick*"
+    name: "{{ item.path }}/brick"
     state: directory
     owner: mfs
     group: mfs
@@ -20,10 +20,17 @@
   loop: "{{ brick_list.files }}"
   no_log: true
 
-- name: Ensure each brick folder exists and is owned correctly
-  file:
-    path: /mnt/mfsbrick.*
-    owner: mfs
-    group: mfs
-    recurse: yes
-  no_log: true
+- name: Find all items matched by /mnt/mfsbrick.*/*
+      ansible.builtin.find:
+        paths: /mnt
+        patterns: 'mfsbrick.*'
+        file_type: directory
+      register: matched_bricks
+
+- name: Set ownership recursively to mfs:mfs on brick contents
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        owner: mfs
+        group: mfs
+        recurse: yes
+      loop: "{{ matched_bricks.files }}"
