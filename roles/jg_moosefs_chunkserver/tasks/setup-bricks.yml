@@ -45,11 +45,8 @@
   no_log: true
 
 - name: Set ownership to mfs:mfs on non-mfs items
-  ansible.builtin.file:
-    path: "{{ item }}"
-    owner: mfs
-    group: mfs
-    follow: false
+  ansible.builtin.command:
+    cmd: chown -R mfs:mfs "{{ item }}"
   loop: "{{ non_mfs_items.stdout_lines }}"
-  no_log: true
+  no_log: false
   changed_when: true
