@@ -3,6 +3,7 @@
     name:
       - mopidy-spotify
       - mopidy-mpd
+      - mopidy-muse
       - mopidy-mpris
       - mopidy-tunein
       - mopidy-iris
