@@ -6,6 +6,7 @@
       - mopidy-mpris
       - mopidy-tunein
       - mopidy-iris
+      - mopidy-musicbox-webclient
       - mopidy-jellyfin
     state: present
     break_system_packages: true
