@@ -9,6 +9,7 @@
       - mopidy-iris
       - mopidy-musicbox-webclient
       - mopidy-jellyfin
+      - mopidy-pibox
     state: present
     break_system_packages: true
 
