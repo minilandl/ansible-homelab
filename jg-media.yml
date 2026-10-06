@@ -2,6 +2,7 @@
 - hosts: media
   become: yes
   roles:
+    - roles/jg_mopidy
     - roles/jg_moosefs_mediamounts
     - roles/jg_nginx_media_config
     - roles/jg_media_docker_checkrr_config

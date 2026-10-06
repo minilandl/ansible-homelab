@@ -3,10 +3,10 @@
   gather_facts: true 
   become: yes
   roles:
+    - roles/jg_apt_sources
     - roles/jg_moosefs_repo 
     - roles/jg_moosefs_client 
     - roles/jg_network
-    - roles/jg_apt_sources
     - roles/jg_apt_unattended_upgrades
     - roles/jg_ntp
     #- roles/jg_update_packages

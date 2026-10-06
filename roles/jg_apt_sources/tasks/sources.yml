@@ -1,6 +1,5 @@
 ---
 
-
 - name: Remove apt sources.list
   ansible.builtin.file:
     path: /etc/apt/sources.list
@@ -13,8 +12,8 @@
   template:
     src: sources.j2
     dest: /etc/apt/sources.list 
-    owner: mediauser
-    group: mediauser
+    owner: jasper
+    group: jasper
     mode: '0644'
 
 - name: Add APT repositories Bookworm
