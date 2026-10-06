@@ -94,3 +94,12 @@
     owner: mediauser
     group: mediauser
     mode: '0644'
+
+
+- name: Copy nginx mopidy config file 
+  template:
+    src: mopidy.conf
+    dest: /home/mediauser/docker/nginx/config/nginx/site-confs/mopidy.conf 
+    owner: mediauser
+    group: mediauser
+    mode: '0644'
