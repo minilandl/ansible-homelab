@@ -27,19 +27,23 @@
   ansible.builtin.shell:
     cmd: "curl -LsSf https://astral.sh/uv/install.sh | sh"
 
+
+
+
+
 - name: Clone a Git repository for mopidy-spotify
   ansible.builtin.git:
     repo: 'https://github.com/mopidy/mopidy-spotify'
-    dest: /tmp/
+    dest: /tmp/mopidy-spotify
     version: main
-    register: app_dir
 
-- name: build mopidy-spotify
-  ansible.builtin.shell: |
-        uv sync
-  args:
-    chdir: "{{ app_dir }}"
-    
+- name: build mopidy-spotif
+  ansible.builtin.command:
+    cmd: uv sync 
+    chdir: /tmp/mopidy-spotify
+  environment:
+    UV_PROJECT_ENVIRONMENT: /path/to/your/project/.venv
+
 
 - name: Check if Mopidy-Spotify extension is installed
   ansible.builtin.shell: mopidyctl deps | grep -i spotify
