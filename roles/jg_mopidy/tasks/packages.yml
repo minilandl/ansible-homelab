@@ -4,3 +4,13 @@
      - mopidy
      - mopidy-alsamixer
     update_cache: yes
+
+
+- name: Install MopidySpotify Build Deps
+  apt:
+    name: 
+     - libcairo2-dev
+     - cmake
+    update_cache: yes
+
+
