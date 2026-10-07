@@ -32,7 +32,7 @@
     repo: 'https://github.com/mopidy/mopidy-spotify'
     dest: /tmp/
     version: main
-    regiater: app_dir
+    register: app_dir
 
 - name: build mopidy-spotify
   ansible.builtin.shell: |
