@@ -12,8 +12,6 @@
       - mopidy-musicbox-webclient
       - mopidy-jellyfin
       - mopidy-pibox
-      - pygobject
-      - pycairo
     state: present
     break_system_packages: true
 
@@ -29,7 +27,19 @@
   ansible.builtin.shell:
     cmd: "curl -LsSf https://astral.sh/uv/install.sh | sh"
 
+- name: Clone a Git repository for mopidy-spotify
+  ansible.builtin.git:
+    repo: 'https://github.com/mopidy/mopidy-spotify'
+    dest: /tmp/
+    version: main
+    regiater: app_dir
 
+- name: build mopidy-spotify
+  ansible.builtin.shell: |
+        uv sync
+  args:
+    chdir: "{{ app_dir }}"
+    
 
 - name: Check if Mopidy-Spotify extension is installed
   ansible.builtin.shell: mopidyctl deps | grep -i spotify
