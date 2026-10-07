@@ -27,18 +27,11 @@
   ansible.builtin.shell:
     cmd: "curl -LsSf https://astral.sh/uv/install.sh | sh"
 
-- name: make a directory to build mopidy spotify into
-  ansible.builtin.file:
-    path: /tmp/mopidy-spotify
-    owner: jasper
-    group: jasper
-    mode: '644'
 
 - name: Clone a Git repository for mopidy-spotify
   ansible.builtin.git:
     repo: 'https://github.com/mopidy/mopidy-spotify'
     dest: /tmp/mopidy-spotify
-    version: main
 
 - name: build mopidy-spotif
   ansible.builtin.command:
