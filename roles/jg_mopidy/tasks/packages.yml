@@ -11,6 +11,7 @@
     name: 
      - libcairo2-dev
      - cmake
+     - git
     update_cache: yes
 
 
