@@ -69,3 +69,10 @@
   ansible.builtin.apt:
     deb: /tmp/gst-plugin-spotify_{{spotify_version}}-alpha+spotify-logging.b9abdbc-0mopidy1_amd64.deb
   when: mopidy_spotify_check.rc == 0
+
+
+- name: set permissions on /tmp/snapfifo
+  ansible.builtin.file:
+    path: /tmp/snapfifo
+    owner: mopidy
+    group: audio
