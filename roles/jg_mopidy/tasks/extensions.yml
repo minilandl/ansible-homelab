@@ -31,14 +31,12 @@
 - name: Clone a Git repository for mopidy-spotify
   ansible.builtin.git:
     repo: 'https://github.com/mopidy/mopidy-spotify'
-    dest: /tmp/mopidy-spotify
+    dest: /home/mediauser/mopidy-spotify
 
 - name: build mopidy-spotif
-  ansible.builtin.command:
-    cmd: uv sync 
-    chdir: /tmp/mopidy-spotify
-  environment:
-    UV_PROJECT_ENVIRONMENT: /tmp/mopidy-spotify/.venv
+  ansible.builtin.shell:
+    cmd: ~/.local/bin/uv sync 
+    chdir: /home/mediauser/mopidy-spotify
 
 
 - name: Check if Mopidy-Spotify extension is installed
