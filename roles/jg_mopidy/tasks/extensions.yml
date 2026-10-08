@@ -33,14 +33,32 @@
     repo: 'https://github.com/mopidy/mopidy-spotify'
     dest: ~/mopidy-spotify
 
-- name: build mopidy-spotif
+- name: run uv sync and install deps for mopidy-spotify
   ansible.builtin.shell:
     cmd: ~/.local/bin/uv sync 
     chdir: ~/mopidy-spotify
 
 
+- name: build mopidy-spotify 
+  ansible.builtin.shell:
+    cmd: ~/.local/bin/uv build
+    chdir: ~/mopidy-spotify
+
+- name: Check if the mopidy-spotify.whl file exists
+  ansible.builtin.stat:
+    path: ~/mopidy-spotify/dist/*.whl
+  register: wheel_file
+  failed_when: false
+
+- name: install mopidy-spotify using pip
+  ansible.builtin.pip:
+    name: ~/mopidy-spotify/dist/mopidy_spotify_*.whl
+  when: Wheel_file.stat.exists
+  state: present
+
+
 - name: Check if Mopidy-Spotify extension is installed
-  ansible.builtin.shell: mopidyctl deps | grep -i spotify
+  ansible.builtin.shell: mopidyctl deps | grep -i mopidy-spotify
   register: mopidy_spotify_check
   failed_when: false
   changed_when: false
