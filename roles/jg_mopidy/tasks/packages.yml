@@ -5,6 +5,12 @@
      - mopidy-alsamixer
     update_cache: yes
 
+- name: Install Snapserver Packages
+  apt:
+    name: 
+     - snapserver
+    update_cache: yes
+
 
 - name: Install MopidySpotify Build Deps
   apt:
@@ -13,5 +19,6 @@
      - cmake
      - git
      - python3-gi
+     - libgirepository-2.0-dev
      - python3-gi-cairo
     update_cache: yes
