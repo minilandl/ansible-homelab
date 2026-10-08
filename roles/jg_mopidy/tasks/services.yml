@@ -9,4 +9,20 @@
   ansible.builtin.systemd_service:
     name: mopidy
     state: restarted
-  become: true  
+  become: true 
+
+
+# Start and enable Snapserver
+- name: Start and enable snapserver
+  service:
+    name: snapserver
+    state: started
+    enabled: true
+
+- name: Restart Snapserver
+  ansible.builtin.systemd_service:
+    name: snapserver
+    state: restarted
+  become: true 
+
+

@@ -1,0 +1,16 @@
+- name: Copy mopidy template
+  template:
+    src: mopidy.j2
+    dest: /etc/mopidy/mopidy.cfg
+    owner: jasper 
+    group: jasper
+    mode: '0644'
+
+
+- name: Copy snapserver template
+  template:
+    src: snapserver.j2
+    dest: /etc/mopidy/snapserver.cfg
+    owner: jasper 
+    group: jasper
+    mode: '0755'
