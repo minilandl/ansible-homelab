@@ -10,7 +10,7 @@
 - name: Copy snapserver template
   template:
     src: snapserver.j2
-    dest: /etc/mopidy/snapserver.cfg
+    dest: /etc/snapserver.cfg
     owner: jasper 
     group: jasper
     mode: '0755'
