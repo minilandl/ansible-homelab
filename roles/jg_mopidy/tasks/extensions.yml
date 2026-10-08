@@ -47,7 +47,7 @@
 
 - name: Install mopidy spotify from local tarball
   ansible.builtin.pip:
-    name: file:///~/mopidy-spotify/dist/*.gz
+    name: /home/mediauser/mopidy-spotify/dist/mopidy_spotify-5.0.2.dev38+g70fffd1d7.d20261008.tar.gz
     break_system_packages: true
 
 
