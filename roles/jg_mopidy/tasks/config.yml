@@ -18,7 +18,7 @@
 - name: Copy snapserver template
   template:
     src: snapserver.j2
-    dest: /etc/snapserver.cfg
+    dest: /etc/snapserver.conf
     owner: jasper 
     group: jasper
     mode: '0755'
