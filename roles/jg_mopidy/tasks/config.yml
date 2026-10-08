@@ -7,6 +7,14 @@
     mode: '0644'
 
 
+
+    # Start and enable Snapserver
+- name: Start and enable snapserver
+  service:
+    name: snapserver
+    state: stopped
+    enabled: true
+
 - name: Copy snapserver template
   template:
     src: snapserver.j2
@@ -14,3 +22,13 @@
     owner: jasper 
     group: jasper
     mode: '0755'
+
+
+    # Start and enable Snapserver
+- name: Restart snapserver
+  service:
+    name: snapserver
+    state: restarted
+    enabled: true
+
+
