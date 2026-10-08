@@ -44,17 +44,11 @@
     cmd: ~/.local/bin/uv build
     chdir: ~/mopidy-spotify
 
-- name: Check if the mopidy-spotify.whl file exists
-  ansible.builtin.stat:
-    path: ~/mopidy-spotify/dist/*.whl
-  register: wheel_file
-  failed_when: false
 
-- name: install mopidy-spotify using pip
+- name: Install mopidy spotify from local tarball
   ansible.builtin.pip:
-    name: ~/mopidy-spotify/dist/mopidy_spotify_*.whl
-  when: Wheel_file.stat.exists
-  state: present
+    name: file:///~/mopidy-spotify/dist/*.gz
+    break_system_packages: true
 
 
 - name: Check if Mopidy-Spotify extension is installed
