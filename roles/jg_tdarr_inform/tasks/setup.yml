@@ -1,0 +1,9 @@
+- name: Clone a Git repository for tdarr-inform 
+  ansible.builtin.git:
+    repo: 'https://github.com/deathbybandaid/tdarr_inform.git'
+    dest: ~/docker/tdarr_inform
+
+
+- name: Install Python Dependencies requirements.txt tdarr-inform
+      ansible.builtin.pip:
+        requirements: /tmp/requirements.txt
