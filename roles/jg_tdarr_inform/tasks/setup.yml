@@ -5,5 +5,12 @@
 
 
 - name: Install Python Dependencies requirements.txt tdarr-inform
-      ansible.builtin.pip:
-        requirements: /tmp/requirements.txt
+   ansible.builtin.pip:
+     requirements: ~/docker/tdarr_inform/requirements.txt
+   break_system_packages: true
+
+- name: Install Python Dependencies web-requirements.txt tdarr-inform
+   ansible.builtin.pip:
+     requirements: ~/docker/tdarr_inform/web-requirements.txt
+   break_system_packages: true
+
