@@ -20,33 +20,77 @@
   loop: "{{ brick_list.files }}"
   no_log: true
 
-- name: Remove .chunkdb to force a rescan 
-  ansible.builtin.file:
-    path: /mnt/mfsbrick.*/.chunkdb
-    state: absent
-
-- name: Find brick directories
+- name: Find .chunkdb files in bricks
   ansible.builtin.find:
-    paths: /mnt
-    patterns: 'mfsbrick.*'
-    file_type: directory
-  register: brick_dirs
+    paths: "{{ brick_list.files | map(attribute='path') | list }}"
+    patterns: ".chunkdb"
+    file_type: file
+    hidden: true
+    recurse: false
+  register: chunkdb_files
+  when:
+    - brick_list.files | length > 0
 
-- name: Find items inside the bricks not owned by mfs:mfs
+- name: Remove .chunkdb to force a rescan
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ chunkdb_files.files | default([]) }}"
+
+#- name: Find brick directories
+#  ansible.builtin.find:
+#    paths: /mnt
+#    patterns: 'mfsbrick.*'
+#    file_type: directory
+#  register: brick_dirs
+
+#- name: Find items inside the bricks not owned by mfs:mfs
+#  ansible.builtin.command:
+#    argv: >-
+#      {{
+#        ['find'] + (brick_dirs.files | map(attribute='path') | list) +
+#        ['-xdev', '(', '!', '-user', 'mfs', '-o', '!', '-group', 'mfs', ')']
+#       }}
+#  register: non_mfs_items
+#  changed_when: false
+#  check_mode: false
+#  no_log: true
+
+
+- name: Fix ownership inside bricks (batched, one job per brick, in parallel)
   ansible.builtin.command:
-    argv: >-
-      {{
-        ['find'] + (brick_dirs.files | map(attribute='path') | list) +
-        ['-xdev', '(', '!', '-user', 'mfs', '-o', '!', '-group', 'mfs', ')']
-       }}
-  register: non_mfs_items
+    argv:
+      - nice
+      - find
+      - "{{ item.path }}"
+      - -xdev
+      - "("
+      - "!"
+      - -user
+      - mfs
+      - -o
+      - "!"
+      - -group
+      - mfs
+      - ")"
+      - -exec
+      - chown
+      - -h
+      - mfs:mfs
+      - "{}"
+      - "+"
+  loop: "{{ brick_list.files }}"
+  async: 604800        # 7 days max
+  poll: 0
+  register: chown_jobs
   changed_when: false
-  check_mode: false
-  no_log: true
 
-- name: Set ownership to mfs:mfs on non-mfs items
-  ansible.builtin.command:
-    cmd: chown -R mfs:mfs "{{ item }}"
-  loop: "{{ non_mfs_items.stdout_lines }}"
-  no_log: false
-  changed_when: true
+- name: Wait for all brick chowns to finish
+  ansible.builtin.async_status:
+    jid: "{{ item.ansible_job_id }}"
+  loop: "{{ chown_jobs.results | default([]) }}"
+  when: item.ansible_job_id is defined
+  register: chown_wait
+  until: chown_wait.finished
+  retries: 20000
+  delay: 30
