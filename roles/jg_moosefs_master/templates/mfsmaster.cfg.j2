@@ -178,6 +178,15 @@
 CHUNKS_WRITE_REP_LIMIT = 20,10,10,40
 CHUNKS_READ_REP_LIMIT = 100,50,20,50
 
+
+
+# Core replication pacing
+CHUNKS_REPLICATIONS_DELAY = 10
+
+# Strict concurrency throttles
+CHUNKS_REPLICATIONS_LIMIT = 1
+CHUNKS_REBALANCING_LIMIT = 1
+
 # maximum number of chunks to replicate from one chunkserver (default is 10,5,2,5,10)
 # one number is equal to five same numbers separated by colons
 # limit groups are the same as in write limit, also relations between numbers should be the same as in write limits ( 1st >= 2nd >= 3rd <= 4th ); fifth limit should be equal or greater than any of the other limits
@@ -258,7 +267,7 @@ CHUNKS_READ_REP_LIMIT = 100,50,20,50
 #  2 - modify atime only when it is lower than ctime or mtime and when current time is higher than ctime or mtime respectively, also modify atime when current atime is older than 24h; do it for all objects during access (like "relatime" option in Linux)
 #  3 - same as above but only in case of files; in case of folders and symlinks do not modify atime
 #  4 - never modify atime during access (like "noatime" option)
- ATIME_MODE = 2
+ ATIME_MODE = 4
 
 # move empty files to trash after unlink? (default is 0 - delete empty files immediately regardless of trash retention settings)
  KEEP_EMPTY_FILES_IN_TRASH = 0
@@ -276,6 +285,7 @@ CHUNKS_READ_REP_LIMIT = 100,50,20,50
 
 # delay time after which inodes of deleted objects will be reused (default: 1d)
 # time can be defined as a number of seconds (integer) or a time period in one of two possible formats: 
+   jg-chunkserver3.jaspergreenhill.com:
 # first format: #.#T where T is one of: s-seconds, m-minutes, h-hours, d-days or w-weeks; fractions of seconds will be rounded to full seconds
 # second format: #w#d#h#m#s, any number of definitions can be ommited, but the remaining definitions must be in order (so #d#m is still a valid definition, but #m#d is not); ranges: s,m: 0 to 59, h: 0 to 23, d: 0 to 6, w is unlimited and the first definition is also always unlimited (i.e. for #d#h#m d will be unlimited)
 # BE AWARE if you change this value below 1 day you MUST ensure that this value is higher than any of the following timeouts in all clients:
