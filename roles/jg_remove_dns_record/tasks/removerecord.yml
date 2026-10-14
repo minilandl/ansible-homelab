@@ -23,8 +23,17 @@
     state: absent
 
 
-
-
+- name: remove dns record jgpve4-ipmi 
+  effectivelywild.technitium_dns.technitium_dns_record:
+    api_url: "{{ technitium_api_url_2 }}"
+    api_token: "{{ technitium_api_token_2 }}"
+    api_port: "{{ technitium_api_port_1 }}"
+    name: "jgpve4-ipmi.jaspergreenhill.com"
+    type: "A"
+    ipAddress: "10.0.30.6"
+    ttl: 3600
+    validate_certs: 'false'
+    state: absent
 
 
 - name: remove dns record jg-chunkserver11-ipmi 
