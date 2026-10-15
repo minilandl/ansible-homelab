@@ -36,6 +36,19 @@
       mode: '0755'
 
 
+- name: Create Nzb directory
+  ansible.builtin.file:
+      path: "{{moosefs_mount_nzb}}"
+      state: directory
+      mode: '0755'
+
+
+- name: Create Nzbwip directory
+  ansible.builtin.file:
+      path: "{{moosefs_mount_nzbwip}}"
+      state: directory
+      mode: '0755'
+
 - name: Mount TV Shows
   ansible.posix.mount:
     src: "{{moosefs_mfsmaster}}" 
@@ -104,5 +117,22 @@
     src: "{{moosefs_mfsmaster}}" 
     path: "{{moosefs_mount_recordings}}"
     opts: mfssubfolder={{moosefs_mount_recordings_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs
+
+
+- name: Mount nzb folder
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_nzb}}"
+    opts: mfssubfolder={{moosefs_mount_nzb_subfolder}},defaults,mfsdelayedinit,allow_other
+    state: mounted
+    fstype: moosefs
+
+- name: Mount nzbwip folder
+  ansible.posix.mount:
+    src: "{{moosefs_mfsmaster}}" 
+    path: "{{moosefs_mount_nzbwip}}"
+    opts: mfssubfolder={{moosefs_mount_nzbwip_subfolder}},defaults,mfsdelayedinit,allow_other
     state: mounted
     fstype: moosefs
