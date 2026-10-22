@@ -1,7 +1,7 @@
 - name: Copy mopidy template
   template:
     src: mopidy.j2
-    dest: /etc/mopidy/mopidy.cfg
+    dest: /etc/mopidy/mopidy.conf
     owner: jasper 
     group: jasper
     mode: '0644'
