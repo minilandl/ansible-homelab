@@ -31,4 +31,9 @@
     state: restarted
     enabled: true
 
+- name: Create a pipewire directory 
+  ansible.builtin.file:
+    path: /etc/pipewire
+    state: directory
+
 
