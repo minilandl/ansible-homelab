@@ -11,6 +11,12 @@
      - snapserver
     update_cache: yes
 
+- name: Install Pipewire packages 
+  apt:
+    name:
+     - pipewire 
+     - pipewire-pulse 
+     - wireplumber
 
 - name: Install MopidySpotify Build Deps
   apt:
