@@ -149,7 +149,8 @@ sampleformat = 48000:16:2
 codec = pcm
 
 
-stream= tcp://127.0.0.1:3333?name=mopidy_tcp
+[stream]
+source = tcp://127.0.0.1:4711?name=MopidyPipeWire&mode=client
 
 
 # Default source stream read chunk size [ms]. 
