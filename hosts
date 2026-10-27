@@ -1,9 +1,6 @@
 chunkservers:
  hosts: 
    mfsmaster.jaspergreenhill.com:
-   #jg-chunkserver3.jaspergreenhill.com: 
-   jg-chunkserver2.jaspergreenhill.com:
-   jg-chunkserver1.jaspergreenhill.com:
    jg-mfschunkserver1.jaspergreenhill.com:
 mfsmaster:
  hosts:
@@ -15,6 +12,9 @@ media:
  hosts: 
   jg-media.jaspergreenhill.com:
    ansible_user: mediauser
+ansible:
+ hosts:
+  jg-ansible.jaspergreenhill.com:
 app:
  hosts: 
   jg-app.jaspergreenhill.com:
@@ -28,18 +28,16 @@ servers:
    jg-app.jaspergreenhill.com:
    jg-ansible.jaspergreenhill.com:
    jg-media.jaspergreenhill.com:
-   jg-chunkserver1.jaspergreenhill.com:
    jg-mfschunkserver1.jaspergreenhill.com:
-   jg-chunkserver2.jaspergreenhill.com:
-   jg-chunkserver3.jaspergreenhill.com:
    jg-k8sworker1.jaspergreenhill.com:
    jg-k8sworker2.jaspergreenhill.com:
    jg-k8sworker3.jaspergreenhill.com:
    jg-k8smaster1.jaspergreenhill.com:
 pve:
  hosts:
+   jgpve1.jaspergreenhill.com:
+   jgpve2.jaspergreenhill.com:
    jgpve6.jaspergreenhill.com:
-   jgpve4.jaspergreenhill.com:
    jgpve5.jaspergreenhill.com:
 k8s:
  hosts:
