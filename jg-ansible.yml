@@ -1,10 +1,8 @@
 ---
-- hosts: chunkservers
+- hosts: ansible
   become: yes
   roles:
-    - roles/jg_moosefs_chunkserver 
-  vars:
-    moosefs_master_host: mfsmaster.jaspergreenhill.com 
+    - roles/jg_apt_opentofu_repo
   tasks:
   - name: System details
     ansible.builtin.debug: msg="{{ item }}"
