@@ -6,11 +6,11 @@
     #- roles/jg_pve_network
     #- roles/jg_pve_clusterinfo
     #- roles/jg_pve_joincluster
-    - roles/jg_pve_moosefs_storage
+    #- roles/jg_pve_moosefs_storage
     - roles/jg_pve_packages_lldp
     - roles/jg_pve_remove_nag
     - roles/jg_users
-    - roles/jg_sshkey
+    - roles/jg_server_packages
   vars:
     pcie_passthrough:
       enable: true
@@ -27,6 +27,7 @@
         - amdgpu
         - i915
     pve_group: "PVEJG"
+    user_jasper: jasper
     pve_cluster_clustername: "{{ pve_group }}" 
     target_speed: 10000 
     speed: 10000 

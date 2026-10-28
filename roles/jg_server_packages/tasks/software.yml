@@ -4,6 +4,7 @@
     pkg:
       - stress
       - rsync
+      - sysstat 
       - neovim
       - smartmontools
       - vim
