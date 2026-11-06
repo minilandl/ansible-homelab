@@ -12,6 +12,7 @@
         validate_certs: 'false'
   loop:
     - sonarr
+    - nexterm
     - dispatcharr
     - dispatcharr-us
     - dispatcharr-uk
