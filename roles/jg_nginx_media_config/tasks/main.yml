@@ -3,4 +3,4 @@
 
 - include_tasks: nginx_templates_internal.yml
 
-- include_tasks: issuecerts.yml
+- include_tasks: nginx_templates_external.yml
