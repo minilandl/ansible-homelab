@@ -3,7 +3,7 @@
   gather_facts: true 
   become: yes
   roles:
-    - roles/jg_apt_sources
+    - roles/jg_pve_packages_lldp
     - roles/jg_moosefs_repo 
     - roles/jg_moosefs_client 
     - roles/jg_network

@@ -1,4 +1,3 @@
 ---
 
-- include_tasks: moosefs_packages.yml
-- include_tasks: moosefs_repo.yml
+- include_tasks: tofu_repo.yml

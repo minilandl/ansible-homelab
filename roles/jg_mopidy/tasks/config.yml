@@ -36,4 +36,12 @@
     path: /etc/pipewire
     state: directory
 
+- name: Copy snapserver template
+  template:
+    src: pipewire-pulse.j2
+    dest: /etc/pipewire/pipewire-pulse.conf
+    owner: jasper 
+    group: jasper
+    mode: '0755'
+
 

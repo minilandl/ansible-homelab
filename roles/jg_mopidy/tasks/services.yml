@@ -1,3 +1,12 @@
+
+- name: Permanently export the run/user/1000  in .bashrc for pipewire
+  ansible.builtin.lineinfile:
+    path: "~/.bashrc"
+    line: "export XDG_RUNTIME_DIR=/run/user/1000"
+    create: yes
+    state: present
+
+
 # Start and enable Mopidy
 - name: Start and enable MooseFS mopidy
   service:

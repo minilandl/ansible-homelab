@@ -1,8 +1,0 @@
-- name: Install required packages for opentofu 
-  apt:
-    name: 
-     - apt-transport-https 
-     - ca-certificates 
-     - curl 
-     - gnupg
-    update_cache: yes
